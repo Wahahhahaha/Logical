@@ -1,0 +1,13 @@
+import { useState } from 'react'
+import { ArrowRight, Check } from 'lucide-react'
+import { useAuth } from '../../auth.jsx'
+import { apiFetch } from '../../lib/api.js'
+import { EggIllustration, PetIllustration, WelcomeIllustration } from '../../components/illustrations/PetIllustration.jsx'
+
+const pets = [{ id: 'egg', name: 'Mochi', description: 'Your companion is still waiting inside this egg.' }, { id: 'cat', name: 'Cat', description: 'A curious companion for your learning journey.' }, { id: 'dog', name: 'Dog', description: 'A loyal companion to cheer you on.' }, { id: 'fox', name: 'Fox', description: 'A clever companion for every challenge.' }]
+
+export default function StudentOnboardingPage() {
+  const { user, updateUser } = useAuth(); const [step, setStep] = useState(1); const [pet, setPet] = useState('egg'); const [loading, setLoading] = useState(false); const [error, setError] = useState('')
+  const finish = async () => { setLoading(true); setError(''); try { const result = await apiFetch('/api/student/onboarding', { method: 'PUT', body: JSON.stringify({ pet }) }); updateUser(result.user); window.location.assign('/dashboard') } catch (requestError) { setError(requestError.message) } finally { setLoading(false) } }
+  return <div className="onboarding-page"><div className="onboarding-card card" key={step}>{step === 1 ? <><div className="onboarding-illustration"><WelcomeIllustration /></div><p className="eyebrow">Welcome to Mathpath</p><h1>Hello, {user.fullName}!</h1><p className="onboarding-copy">We are happy to have you here. Your learning journey will be guided step by step, with a companion cheering you on.</p><button className="primary-button" onClick={() => setStep(2)}>Next <ArrowRight size={16} /></button></> : <><div className="onboarding-illustration egg-illustration"><EggIllustration /></div><p className="eyebrow">Meet your companion</p><h1>Choose your first companion</h1><p className="onboarding-copy">Your companion will be with you as you learn. Start with the egg, then watch your journey grow.</p><div className="pet-choice-grid">{pets.map(({ id, name, description }) => <button className={`pet-choice ${pet === id ? 'selected' : ''}`} key={id} onClick={() => setPet(id)}><span className="pet-choice-icon">{id === 'egg' ? <EggIllustration /> : <PetIllustration type={id} />}</span><strong>{name}</strong><small>{description}</small>{pet === id && <Check size={15} />}</button>)}</div>{error && <div className="form-error">{error}</div>}<button className="primary-button" disabled={loading} onClick={finish}>{loading ? 'Saving...' : 'Start learning'} <ArrowRight size={16} /></button></>}</div></div>
+}

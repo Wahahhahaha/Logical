@@ -1,0 +1,10 @@
+import { useState } from 'react'
+import { ArrowRight, BookOpen, Check, Flame, Sparkles } from 'lucide-react'
+import { useAuth } from '../../auth.jsx'
+import { apiFetch } from '../../lib/api.js'
+
+export default function StudentLearningPage() {
+  const { updateUser } = useAuth(); const [loading, setLoading] = useState(false); const [completed, setCompleted] = useState(false); const [message, setMessage] = useState(''); const [error, setError] = useState('')
+  const completeTask = async () => { setLoading(true); setError(''); setMessage(''); try { const result = await apiFetch('/api/student/activity/complete', { method: 'POST', body: JSON.stringify({ lessonKey: 'fractions-same-denominator' }) }); updateUser(result.user); setCompleted(true); setMessage(result.totalAwarded ? `Great work! +${result.learningAwarded} XP learning${result.checkinAwarded ? ` and +${result.checkinAwarded} XP check-in` : ''}.` : 'This learning task has already been recorded today.') } catch (requestError) { setError(requestError.message) } finally { setLoading(false) } }
+  return <div className="page-stack"><section className="welcome-row"><div><p className="eyebrow">Learning path</p><h1>Fractions</h1><p className="page-subtitle">Adding fractions with the same denominator.</p></div><div className="streak-pill"><Flame size={17} fill="currentColor" /><strong>Daily task <small>check in by learning</small></strong></div></section><div className="card learning-task-card"><div className="task-icon"><BookOpen size={23} /></div><label>Chapter 3 · Lesson 2</label><h2>Adding fractions with the same denominator</h2><p>When the denominators are the same, add the numerators and keep the denominator unchanged.</p><div className="task-example"><span>1/5 + 2/5</span><ArrowRight size={18} /><b>3/5</b></div>{error && <div className="form-error">{error}</div>}{message && <div className="form-success">{message}</div>}<button className="primary-button" onClick={completeTask} disabled={loading || completed}>{completed ? <><Check size={16} /> Task completed</> : <>{loading ? 'Saving...' : 'Complete learning task'} <Sparkles size={16} /></>}</button></div></div>
+}
