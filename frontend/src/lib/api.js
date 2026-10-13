@@ -1,4 +1,9 @@
-const API_BASE = import.meta.env.VITE_API_URL || `${window.location.protocol}//${window.location.hostname}:4000`
+export const API_BASE = import.meta.env.VITE_API_URL || `${window.location.protocol}//${window.location.hostname}:4000`
+
+export function apiUrl(path) {
+  if (!path) return null
+  return /^https?:\/\//i.test(path) ? path : `${API_BASE}${path}`
+}
 
 export async function apiFetch(path, options = {}) {
   const token = localStorage.getItem('mathpath_token')

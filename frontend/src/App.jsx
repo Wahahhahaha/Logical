@@ -6,12 +6,14 @@ import Placeholder from './pages/common/Placeholder.jsx'
 import ProfilePage from './pages/shared/ProfilePage.jsx'
 import StudentDashboard from './pages/student/StudentDashboard.jsx'
 import StudentLearningPage from './pages/student/StudentLearningPage.jsx'
+import StudentLessonPage from './pages/student/StudentLessonPage.jsx'
 import StudentOnboardingPage from './pages/student/StudentOnboardingPage.jsx'
 import StudentPetPage from './pages/student/StudentPetPage.jsx'
-import StudentWorkspace from './pages/student/StudentWorkspace.jsx'
+import StudentQuestsPage from './pages/student/StudentQuestsPage.jsx'
+import StudentProgressPage from './pages/student/StudentProgressPage.jsx'
 import StudentManagementPage from './pages/teacher/StudentManagementPage.jsx'
 import TeacherDashboard from './pages/teacher/TeacherDashboard.jsx'
-import TeacherWorkspace from './pages/teacher/TeacherWorkspace.jsx'
+import TeacherProgressPage from './pages/teacher/TeacherProgressPage.jsx'
 import './App.css'
 
 export default function App() {
@@ -22,17 +24,17 @@ export default function App() {
     <Route element={<RequireAuth />}>
       <Route path="/dashboard" element={<DashboardEntry />} />
       <Route path="/onboarding" element={<StudentOnboardingGate />} />
+      <Route path="/student/learn/:lessonKey" element={<StudentLessonPage />} />
       <Route element={<AppShell />}>
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/student/dashboard" element={<StudentDashboard />} />
         <Route path="/student/learn" element={<StudentLearningPage />} />
-        <Route path="/student/practice" element={<StudentWorkspace />} />
-        <Route path="/student/quests" element={<StudentWorkspace />} />
+        <Route path="/student/quests" element={<StudentQuestsPage />} />
         <Route path="/student/pet" element={<StudentPetPage />} />
-        <Route path="/student/progress" element={<StudentWorkspace />} />
+        <Route path="/student/progress" element={<StudentProgressPage />} />
         <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
         <Route path="/teacher/students" element={<StudentManagementPage />} />
-        <Route path="/teacher/progress" element={<TeacherWorkspace />} />
+        <Route path="/teacher/progress" element={<TeacherProgressPage />} />
         <Route path="*" element={<Placeholder title="Page not found" description="The requested workspace page does not exist." />} />
       </Route>
     </Route>
