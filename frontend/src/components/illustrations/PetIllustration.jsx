@@ -13,13 +13,41 @@ export function PetEggIllustration({ type = 'cat', className = '' }) {
 
 const face = '#fff6e8'
 
-function CatCharacterIllustration({ className = '' }) {
-  return <svg className={`illustration-svg ${className}`} viewBox="0 0 240 240" role="img" aria-label="Cat pet character">
-    <path d="M160 174c28 10 43-7 42-28-1-13 8-18 14-10 9 12 4 34-9 46-14 13-31 13-48 5Z" fill="#e9a366" stroke="#bd8056" strokeWidth="2.2"/><path d="M196 145c10-10 17-4 17 4 0 8-4 15-10 19" fill="none" stroke="#fff0da" strokeWidth="7" strokeLinecap="round"/>
-    <path d="M77 144c-10 17-10 43-1 57 7 10 20 7 30-4l13-14 12 14c10 11 24 14 31 4 9-14 8-40-2-57Z" fill="#e9a366" stroke="#bd8056" strokeWidth="2.2"/><path d="M94 156c-4 13-3 26 2 37m48-37c4 13 3 26-2 37" fill="none" stroke="#f6d9b5" strokeWidth="2.2" strokeLinecap="round"/><path d="M81 183c7 2 14 0 20-6l10 12v12H84c-5-5-6-11-3-18Zm77 0c-7 2-14 0-20-6l-10 12v12h27c5-5 6-11 3-18Z" fill="#a86e4e"/>
-    <path d="M71 69c-4-17-3-31 5-44l33 30c9-3 20-3 29 0l33-30c8 13 9 27 5 44" fill="#e9a366" stroke="#bd8056" strokeWidth="2.2" strokeLinejoin="round"/><path d="m83 48 22 18-26-8m78-10-22 18 26-8" fill="#e99891"/>
-    <path d="M67 101c0-37 21-61 52-61s53 24 53 61c0 37-21 57-53 57s-52-20-52-57Z" fill="#e9a366" stroke="#bd8056" strokeWidth="2.2"/><path d="M76 117c7 22 22 33 43 33s36-11 43-33c-12-9-26-13-43-13s-31 4-43 13Z" fill={face}/><g className="pet-eyes"><ellipse cx="106" cy="99" rx="12" ry="15" fill="#fff"/><ellipse cx="110" cy="100" rx="5" ry="9" fill="#517f79"/><circle cx="112" cy="95" r="3" fill="#fff"/></g><g className="pet-eyes"><ellipse cx="135" cy="99" rx="12" ry="15" fill="#fff"/><ellipse cx="139" cy="100" rx="5" ry="9" fill="#517f79"/><circle cx="141" cy="95" r="3" fill="#fff"/></g><path d="m116 124 5-4 5 4-5 4Z" fill="#bd7779"/><path d="M121 128v5m0 0c-4 5-9 5-12 1m12-1c4 5 9 5 12 1" fill="none" stroke="#946c5d" strokeWidth="2" strokeLinecap="round"/><circle cx="91" cy="119" r="6" fill="#edaaa0" opacity=".65"/><circle cx="151" cy="119" r="6" fill="#edaaa0" opacity=".65"/><path d="M76 77c7-15 20-25 36-29" fill="none" stroke="#f9d6a7" strokeWidth="3" strokeLinecap="round"/>
-  </svg>
+function CatCharacterIllustration({ className = '', emotion = 'idle', effect = '' }) {
+  return <img className={`illustration-svg pet-cat emotion-${emotion} ${className}`} src="/cat-pixel.png" alt="Cat pixel art character" draggable="false" data-effect={effect} />
+  /* Legacy vector pixel construction removed from the active renderer. */
+  /*
+  const tail = ['                          DD', '                         DGGD', '                         DGGGD', '                          DGGGD', '                           DGGD', '                            DD']
+  const tailFill = ['                           G', '                           GG', '                            G', '                            G']
+  const body = ['           DDDDDDDDDDD', '          DGGGGGGGGGGGD', '          DGGGGGGGGGGGD', '          DGGGGGGGGGGGD', '           DGGGGGGGGGD', '           DGGGGGGGGGD', '           DGGGGGGGGGD', '           DGGGGGGGGGD', '           DGGGGGGGGGD']
+  const belly = ['             CCCCC', '            CCCCCCC', '            CCCCCCC', '            CCCCCCC', '             CCCCC', '              CCC']
+  const paws = ['        DD   DD   DD   DD', '        DC   DC   DC   DC', '        DCC  DCC  DCC  DCC']
+  const ears = ['        DD        DD', '       DGGD      DGGD', '      DGGGGD    DGGGGD', '      DGGGGD    DGGGGD', '       DGGGGDDGGGGGD']
+  const earInner = ['        PP        PP', '       PPPP      PPPP', '       PPPP      PPPP', '        PPPP    PPPP']
+  const head = ['        DDDDDDDDDDDD', '      DDGGGGGGGGGGGGDD', '     DGGGGGGGGGGGGGGGGD', '    DGGGGGGGGGGGGGGGGGGD', '   DGGGGGGGGGGGGGGGGGGGGD', '   DGGGGGGGGGGGGGGGGGGGGD', '    DGGGGGGGGGGGGGGGGGGD', '     DGGGGGGGGGGGGGGGGD', '      DGGGGGGGGGGGGGGD', '        DGGGGGGGGGGGD']
+  const mask = ['      CCCC        CCCC', '     CCCCCC      CCCCCC', '      CCCCCCCCCCCCCCCC', '       CCCCCCCCCCCCCC', '        CCCCCCCCCCCC']
+  const headPatches = ['          TTT', '         TTTT', '          TTT']
+  const bodyPatches = ['                  TTT', '                 TTTT', '                  TTT']
+  const whiskers = ['       C      C      C', '      C       C       C']
+  const eyes = emotion === 'blink' || emotion === 'happy' || emotion === 'celebrating' || emotion === 'excited'
+    ? ['          EE    EE']
+    : ['         EEE  EEE', '         EEE  EEE', '          EE  EE']
+  const mouths = emotion === 'happy' || emotion === 'celebrating' || emotion === 'excited'
+    ? ['              E E', '               E']
+    : ['               E']
+  const emotes = {
+    love: { rows: ['.P.P.', 'PPPPP', 'PPPPP', '.PPP.', '..P..'], palette: { P: palette.P }, x: 25, y: 2 },
+    sparkle: { rows: ['..Y..', '.YYY.', 'YYYYY', '.YYY.', '..Y..'], palette: { Y: '#ffd45b' }, x: 2, y: 6 },
+    confetti: { rows: ['P...Y....C', '.Y....P...', '...C.....Y'], palette: { P: palette.P, Y: '#ffd45b', C: '#8ac7e7' }, x: 3, y: 1 },
+  }
+  const activeEmote = emotes[effect]
+  return <svg className={`illustration-svg pet-cat emotion-${emotion} ${className}`} viewBox="0 0 32 32" role="img" aria-label="Cat pixel art character" shapeRendering="crispEdges" style={{ imageRendering: 'pixelated' }}>
+    <g className="cat-tail"><PixelLayer rows={tail} palette={{ D: palette.D, G: palette.G }} offsetY={17} /><PixelLayer rows={tailFill} palette={{ G: palette.G }} offsetY={18} /></g>
+    <g className="cat-body"><PixelLayer rows={body} palette={{ D: palette.D, G: palette.G }} offsetY={18} centered /><PixelLayer rows={bodyPatches} palette={{ T: palette.T }} offsetY={19} centered /><PixelLayer rows={belly} palette={{ C: palette.C }} offsetY={20} centered /><PixelLayer rows={paws} palette={{ D: palette.D, C: palette.C }} offsetY={27} centered /></g>
+    <g className="cat-ears"><PixelLayer rows={ears} palette={{ D: palette.D, G: palette.G }} offsetY={1} centered /><PixelLayer rows={earInner} palette={{ P: palette.P }} offsetY={2} centered /></g>
+    <g className="cat-head"><PixelLayer rows={head} palette={{ D: palette.D, G: palette.G }} offsetY={7} centered /><PixelLayer rows={headPatches} palette={{ T: palette.T }} offsetY={8} centered /><PixelLayer rows={mask} palette={{ C: palette.C }} offsetY={11} centered /><g className="pet-eyes"><PixelLayer rows={eyes} palette={{ E: palette.E }} offsetY={12} centered /><PixelLayer rows={['          C     C']} palette={{ C: palette.C }} offsetY={12} centered /></g><PixelLayer rows={whiskers} palette={{ D: palette.D }} offsetY={15} centered /><PixelLayer rows={['               PP']} palette={{ P: palette.P }} offsetY={15} centered /><PixelLayer rows={mouths} palette={{ E: palette.E }} offsetY={16} centered /><PixelLayer rows={['      PP              PP']} palette={{ P: palette.P }} offsetY={15} centered /></g>
+    {activeEmote && <g className="cat-emote"><PixelLayer rows={activeEmote.rows} palette={activeEmote.palette} offsetX={activeEmote.x} offsetY={activeEmote.y} /></g>}
+  </svg> */
 }
 
 function DogCharacterIllustration({ className = '' }) {
@@ -30,37 +58,251 @@ function DogCharacterIllustration({ className = '' }) {
   </svg>
 }
 
-function FoxCharacterIllustration({ className = '' }) {
-  return <svg className={`illustration-svg ${className}`} viewBox="0 0 260 260" role="img" aria-label="Fox pet character">
-    {/* Large brush-shaped tail sits behind the compact seated body. */}
-    <path d="M158 182c26 4 48-11 56-39 5-20 12-36 24-38 12-1 18 13 16 31-4 38-29 67-63 74-18 4-33-3-45-17Z" fill="#ed5815"/>
-    <path d="M237 108c9 4 10 18 5 32-5 19-17 37-32 49 3-11 2-20-2-28l10-8-4-8 11-7-3-9 10-5-3-8Z" fill="#ffe0bb"/>
-    <path d="M101 140c-20 9-30 33-30 62 0 26 10 42 28 42 14 0 22-10 25-27h12c3 17 11 27 25 27 18 0 28-16 28-42 0-29-10-53-30-62Z" fill="#f36a16"/>
-    <path d="M109 149c-11 18-12 42-8 63 8-3 18-2 29 3 11-5 21-6 29-3 4-21 3-45-8-63-12 5-30 5-42 0Z" fill="#ffe0bb"/>
-    <path d="M81 211c9 4 18 4 28 0 5 3 9 7 11 12l-1 11c-2 7-8 11-16 11-13 0-21-10-22-23 0-4-1-8 0-11Zm98 0c-9 4-18 4-28 0-5 3-9 7-11 12l1 11c2 7 8 11 16 11 13 0 21-10 22-23 0-4 1-8 0-11Z" fill="#63210f"/>
-    <path d="M94 88 75 28c-2-7 3-10 8-6l47 36 47-36c5-4 10-1 8 6l-19 60-36-10c-9-3-19-3-28 0Z" fill="#f36a16"/>
-    <path d="m81 31 1-9c0-4 3-5 6-2l32 26c-14-8-25-12-39-15Zm98 0-1-9c0-4-3-5-6-2l-32 26c14-8 25-12 39-15Z" fill="#63210f"/>
-    <path d="m85 39 31 20-24-5Zm90 0-31 20 24-5Z" fill="#ffd0a0"/>
-    {/* Broad, angular cheeks and tapered muzzle define the fox silhouette. */}
-    <path d="M65 91c11-23 31-36 65-36s54 13 65 36l27 23-37 15c-17 7-36 12-55 12s-38-5-55-12l-37-15Z" fill="#f36a16"/>
-    <path d="M65 91c12 7 26 9 40 4 8-3 16-2 25 4v42c-19 0-38-5-55-12l-37-15Zm130 0c-12 7-26 9-40 4-8-3-16-2-25 4v42c19 0 38-5 55-12l37-15Z" fill="#ffe0bb"/>
-    <path d="M130 59c18 0 35 5 48 15-15 2-25 8-35 18-4 4-8 7-13 8-5-1-9-4-13-8-10-10-20-16-35-18 13-10 30-15 48-15Z" fill="#ef5810"/>
-    <g className="pet-eyes"><circle cx="100" cy="105" r="5.5" fill="#512018"/></g><g className="pet-eyes"><circle cx="160" cy="105" r="5.5" fill="#512018"/></g>
-    <path d="m122 124 8-5 8 5-8 7Z" fill="#542018"/>
-    <path d="M119 130c3 4 7 6 11 6s8-2 11-6" fill="none" stroke="#a34c23" strokeWidth="2" strokeLinecap="round"/>
+function PixelLayer({ rows, palette, offsetY = 0, offsetX = 0, centered = false }) {
+  return <g shapeRendering="crispEdges">{rows.flatMap((row, y) => {
+    const pixels = centered ? row.trim() : row
+    const centeredOffset = centered ? Math.floor((32 - pixels.length) / 2) : 0
+    return Array.from(pixels.padEnd(32, '.').slice(0, 32).replaceAll(' ', '.'), (pixel, x) => palette[pixel] ? <rect key={`${y}-${x}`} x={x + centeredOffset + offsetX} y={y + offsetY} width="1" height="1" fill={palette[pixel]} /> : null)
+  })}</g>
+}
+
+function FoxCharacterIllustration({ className = '', emotion = 'idle', effect = '' }) {
+  const tail = [
+    '                           DD',
+    '                         DDDDD',
+    '                        DDDDDDD',
+    '                       DDDDDDDDD',
+    '                      DDDDDDDDDD',
+    '                     DDDDDDDDDDD',
+    '                    DDDDDDDDDDDD',
+    '                   DDDDDDDDDDDDD',
+    '                  DDDDDDDDDDDDDD',
+    '                  DDDDDDDDDDDDDD',
+    '                   DDDDDDDDDDDDD',
+    '                    DDDDDDDDDDDD',
+    '                     DDDDDDDDDDD',
+    '                      DDDDDDDDD',
+    '                       DDDD',
+    '                        D',
+  ]
+  const tailFill = [
+    '                           OO',
+    '                          OOO',
+    '                         OOOOO',
+    '                        OOOOOOO',
+    '                       OOOOOOOO',
+    '                      OOOOOOOOO',
+    '                     OOOOOOOOOO',
+    '                    OOOOOOOOOOO',
+    '                    OOOOOOOOOOO',
+    '                     OOOOOOOOOO',
+    '                      OOOOOOOOO',
+    '                       OOOOOOOO',
+    '                        OOOOOO',
+    '                         OO',
+  ]
+  const tailTipOutline = [
+    '                            DD',
+    '                           DDDD',
+    '                           DDDD',
+    '                           DDDD',
+    '                          DDDDD',
+    '                         DDDDD',
+    '                        DDDDD',
+    '                       DDDDD',
+  ]
+  const tailTip = [
+    '                             C',
+    '                            CC',
+    '                            CC',
+    '                            CC',
+    '                           CCC',
+    '                          CCC',
+    '                         CCC',
+    '                        CCC',
+  ]
+  const tailZigzag = [
+    '                           O',
+    '                          O',
+    '                           O',
+    '                        O',
+  ]
+  const body = [
+    '           DDDDDDDDDD',
+    '          DOOOOOOOOOOD',
+    '         DOOOOOOOOOOOOD',
+    '         DOOOOOOOOOOOOD',
+    '         DOOOOOOOOOOOOD',
+    '         DOOOOOOOOOOOOD',
+    '         DOOOOOOOOOOOOD',
+    '          DOOOOOOOOOOD',
+    '          DOOOOOOOOOOD',
+    '           DOOOOOOOOD',
+    '           DOOOOOOOOD',
+    '           DOOOOOOOOD',
+  ]
+  const belly = [
+    '            CCCCCCCC',
+    '           CCCCCCCCCC',
+    '           CCCCCCCCCC',
+    '           CCCCCCCCCC',
+    '            CCCCCCCC',
+    '            CCCCCCCC',
+    '             CCCCCC',
+    '             CCCCCC',
+  ]
+  const paws = [
+    '           BBBB  BBBB',
+    '           BBBB  BBBB',
+    '           BBBB  BBBB',
+    '            BBB  BBB',
+  ]
+  const ears = [
+    '         DD          DD',
+    '        DOO          OOD',
+    '        DOOO        OOOD',
+    '       DOOOO        OOOOD',
+    '       DOOOO        OOOOD',
+    '      DOOOOO        OOOOOD',
+    '      DOOOOO        OOOOOD',
+    '       OOOOOO      OOOOOO',
+  ]
+  const head = [
+    '          DDDDDDDDDD',
+    '        DDOOOOOOOOODD',
+    '       DOOOOOOOOOOOOOD',
+    '      DOOOOOOOOOOOOOOOD',
+    '     DOOOOOOOOOOOOOOOOOD',
+    '     DOOOOOOOOOOOOOOOOOD',
+    '     DOOOOOOOOOOOOOOOOOD',
+    '     DOOOOOOOOOOOOOOOOOD',
+    '      DOOOOOOOOOOOOOOOD',
+    '       DOOOOOOOOOOOOOD',
+    '         DOOOOOOOOOD',
+    '           DOOOOOD',
+  ]
+  const mask = [
+    '      CC                  CC',
+    '      CCCC              CCCC',
+    '       CCCCC          CCCCC',
+    '        CCCCC        CCCCC',
+    '          CCCC      CCCC',
+    '            CCCCCCCC',
+    '             CCCCCC',
+    '              CCCC',
+  ]
+  const markings = [
+    '              DD',
+    '             DDDD',
+    '              DD',
+  ]
+  const eyes = emotion === 'blink' || emotion === 'happy' || emotion === 'celebrating' || emotion === 'excited'
+    ? ['          EEE    EEE']
+    : emotion === 'sleepy'
+      ? ['          EEE    EEE', '           E       E']
+      : emotion === 'thinking' || emotion === 'curious'
+        ? ['            EE      EE']
+        : ['           EE      EE']
+  const mouths = emotion === 'happy' || emotion === 'celebrating' || emotion === 'excited'
+    ? ['              B  B', '               BB']
+    : emotion === 'sad'
+      ? ['               BB', '              B  B']
+      : ['              B B']
+  const emotes = {
+    love: { rows: ['.P.P.', 'PPPPP', 'PPPPP', '.PPP.', '..P..'], palette: { P: '#f27da4' }, x: 25, y: 1 },
+    sweat: { rows: ['..B..', '.BBB.', 'BBBBB', '.BBB.', '..B..'], palette: { B: '#71c5ed' }, x: 25, y: 7 },
+    anger: { rows: ['R.R', '.R.', 'R.R'], palette: { R: '#d8463e' }, x: 27, y: 1 },
+    sparkle: { rows: ['..Y..', '.YYY.', 'YYYYY', '.YYY.', '..Y..'], palette: { Y: '#ffd45b' }, x: 2, y: 6 },
+    confetti: { rows: ['P...Y....B', '.Y....P...', '...B.....Y'], palette: { P: '#f27da4', Y: '#ffd45b', B: '#71c5ed' }, x: 4, y: 1 },
+    thought: { rows: ['..CCC..', '.C...C.', '.C...C.', '..CCC..', '...C...', '....C..', '.....C.', '..C.C.C'], palette: { C: '#fff6e8' }, x: 24, y: 1 },
+    z: { rows: ['ZZZZ', '..Z.', '.Z..', 'ZZZZ'], palette: { Z: '#b4a2dc' }, x: 25, y: 2 },
+  }
+  const activeEmote = emotes[effect]
+
+  return <svg className={`illustration-svg ${className}`} viewBox="0 0 32 32" role="img" aria-label="Fox pixel art character" shapeRendering="crispEdges" style={{ imageRendering: 'pixelated' }}>
+    <g className="fox-tail" data-fox-part="tail"><PixelLayer rows={tail} palette={{ D: '#63210f' }} offsetY={15} /><PixelLayer rows={tailFill} palette={{ O: '#ed5815' }} offsetY={16} /><PixelLayer rows={tailTipOutline} palette={{ D: '#63210f' }} offsetY={17} /><PixelLayer rows={tailTip} palette={{ C: '#ffe0bb' }} offsetY={18} /><PixelLayer rows={tailZigzag} palette={{ O: '#ed5815' }} offsetY={20} /></g>
+    <g className="fox-body"><PixelLayer rows={body} palette={{ O: '#f36a16', D: '#d94b0d' }} offsetY={16} centered /><PixelLayer rows={belly} palette={{ C: '#ffe0bb' }} offsetY={19} centered /><PixelLayer rows={paws} palette={{ B: '#63210f' }} offsetY={27} centered /></g>
+    <g className="fox-ears"><PixelLayer rows={ears} palette={{ O: '#f36a16', D: '#63210f' }} offsetY={1} centered /></g>
+    <g className="fox-head" data-fox-part="head">
+      <PixelLayer rows={head} palette={{ O: '#f36a16', D: '#d94b0d' }} offsetY={7} centered />
+      <PixelLayer rows={mask} palette={{ C: '#ffe0bb' }} offsetY={11} centered />
+      <PixelLayer rows={markings} palette={{ D: '#ef5810' }} offsetY={8} centered />
+      <g className="pet-eyes"><PixelLayer rows={eyes} palette={{ E: '#32140e' }} offsetY={12} centered /></g>
+      <PixelLayer rows={['               BB']} palette={{ B: '#63210f' }} offsetY={14} centered />
+      <PixelLayer rows={mouths} palette={{ B: '#63210f' }} offsetY={16} centered />
+    </g>
+    {activeEmote && <g className="fox-emote"><PixelLayer rows={activeEmote.rows} palette={activeEmote.palette} offsetX={activeEmote.x} offsetY={activeEmote.y} /></g>}
   </svg>
 }
 
-function PetCharacter({ type, className }) {
+function BirdCharacterIllustration({ className = '' }) {
+  return <svg className={`illustration-svg ${className}`} viewBox="0 0 32 32" role="img" aria-label="Bird pixel art character" shapeRendering="crispEdges" style={{ imageRendering: 'pixelated' }}>
+    <g className="bird-body"><path d="M8 11h14v12H8zM11 8h9v3h-9z" fill="#69b9da"/><path d="M10 18h12v7H10z" fill="#fff0cf"/><path d="M6 14h5v7H6z" fill="#4e9fc4"/><path d="M22 13h5v4h-5z" fill="#f6a943"/><path d="M12 25h2v3h-2zm8 0h2v3h-2z" fill="#e78537"/><path d="M11 12h2v2h-2zm8 0h2v2h-2z" fill="#24354a"/><path d="M10 8h3v3h-3z" fill="#9de0ea"/></g>
+  </svg>
+}
+
+// Small shared pixel canvas for the non-Cat onboarding pets. Cat uses the
+// rebuilt CatCharacterIllustration above so every Cat state has one source.
+const pixelPetData = {
+  dog: {
+    label: 'Dog pixel art character',
+    palette: { O: '#b8784f', D: '#70453a', C: '#fff0d8', P: '#e58c91', E: '#382622' },
+    layers: [
+      ['   DDD             DDD   ','  DDDOOOO       OOOODDD  ',' DDDOOOOOOOOOOOOOOOODDD ',' DDOOOOOOOOOOOOOOOOODD  ','  DOOOOOOOOOOOOOOOOOD   '],
+      ['    DOOOOOOOOOOOOOD     ','   DOOOOOOOOOOOOOOOOD    ','   DOOOOCCCCCCOOOOOOD    ','   DOOOCCCCCCCCCCOOOOD   ','   DOOOCCCCCCCCCCOOOOD   ','    DOOCCCCCCCCCCOOD     '],
+      ['      OOOO  OOOO        ','      OOOO  OOOO        ','       O  EE  O         ','       O   E  O         ','      O  EEEE O         '],
+      ['       OOOOOOOO         ','      OCCCCCCCCO        ','      OCCCCCCCCO        ','       OOOOOOOO         '],
+      ['     DDOOOOOOOODD       ','    DOOOOOOOOOOOOOD      ','    DOOOOCCCCOOOOOOD     ','     OOOCCCCCCOOO       ','      OOOO  OOOO        '],
+    ],
+  },
+  bird: {
+    label: 'Bird pixel art character',
+    palette: { B: '#4f91c4', L: '#79c7e6', C: '#fff0d8', Y: '#f3ad3d', D: '#263b59' },
+    layers: [
+      ['          LLLLL         ','        LLLLLLLLL       ','       LLLLLLLLLLL      ','      LLLLLLLLLLLLL     ','     LLLLLLLLLLLLLLL    ','     LLLLLLLLLLLLLLL    ','      LLLLLLLLLLLLL     '],
+      ['     BBBB      BBBB    ','    BBBB        BBBB   ','    BB   CCCCCCC  BB   ','    BB  CCCCCCCCC BB   ','    BB  CCCCCCCCC BB   ','     BBBCCCCCCCCBB     ','      BBBBBBBBBBBB     '],
+      ['        D   D          ','         YYY           ','          Y            '],
+      ['       CCCCCCCC        ','      CCCCCCCCCC       ','      CCCCCCCCCC       ','       CCCCCCCC        '],
+      ['     BB          BB    ','    BBB          BBB    ','      Y          Y      ','      Y          Y      '],
+    ],
+  },
+}
+
+function PixelPetIllustration({ type, className = '' }) {
+  const data = pixelPetData[type]
+  if (!data) return <FoxCharacterIllustration className={className} />
+  const rects = []
+  let y = 0
+  data.layers.forEach(rows => {
+    rows.forEach(row => {
+      const trimmed = row.trim()
+      const start = Math.floor((32 - trimmed.length) / 2)
+      Array.from(trimmed).forEach((pixel, x) => {
+        if (data.palette[pixel]) rects.push(<rect key={`${y}-${x}-${pixel}`} x={start + x} y={y} width="1" height="1" fill={data.palette[pixel]} />)
+      })
+      y += 1
+    })
+    y += 1
+  })
+  return <svg className={`illustration-svg ${className}`} viewBox="0 0 32 32" role="img" aria-label={data.label} shapeRendering="crispEdges" style={{ imageRendering: 'pixelated' }}><g>{rects}</g></svg>
+}
+
+function PetCharacter({ type, className, emotion, effect }) {
   if (type === 'dog') return <DogCharacterIllustration className={className} />
-  if (type === 'fox') return <FoxCharacterIllustration className={className} />
+  if (type === 'fox') return <FoxCharacterIllustration className={className} emotion={emotion} effect={effect} />
+  if (type === 'bird') return <BirdCharacterIllustration className={className} />
   return <CatCharacterIllustration className={className} />
 }
 
-export function PetCharacterIllustration({ type = 'cat', className = '' }) {
-  return <PetCharacter type={type} className={className} />
+export function PetCharacterIllustration({ type = 'cat', className = '', emotion, effect }) {
+  return <PetCharacter type={type} className={className} emotion={emotion} effect={effect} />
 }
 
-export function PetIllustration({ type = 'cat', className = '' }) {
-  return <PetCharacter type={type} className={className} />
+export function PetIllustration({ type = 'cat', className = '', emotion, effect }) {
+  return <PetCharacter type={type} className={className} emotion={emotion} effect={effect} />
+}
+
+export function OnboardingPixelPet({ type = 'cat', className = '' }) {
+  if (type === 'cat') return <CatCharacterIllustration className={className} />
+  return type === 'fox' ? <FoxCharacterIllustration className={className} /> : <PixelPetIllustration type={type} className={className} />
 }

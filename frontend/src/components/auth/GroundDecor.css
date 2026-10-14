@@ -1,0 +1,40 @@
+.auth-page {
+  background: linear-gradient(180deg, #8bd9f3 0 58%, #c9eac9 58% 100%);
+}
+
+.auth-page::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 42%;
+  background:
+    radial-gradient(circle at 10% 80%, #7fb96b 0 30px, transparent 32px),
+    radial-gradient(circle at 25% 75%, #8fc877 0 24px, transparent 26px),
+    radial-gradient(circle at 40% 82%, #7fb96b 0 28px, transparent 30px),
+    radial-gradient(circle at 60% 78%, #95cf80 0 22px, transparent 24px),
+    radial-gradient(circle at 75% 84%, #7fb96b 0 26px, transparent 28px),
+    radial-gradient(circle at 90% 79%, #8fc877 0 24px, transparent 26px),
+    linear-gradient(180deg, #b6d8a8 0 60%, #9ecf90 60% 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.auth-page::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 46%;
+  background:
+    radial-gradient(circle at 8% 95%, #d8b76e 0 6px, transparent 8px),
+    radial-gradient(circle at 15% 88%, #f2d89c 0 4px, transparent 6px),
+    radial-gradient(circle at 22% 96%, #d8b76e 0 5px, transparent 7px),
+    radial-gradient(circle at 35% 90%, #f2d89c 0 4px, transparent 6px),
+    radial-gradient(circle at 48% 94%, #d8b76e 0 6px, transparent 8px),
+    radial-gradient(circle at 58% 89%, #f2d89c 0 4px, transparent 6px),
+    radial-gradient(circle at 70% 95%, #d8b76e 0 5px, transparent 7px),
+    radial-gradient(circle at 82% 91%, #f2d89c 0 4px, transparent 6px),
+    radial-gradient(circle at 92% 96%, #d8b76e 0 6px, transparent 8px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.9;
+}
