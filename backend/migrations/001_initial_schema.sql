@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS student_profiles (
   initial_level_id INT UNSIGNED NOT NULL,
   current_exp INT UNSIGNED NOT NULL DEFAULT 0,
   current_streak INT UNSIGNED NOT NULL DEFAULT 0,
-  pet_type ENUM('egg', 'cat', 'dog', 'fox') NOT NULL DEFAULT 'egg',
+  pet_type ENUM('egg', 'cat', 'dog', 'fox', 'bird') NOT NULL DEFAULT 'egg',
   pet_name VARCHAR(40) NULL,
   onboarding_completed BOOLEAN NOT NULL DEFAULT FALSE,
   created_at DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),

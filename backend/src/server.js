@@ -148,9 +148,9 @@ app.put('/api/profile/password', requireAuth, async (req, res) => {
   }
 });
 app.put('/api/student/onboarding', requireAuth, requireRole('student'), async (req, res) => {
-  const petSchema = z.object({ pet: z.enum(['egg', 'cat', 'dog', 'fox']).default('egg'), petName: z.string().trim().min(1).max(40).optional() });
+  const petSchema = z.object({ pet: z.enum(['egg', 'cat', 'dog', 'fox', 'bird']).default('egg'), petName: z.string().trim().min(1).max(40).optional() });
   const parsed = petSchema.safeParse(req.body); if (!parsed.success) return sendValidationError(res, parsed.error);
-  try { await query('UPDATE student_profiles SET onboarding_completed = TRUE, pet_type = $1, pet_name = COALESCE($3, pet_name) WHERE user_id = $2', [parsed.data.pet, req.auth.sub, parsed.data.petName || null]); const result = await query(`${userQuery} WHERE u.id = $1`, [req.auth.sub]); return res.json({ user: toPublicUser(result.rows[0]), pet: parsed.data.pet }); }
+  try { await query('UPDATE student_profiles SET pet_type = CASE WHEN onboarding_completed = TRUE THEN pet_type ELSE $1 END, pet_name = COALESCE($2, pet_name), onboarding_completed = TRUE WHERE user_id = $3', [parsed.data.pet, parsed.data.petName || null, req.auth.sub]); const result = await query(`${userQuery} WHERE u.id = $1`, [req.auth.sub]); const finalPet = result.rows[0]?.pet_type || parsed.data.pet; return res.json({ user: toPublicUser(result.rows[0]), pet: finalPet, locked: true }); }
   catch { return res.status(503).json({ message: 'Unable to complete onboarding' }); }
 });
 app.get('/api/student/pet', requireAuth, requireRole('student'), async (req, res) => {
