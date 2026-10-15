@@ -9,7 +9,7 @@ require('dotenv').config();
 const { query, getClient } = require('./db');
 const { signUser, requireAuth, requireRole } = require('./auth');
 const { UPLOADS_DIR, PhotoValidationError, ensureUploadsDir, writeProfilePhoto, discardProfilePhoto, pruneProfilePhotos, removeProfilePhoto } = require('./photos');
-const { ensureProfilePhotoColumn, ensureQuestActivityType, ensurePetNameColumn, ensureStudentActivities, ensurePracticeAttempts, ensureInitialLevelRemoved } = require('./schema');
+const { ensureProfilePhotoColumn, ensureQuestActivityType, ensurePetNameColumn, ensureStudentActivities, ensurePracticeAttempts, ensureInitialLevelRemoved, ensureHatchedPets } = require('./schema');
 const { dailyQuests } = require('./quests');
 const { generatePracticeQuestions } = require('./practice');
 
@@ -39,7 +39,7 @@ const learningActivitySchema = z.object({ lessonKey: z.string().trim().min(1).ma
 
 function sendValidationError(res, error) { const details = error.issues?.map((issue) => `${issue.path.join('.') || 'request'}: ${issue.message}`).join('; '); return res.status(400).json({ message: details ? `Invalid request data: ${details}` : 'Invalid request data', issues: error.issues }); }
 function toPublicUser(row) {
-  return { id: row.id, fullName: row.full_name, username: row.username, role: row.role, language: row.language, photoUrl: row.photo_url || null, profile: row.nis ? { nis: row.nis, grade: row.grade, classId: row.class_id, className: row.class_name, currentExp: row.current_exp, currentStreak: row.current_streak, petType: row.pet_type || 'egg', petName: row.pet_name || null, onboardingCompleted: row.onboarding_completed } : null };
+  return { id: row.id, fullName: row.full_name, username: row.username, role: row.role, language: row.language, photoUrl: row.photo_url || null, profile: row.nis ? { nis: row.nis, grade: row.grade, classId: row.class_id, className: row.class_name, currentExp: row.current_exp, currentStreak: row.current_streak, petType: row.pet_type && row.pet_type !== 'egg' ? row.pet_type : 'cat', petName: row.pet_name || null, onboardingCompleted: row.onboarding_completed } : null };
 }
 function dateKeyFor(timestamp = Date.now()) { return new Date(timestamp).toISOString().slice(0, 10); }
 function streakFromDates(dates) {
@@ -152,9 +152,9 @@ app.put('/api/profile/password', requireAuth, async (req, res) => {
   }
 });
 app.put('/api/student/onboarding', requireAuth, requireRole('student'), async (req, res) => {
-  const petSchema = z.object({ pet: z.enum(['egg', 'cat', 'dog', 'fox', 'bird']).default('egg'), petName: z.string().trim().min(1).max(40).optional() });
+  const petSchema = z.object({ pet: z.enum(['cat', 'dog', 'fox', 'bird']).default('cat'), petName: z.string().trim().min(1).max(40).optional() });
   const parsed = petSchema.safeParse(req.body); if (!parsed.success) return sendValidationError(res, parsed.error);
-  try { await query('UPDATE student_profiles SET pet_type = CASE WHEN onboarding_completed = TRUE THEN pet_type ELSE $1 END, pet_name = COALESCE($2, pet_name), onboarding_completed = TRUE WHERE user_id = $3', [parsed.data.pet, parsed.data.petName || null, req.auth.sub]); const result = await query(`${userQuery} WHERE u.id = $1`, [req.auth.sub]); const finalPet = result.rows[0]?.pet_type || parsed.data.pet; return res.json({ user: toPublicUser(result.rows[0]), pet: finalPet, locked: true }); }
+  try { await query("UPDATE student_profiles SET pet_type = CASE WHEN onboarding_completed = TRUE AND pet_type <> 'egg' THEN pet_type ELSE $1 END, pet_name = COALESCE($2, pet_name), onboarding_completed = TRUE WHERE user_id = $3", [parsed.data.pet, parsed.data.petName || null, req.auth.sub]); const result = await query(`${userQuery} WHERE u.id = $1`, [req.auth.sub]); const finalPet = result.rows[0]?.pet_type && result.rows[0].pet_type !== 'egg' ? result.rows[0].pet_type : parsed.data.pet; return res.json({ user: toPublicUser(result.rows[0]), pet: finalPet, locked: true }); }
   catch { return res.status(503).json({ message: 'Unable to complete onboarding' }); }
 });
 app.get('/api/student/pet', requireAuth, requireRole('student'), async (req, res) => {
@@ -163,7 +163,7 @@ app.get('/api/student/pet', requireAuth, requireRole('student'), async (req, res
     if (!result.rows[0]) return res.status(404).json({ message: 'Student not found' });
     const user = toPublicUser(result.rows[0]); const exp = user.profile?.currentExp || 0;
     const streak = await syncStreak(req.auth.sub);
-    return res.json({ pet: user.profile?.petType || 'egg', petName: user.profile?.petName || null, level: Math.floor(exp / 100), exp, expInLevel: exp % 100, expToNextLevel: 100, streak, onboardingCompleted: Boolean(user.profile?.onboardingCompleted) });
+    return res.json({ pet: user.profile?.petType || 'cat', petName: user.profile?.petName || null, level: Math.floor(exp / 100), exp, expInLevel: exp % 100, expToNextLevel: 100, streak, onboardingCompleted: Boolean(user.profile?.onboardingCompleted) });
   } catch (error) { console.error('Load pet progress error:', error.message); return res.status(503).json({ message: 'Unable to load pet progress' }); }
 });
 app.put('/api/student/pet/name', requireAuth, requireRole('student'), async (req, res) => {
@@ -374,5 +374,6 @@ if (require.main === module) {
   ensureQuestActivityType().then((status) => { if (status === 'error' || status === 'missing-table') setTimeout(() => { void ensureQuestActivityType(); }, 20000); });
   ensurePetNameColumn().then((status) => { if (status === 'error' || status === 'missing-table') setTimeout(() => { void ensurePetNameColumn(); }, 20000); });
   ensureInitialLevelRemoved().then((status) => { if (status === 'error' || status === 'missing-table') setTimeout(() => { void ensureInitialLevelRemoved(); }, 20000); });
+  ensureHatchedPets().then((status) => { if (status === 'error' || status === 'missing-table') setTimeout(() => { void ensureHatchedPets(); }, 20000); });
 }
 module.exports = app;

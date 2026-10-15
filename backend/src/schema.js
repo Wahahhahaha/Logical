@@ -109,6 +109,26 @@ async function ensurePracticeAttempts() {
   }
 }
 
+async function ensureHatchedPets() {
+  try {
+    if (!(await tableExists('student_profiles'))) return 'missing-table';
+    const result = await query("SELECT COUNT(*) AS count FROM student_profiles WHERE pet_type = 'egg'");
+    if (Number(result.rows[0]?.count) > 0) {
+      await query("UPDATE student_profiles SET pet_type = 'cat' WHERE pet_type = 'egg'");
+      console.log('Schema: hatched existing egg pets into cat companions');
+    }
+    const columnType = await query("SELECT COLUMN_TYPE AS type FROM information_schema.columns WHERE table_schema = DATABASE() AND table_name = 'student_profiles' AND column_name = 'pet_type'");
+    if (String(columnType.rows[0]?.type || '').includes("'egg'")) {
+      await query("ALTER TABLE student_profiles MODIFY COLUMN pet_type ENUM('cat', 'dog', 'fox', 'bird') NOT NULL DEFAULT 'cat'");
+      console.log('Schema: removed the egg state from student_profiles.pet_type');
+    }
+    return 'ok';
+  } catch (error) {
+    console.warn('Schema check for hatched pets skipped:', error.message);
+    return 'error';
+  }
+}
+
 async function ensureInitialLevelRemoved() {
   try {
     if (!(await tableExists('users'))) return 'missing-table';
@@ -133,4 +153,4 @@ async function ensureInitialLevelRemoved() {
   }
 }
 
-module.exports = { ensureProfilePhotoColumn, ensureQuestActivityType, ensurePetNameColumn, ensureStudentActivities, ensurePracticeAttempts, ensureInitialLevelRemoved };
+module.exports = { ensureProfilePhotoColumn, ensureQuestActivityType, ensurePetNameColumn, ensureStudentActivities, ensurePracticeAttempts, ensureInitialLevelRemoved, ensureHatchedPets };

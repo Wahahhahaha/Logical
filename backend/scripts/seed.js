@@ -13,17 +13,17 @@ async function findOrCreateClass(name, grade, teacherId) {
 
 async function seed() {
   if (!process.env.DATABASE_NAME) throw new Error('DATABASE_NAME is missing. Copy .env.example to .env and configure MySQL first.');
-  const teacherPassword = await bcrypt.hash('teacher123', 12);
+  const teacherPassword = await bcrypt.hash('12345', 12);
   const teacherId = randomUUID();
   await query("INSERT INTO users (id, full_name, username, password_hash, role) VALUES ($1, 'Demo Teacher', 'teacher.demo', $2, 'teacher') ON DUPLICATE KEY UPDATE full_name = VALUES(full_name), password_hash = VALUES(password_hash)", [teacherId, teacherPassword]);
   const teacher = await query('SELECT id FROM users WHERE username = $1', ['teacher.demo']);
   const actualTeacherId = teacher.rows[0].id;
   const students = [
-    ['Student A', 'STU-001', 'student123', '7', 'Class A'],
-    ['Student B', 'STU-002', 'student123', '7', 'Class A'],
-    ['Student C', 'STU-003', 'student123', '7', 'Class A'],
-    ['Student D', 'STU-004', 'student123', '7', 'Class A'],
-    ['Student E', 'STU-005', 'student123', '7', 'Class A'],
+    ['Student A', 'STU-001', '12345', '2', 'Class A'],
+    ['Student B', 'STU-002', '12345', '2', 'Class A'],
+    ['Student C', 'STU-003', '12345', '3', 'Class B'],
+    ['Student D', 'STU-004', '12345', '1', 'Class C'],
+    ['Student E', 'STU-005', '12345', '4', 'Class D'],
   ];
   for (const [fullName, nis, password, grade, className] of students) {
     const hash = await bcrypt.hash(password, 12); const userId = randomUUID();
@@ -32,7 +32,7 @@ async function seed() {
     const classId = await findOrCreateClass(className, grade, actualTeacherId);
     await query("INSERT INTO student_profiles (user_id, nis, teacher_id, class_id, grade) VALUES ($1, $2, $3, $4, $5) ON DUPLICATE KEY UPDATE teacher_id = VALUES(teacher_id), class_id = VALUES(class_id), grade = VALUES(grade)", [actualUserId, nis, actualTeacherId, classId, grade]);
   }
-  console.log('Seed complete. Teacher: teacher.demo / teacher123. Student IDs: STU-001..STU-005 / student123.');
+  console.log('Seed complete. Teacher: teacher.demo / 12345. Student IDs: STU-001..STU-005 / 12345.');
 }
 
 seed().catch((error) => { console.error('Seed failed:', error.message); process.exitCode = 1; }).finally(() => closePool());
