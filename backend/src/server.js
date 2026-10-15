@@ -9,7 +9,7 @@ require('dotenv').config();
 const { query, getClient } = require('./db');
 const { signUser, requireAuth, requireRole } = require('./auth');
 const { UPLOADS_DIR, PhotoValidationError, ensureUploadsDir, writeProfilePhoto, discardProfilePhoto, pruneProfilePhotos, removeProfilePhoto } = require('./photos');
-const { ensureProfilePhotoColumn, ensureQuestActivityType, ensurePetNameColumn, ensureStudentActivities } = require('./schema');
+const { ensureProfilePhotoColumn, ensureQuestActivityType, ensurePetNameColumn, ensureStudentActivities, ensurePracticeAttempts } = require('./schema');
 const { dailyQuests } = require('./quests');
 const { generatePracticeQuestions } = require('./practice');
 
@@ -222,6 +222,21 @@ app.post('/api/student/activity/complete', requireAuth, requireRole('student'), 
     return res.json({ message: 'Learning activity recorded', user, learningAwarded, checkinAwarded, questAwarded, questsCompleted, totalAwarded: learningAwarded + checkinAwarded + questAwarded, level: Math.floor(exp / 100), exp, expInLevel: exp % 100, expToNextLevel: 100, streak: user.profile?.currentStreak || 0 });
   } catch (error) { await client.query('ROLLBACK'); console.error('Complete activity error:', error.message); return res.status(400).json({ message: 'Unable to record learning activity' }); } finally { client.release(); }
 });
+const practiceSubmitSchema = z.object({
+  lessonKey: z.string().trim().min(1).max(100),
+  stageId: z.coerce.number().int().positive().optional(),
+  operation: z.string().trim().max(30).optional().default(''),
+  correct: z.coerce.number().int().min(0).max(50),
+  total: z.coerce.number().int().min(1).max(50),
+});
+app.post('/api/student/practice/submit', requireAuth, requireRole('student'), async (req, res) => {
+  const parsed = practiceSubmitSchema.safeParse(req.body); if (!parsed.success) return sendValidationError(res, parsed.error);
+  const total = parsed.data.total; const correct = Math.min(parsed.data.correct, total); const score = Math.round((correct / total) * 100);
+  try {
+    await query('INSERT INTO student_practice_attempts (id, user_id, lesson_key, stage_id, operation, correct_count, total_count, score) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [randomUUID(), req.auth.sub, parsed.data.lessonKey, parsed.data.stageId || null, parsed.data.operation || '', correct, total, score]);
+    return res.json({ message: 'Practice recorded', correct, total, score });
+  } catch (error) { console.error('Practice submit error:', error.message); return res.status(400).json({ message: 'Unable to record practice result' }); }
+});
 app.get('/api/levels', requireAuth, async (req, res) => { try { return res.json({ levels: (await query('SELECT id, name, description FROM levels ORDER BY id')).rows }); } catch { return res.status(503).json({ message: 'Unable to load levels' }); } });
 app.get('/api/classes', requireAuth, requireRole('teacher'), async (req, res) => { try { return res.json({ classes: (await query('SELECT id, name, grade FROM classes WHERE teacher_id = $1 ORDER BY grade, name', [req.auth.sub])).rows }); } catch { return res.status(503).json({ message: 'Unable to load classes' }); } });
 
@@ -262,6 +277,32 @@ app.get('/api/teacher/analytics', requireAuth, requireRole('teacher'), async (re
   } catch (error) { console.error('Teacher analytics error:', error.message); return res.status(503).json({ message: 'Unable to load class analytics' }); }
 });
 
+app.get('/api/teacher/students/:id/insights', requireAuth, requireRole('teacher'), async (req, res) => {
+  try {
+    const studentResult = await query(`${userQuery} WHERE sp.user_id = $1 AND sp.teacher_id = $2`, [req.params.id, req.auth.sub]);
+    if (!studentResult.rows[0]) return res.status(404).json({ message: 'Student not found' });
+    const student = toPublicUser(studentResult.rows[0]);
+    const activityResult = await query('SELECT activity_type, activity_key, created_at FROM student_activities WHERE user_id = $1', [req.params.id]);
+    const attemptResult = await query('SELECT lesson_key, stage_id, operation, correct_count, total_count, score, created_at FROM student_practice_attempts WHERE user_id = $1 ORDER BY created_at DESC', [req.params.id]);
+    const todayKey = dateKeyFor();
+    const lessonKeyOf = (key) => String(key).split(':')[0];
+    const completedLessons = [...new Set(activityResult.rows.filter((row) => row.activity_type === 'learning').map((row) => lessonKeyOf(row.activity_key)))];
+    const todayLessonKeys = activityResult.rows.filter((row) => row.activity_type === 'learning' && row.activity_key.endsWith(`:${todayKey}`)).map((row) => lessonKeyOf(row.activity_key));
+    const checkedInToday = activityResult.rows.some((row) => row.activity_type === 'checkin' && row.activity_key === todayKey);
+    const checkinDates = [...new Set(activityResult.rows.filter((row) => row.activity_type === 'checkin').map((row) => row.activity_key))];
+    let lastActiveAt = null;
+    for (const row of activityResult.rows) { const created = row.created_at ? new Date(row.created_at) : null; if (created && (!lastActiveAt || created > lastActiveAt)) lastActiveAt = created; }
+    const questToday = activityResult.rows.some((row) => row.activity_type === 'quest' && row.activity_key.endsWith(`:${todayKey}`));
+    const activityByDay = [];
+    for (let offset = 6; offset >= 0; offset -= 1) {
+      const day = new Date(); day.setUTCHours(0, 0, 0, 0); day.setUTCDate(day.getUTCDate() - offset);
+      const key = day.toISOString().slice(0, 10);
+      activityByDay.push({ date: key, count: activityResult.rows.filter((row) => row.created_at && new Date(row.created_at).toISOString().slice(0, 10) === key).length });
+    }
+    const attempts = attemptResult.rows.map((row) => ({ lessonKey: row.lesson_key, stageId: row.stage_id ?? null, operation: row.operation || '', correct: Number(row.correct_count), total: Number(row.total_count), score: Number(row.score), createdAt: row.created_at ? new Date(row.created_at).toISOString() : null }));
+    return res.json({ student, completedLessons, todayLessonKeys, lessonsToday: todayLessonKeys.length, checkedInToday, streak: streakFromDates(checkinDates), activeToday: todayLessonKeys.length > 0 || checkedInToday || questToday, lastActiveAt: lastActiveAt ? lastActiveAt.toISOString() : null, activityByDay, attempts });
+  } catch (error) { console.error('Student insights error:', error.message); return res.status(503).json({ message: 'Unable to load student insights' }); }
+});
 app.get('/api/students', requireAuth, requireRole('teacher'), async (req, res) => {
   try { const result = await query(`${userQuery} WHERE sp.teacher_id = $1 ORDER BY sp.created_at DESC`, [req.auth.sub]); return res.json({ students: result.rows.map(toPublicUser) }); }
   catch (error) { console.error('List students error:', error.message); return res.status(503).json({ message: 'Unable to load students' }); }
@@ -326,6 +367,7 @@ if (require.main === module) {
   app.listen(PORT, () => console.log(`Logical API berjalan di http://localhost:${PORT}`));
   ensureProfilePhotoColumn().then((status) => { if (status === 'error' || status === 'missing-table') setTimeout(() => { void ensureProfilePhotoColumn(); }, 20000); });
   ensureStudentActivities().then((status) => { if (status === 'error' || status === 'missing-table') setTimeout(() => { void ensureStudentActivities(); }, 20000); });
+  ensurePracticeAttempts().then((status) => { if (status === 'error' || status === 'missing-table') setTimeout(() => { void ensurePracticeAttempts(); }, 20000); });
   ensureQuestActivityType().then((status) => { if (status === 'error' || status === 'missing-table') setTimeout(() => { void ensureQuestActivityType(); }, 20000); });
   ensurePetNameColumn().then((status) => { if (status === 'error' || status === 'missing-table') setTimeout(() => { void ensurePetNameColumn(); }, 20000); });
 }
