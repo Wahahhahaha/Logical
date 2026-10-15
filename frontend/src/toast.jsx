@@ -30,8 +30,8 @@ export function ToastProvider({ children }) {
     {children}
     <div className="toast-stack">
       {toasts.map((toast) => <div key={toast.id} className={`toast toast-${toast.tone}`} role="status" onClick={() => dismiss(toast.id)}>
-        {toast.tone === 'success' ? <CheckCircle2 size={16} /> : <XCircle size={16} />}
-        <span>{toast.message}</span>
+        <span className="toast-icon">{toast.tone === 'success' ? <CheckCircle2 size={15} /> : <XCircle size={15} />}</span>
+        <span className="toast-message">{toast.message}</span>
         <i className="toast-progress"><b style={{ animationDuration: `${TOAST_DURATION}ms` }} /></i>
       </div>)}
     </div>

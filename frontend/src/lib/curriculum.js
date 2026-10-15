@@ -1,10 +1,11 @@
 import { Calculator, Divide, Hash, Percent, Ruler } from 'lucide-react'
+import { curriculumEn } from './curriculumEn.js'
 
 export const curriculum = {
   '1': {
     grade: '1',
     title: 'Matematika Dasar',
-    subtitle: 'Operasi penjumlahan dan pengurangan pada bilangan sederhana.',
+    subtitle: 'Penjumlahan, pengurangan, serta membandingkan dan mengurutkan bilangan sederhana.',
     stages: [
       { id: 1, name: 'Stage 1', title: 'Matematika Dasar', icon: Calculator, lessons: [
         {
@@ -124,7 +125,128 @@ export const curriculum = {
         }
       ] },
 
-      { id: 2, name: 'Stage 2', title: 'Mengurutkan Bilangan', locked: true },
+      { id: 2, name: 'Stage 2', title: 'Mengurutkan Bilangan', icon: Hash, locked: true, lessons: [
+        {
+          key: 'g1-s2-compare',
+          label: 'Lesson 1',
+          title: 'Membandingkan bilangan',
+          description: 'Mengenal tanda lebih besar, lebih kecil, dan sama dengan.',
+          operation: 'compare',
+          practiceCount: 0,
+          slides: [
+            { type: 'text', title: 'Membandingkan bilangan', body: ['Membandingkan bilangan berarti menentukan bilangan mana yang lebih besar atau lebih kecil.', 'Tanda > artinya "lebih besar", tanda < artinya "lebih kecil", dan tanda = artinya "sama dengan".'] },
+            { type: 'example', title: 'Contoh: 5 dan 3', body: ['Bandingkan bilangan 5 dengan 3.'], expression: '5 > 3', note: '5 lebih besar dari 3, jadi memakai tanda >.' },
+            { type: 'example', title: 'Contoh: 4 dan 4', body: ['Bandingkan bilangan 4 dengan 4.'], expression: '4 = 4', note: 'Kedua bilangan sama besar, jadi memakai tanda =.' }
+          ]
+        },
+        {
+          key: 'g1-s2-compare-practice',
+          label: 'Lesson 2',
+          title: 'Latihan membandingkan bilangan',
+          description: 'Berlatih memilih tanda lebih besar, lebih kecil, atau sama dengan.',
+          operation: 'compare',
+          practiceCount: 0,
+          slides: [
+            { type: 'text', title: 'Siap latihan membandingkan!', body: ['Pilih tanda yang tepat untuk membandingkan kedua bilangan.', 'Ingat: > lebih besar, < lebih kecil, = sama dengan.'] },
+            { type: 'practice', question: '6 ... 2', options: ['<', '=', '>'], answer: '>', explanation: '6 lebih besar dari 2, jadi tandanya >.' },
+            { type: 'practice', question: '3 ... 8', options: ['<', '=', '>'], answer: '<', explanation: '3 lebih kecil dari 8, jadi tandanya <.' },
+            { type: 'practice', question: '7 ... 7', options: ['<', '=', '>'], answer: '=', explanation: '7 sama besar dengan 7, jadi tandanya =.' },
+            { type: 'practice', question: '9 ... 4', options: ['<', '=', '>'], answer: '>', explanation: '9 lebih besar dari 4, jadi tandanya >.' },
+            { type: 'practice', question: '5 ... 5', options: ['<', '=', '>'], answer: '=', explanation: '5 sama besar dengan 5, jadi tandanya =.' },
+            { type: 'practice', question: '2 ... 6', options: ['<', '=', '>'], answer: '<', explanation: '2 lebih kecil dari 6, jadi tandanya <.' }
+          ]
+        },
+        {
+          key: 'g1-s2-order-asc',
+          label: 'Lesson 3',
+          title: 'Mengurutkan dari yang terkecil',
+          description: 'Mengurutkan bilangan dari yang terkecil ke yang terbesar.',
+          operation: 'order',
+          practiceCount: 0,
+          slides: [
+            { type: 'text', title: 'Urutan naik', body: ['Mengurutkan dari yang terkecil berarti menyusun bilangan mulai dari yang paling kecil sampai yang paling besar.', 'Perhatikan setiap bilangan, lalu bandingkan satu per satu.'] },
+            { type: 'example', title: 'Contoh: 3, 1, 2', body: ['Urutkan bilangan 3, 1, dan 2 dari yang terkecil.'], expression: '1, 2, 3', note: 'Karena 1 < 2 < 3, urutannya 1, 2, 3.' },
+            { type: 'example', title: 'Contoh: 6, 4, 5', body: ['Urutkan bilangan 6, 4, dan 5 dari yang terkecil.'], expression: '4, 5, 6', note: 'Karena 4 < 5 < 6, urutannya 4, 5, 6.' }
+          ]
+        },
+        {
+          key: 'g1-s2-order-asc-practice',
+          label: 'Lesson 4',
+          title: 'Latihan mengurutkan naik',
+          description: 'Berlatih mengurutkan bilangan dari yang terkecil.',
+          operation: 'order',
+          practiceCount: 0,
+          slides: [
+            { type: 'text', title: 'Siap latihan mengurutkan!', body: ['Pilih urutan bilangan dengan teliti.', 'Ingat, urutan naik dimulai dari bilangan terkecil.'] },
+            { type: 'practice', question: 'Bilangan terkecil di antara 4, 1, 3 adalah?', options: ['1', '3', '4'], answer: '1', explanation: '1 adalah bilangan terkecil.' },
+            { type: 'practice', question: 'Urutan dari terkecil: 5, 2, 4', options: ['2, 4, 5', '4, 2, 5', '5, 2, 4'], answer: '2, 4, 5', explanation: '2 < 4 < 5, jadi urutannya 2, 4, 5.' },
+            { type: 'practice', question: 'Bilangan terbesar di antara 3, 7, 5 adalah?', options: ['3', '5', '7'], answer: '7', explanation: '7 adalah bilangan terbesar.' },
+            { type: 'practice', question: 'Urutan dari terkecil: 6, 3, 5', options: ['3, 5, 6', '6, 5, 3', '5, 3, 6'], answer: '3, 5, 6', explanation: '3 < 5 < 6, jadi urutannya 3, 5, 6.' },
+            { type: 'practice', question: 'Bilangan terkecil di antara 9, 6, 8 adalah?', mode: 'input', answer: '6', explanation: '6 adalah bilangan terkecil.' },
+            { type: 'practice', question: 'Bilangan terbesar di antara 2, 4, 1 adalah?', mode: 'input', answer: '4', explanation: '4 adalah bilangan terbesar.' }
+          ]
+        },
+        {
+          key: 'g1-s2-order-desc',
+          label: 'Lesson 5',
+          title: 'Mengurutkan dari yang terbesar',
+          description: 'Mengurutkan bilangan dari yang terbesar ke yang terkecil.',
+          operation: 'order',
+          practiceCount: 0,
+          slides: [
+            { type: 'text', title: 'Urutan turun', body: ['Mengurutkan dari yang terbesar berarti menyusun bilangan mulai dari yang paling besar sampai yang paling kecil.', 'Urutan turun adalah kebalikan dari urutan naik.'] },
+            { type: 'example', title: 'Contoh: 2, 5, 3', body: ['Urutkan bilangan 2, 5, dan 3 dari yang terbesar.'], expression: '5, 3, 2', note: 'Karena 5 > 3 > 2, urutannya 5, 3, 2.' },
+            { type: 'example', title: 'Contoh: 4, 7, 6', body: ['Urutkan bilangan 4, 7, dan 6 dari yang terbesar.'], expression: '7, 6, 4', note: 'Karena 7 > 6 > 4, urutannya 7, 6, 4.' }
+          ]
+        },
+        {
+          key: 'g1-s2-order-desc-practice',
+          label: 'Lesson 6',
+          title: 'Latihan mengurutkan turun',
+          description: 'Berlatih mengurutkan bilangan dari yang terbesar.',
+          operation: 'order',
+          practiceCount: 0,
+          slides: [
+            { type: 'text', title: 'Siap latihan mengurutkan!', body: ['Sekarang urutkan bilangan dari yang terbesar ke yang terkecil.', 'Bandingkan bilangan dengan teliti.'] },
+            { type: 'practice', question: 'Urutan dari terbesar: 3, 8, 5', options: ['8, 5, 3', '3, 5, 8', '5, 3, 8'], answer: '8, 5, 3', explanation: '8 > 5 > 3, jadi urutannya 8, 5, 3.' },
+            { type: 'practice', question: 'Urutan dari terbesar: 4, 1, 6', options: ['6, 4, 1', '1, 4, 6', '4, 6, 1'], answer: '6, 4, 1', explanation: '6 > 4 > 1, jadi urutannya 6, 4, 1.' },
+            { type: 'practice', question: 'Bilangan terbesar di antara 7, 9, 8 adalah?', options: ['7', '8', '9'], answer: '9', explanation: '9 adalah bilangan terbesar.' },
+            { type: 'practice', question: 'Urutan dari terbesar: 2, 5, 3', options: ['5, 3, 2', '2, 3, 5', '3, 5, 2'], answer: '5, 3, 2', explanation: '5 > 3 > 2, jadi urutannya 5, 3, 2.' },
+            { type: 'practice', question: 'Bilangan terbesar di antara 5, 6, 4 adalah?', mode: 'input', answer: '6', explanation: '6 adalah bilangan terbesar.' },
+            { type: 'practice', question: 'Bilangan terkecil di antara 3, 7, 2 adalah?', mode: 'input', answer: '2', explanation: '2 adalah bilangan terkecil.' }
+          ]
+        },
+        {
+          key: 'g1-s2-between',
+          label: 'Lesson 7',
+          title: 'Bilangan sebelum dan sesudah',
+          description: 'Menentukan bilangan sebelum, sesudah, dan di antara dua bilangan.',
+          operation: 'order',
+          practiceCount: 0,
+          slides: [
+            { type: 'text', title: 'Bilangan sebelum dan sesudah', body: ['Setiap bilangan punya bilangan sebelum dan bilangan sesudah.', 'Bilangan sebelum nilainya 1 lebih kecil, bilangan sesudah nilainya 1 lebih besar.'] },
+            { type: 'example', title: 'Contoh: sebelum dan sesudah 5', body: ['Tentukan bilangan sebelum 5 dan bilangan sesudah 5.'], expression: '4 < 5 < 6', note: 'Bilangan sebelum 5 adalah 4, bilangan sesudah 5 adalah 6.' },
+            { type: 'example', title: 'Contoh: di antara 8 dan 10', body: ['Bilangan apa yang berada di antara 8 dan 10?'], expression: '9', note: 'Bilangan di antara 8 dan 10 adalah 9.' }
+          ]
+        },
+        {
+          key: 'g1-s2-between-practice',
+          label: 'Lesson 8',
+          title: 'Latihan sebelum dan sesudah',
+          description: 'Berlatih menentukan bilangan sebelum, sesudah, dan di antara dua bilangan.',
+          operation: 'order',
+          practiceCount: 0,
+          slides: [
+            { type: 'text', title: 'Siap latihan!', body: ['Tentukan bilangan sebelum, sesudah, atau di antara bilangan.', 'Ingat: sebelum = 1 lebih kecil, sesudah = 1 lebih besar.'] },
+            { type: 'practice', question: 'Bilangan sesudah 7 adalah?', options: ['5', '6', '8', '9'], answer: '8', explanation: 'Bilangan sesudah 7 adalah 8.' },
+            { type: 'practice', question: 'Bilangan sebelum 4 adalah?', options: ['2', '3', '5'], answer: '3', explanation: 'Bilangan sebelum 4 adalah 3.' },
+            { type: 'practice', question: 'Bilangan di antara 5 dan 7 adalah?', options: ['4', '6', '8'], answer: '6', explanation: 'Bilangan di antara 5 dan 7 adalah 6.' },
+            { type: 'practice', question: 'Bilangan sesudah 9 adalah?', options: ['8', '10', '11'], answer: '10', explanation: 'Bilangan sesudah 9 adalah 10.' },
+            { type: 'practice', question: 'Bilangan sebelum 6 adalah?', mode: 'input', answer: '5', explanation: 'Bilangan sebelum 6 adalah 5.' },
+            { type: 'practice', question: 'Bilangan di antara 2 dan 4 adalah?', mode: 'input', answer: '3', explanation: 'Bilangan di antara 2 dan 4 adalah 3.' }
+          ]
+        }
+      ] },
       { id: 3, name: 'Stage 3', title: 'Bentuk dan Bangun', locked: true }
     ]
   },
@@ -3921,17 +4043,75 @@ export const curriculum = {
 
 export const fallbackGrade = { grade: '-', title: 'Segera hadir', subtitle: 'Materi untuk grade ini sedang disiapkan.', stages: [] }
 
-export function planFor(grade) { return curriculum[grade] || fallbackGrade }
+function pickText(base, overlay) { return overlay ?? base }
 
-export function allLessons(grade) {
-  const plan = planFor(grade)
+const termMap = {
+  Ribuan: 'Thousands',
+  Ratusan: 'Hundreds',
+  Puluhan: 'Tens',
+  Satuan: 'Ones',
+  'Sama besar': 'Equal',
+  'Tidak bisa': 'Cannot tell'
+}
+const translateTerm = value => (typeof value === 'string' && termMap[value]) || value
+
+function localizeSlide(slide, en) {
+  if (!en) return slide
+  return {
+    ...slide,
+    title: pickText(slide.title, en.title),
+    body: pickText(slide.body, en.body),
+    expression: pickText(slide.expression, en.expression),
+    points: pickText(slide.points, en.points),
+    note: pickText(slide.note, en.note),
+    question: pickText(slide.question, en.question),
+    options: en.options ?? (Array.isArray(slide.options) ? slide.options.map(translateTerm) : slide.options),
+    answer: pickText(slide.answer, en.answer === undefined ? translateTerm(slide.answer) : en.answer),
+    explanation: pickText(slide.explanation, en.explanation)
+  }
+}
+
+function localizeLesson(lesson, en) {
+  if (!en) return lesson
+  return {
+    ...lesson,
+    title: pickText(lesson.title, en.title),
+    description: pickText(lesson.description, en.description),
+    slides: (lesson.slides || []).map((slide, index) => localizeSlide(slide, en.slides && en.slides[index]))
+  }
+}
+
+export function localizePlan(plan, language) {
+  if (!plan || String(language).slice(0, 2) !== 'en') return plan
+  const en = curriculumEn[plan.grade]
+  if (!en) return plan
+  return {
+    ...plan,
+    title: pickText(plan.title, en.title),
+    subtitle: pickText(plan.subtitle, en.subtitle),
+    stages: (plan.stages || []).map(stage => {
+      const enStage = en.stages && en.stages[stage.id]
+      return {
+        ...stage,
+        name: pickText(stage.name, enStage && enStage.name),
+        title: pickText(stage.title, enStage && enStage.title),
+        lessons: (stage.lessons || []).map(lesson => localizeLesson(lesson, enStage && enStage.lessons && enStage.lessons[lesson.key]))
+      }
+    })
+  }
+}
+
+export function planFor(grade, language) { return localizePlan(curriculum[grade] || fallbackGrade, language) }
+
+export function allLessons(grade, language) {
+  const plan = planFor(grade, language)
   const list = []
   for (const stage of plan.stages) if (!stage.locked) for (const lesson of stage.lessons || []) list.push({ ...lesson, stageId: stage.id, stageName: stage.name, stageTitle: stage.title })
   return list
 }
 
-export function findLesson(grade, lessonKey) {
-  const plan = planFor(grade)
+export function findLesson(grade, lessonKey, language) {
+  const plan = planFor(grade, language)
   for (const stage of plan.stages) for (const lesson of stage.lessons || []) if (lesson.key === lessonKey) return { ...lesson, stageId: stage.id, stageName: stage.name }
   return null
 }

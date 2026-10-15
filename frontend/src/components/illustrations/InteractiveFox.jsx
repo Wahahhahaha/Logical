@@ -5,7 +5,7 @@ import { PetIllustration } from './PetIllustration.jsx'
 const reactions = {
   happy: { emotion: 'happy', effect: 'sparkle', messageKey: 'pet.react.happy' },
   love: { emotion: 'excited', effect: 'love', messageKey: 'pet.react.love' },
-  confused: { emotion: 'curious', effect: 'sweat', messageKey: 'pet.react.gentle' },
+  confused: { emotion: 'confused', effect: 'sweat', messageKey: 'pet.react.gentle' },
   thinking: { emotion: 'thinking', effect: 'thought', messageKey: 'pet.react.thinking' },
   celebrating: { emotion: 'celebrating', effect: 'confetti', messageKey: 'pet.react.celebrating' },
   sleepy: { emotion: 'sleepy', effect: 'z', messageKey: '' },

@@ -4,30 +4,9 @@ import { useAuth } from '../../auth.jsx'
 import { useI18n } from '../../i18n.jsx'
 import { useToast } from '../../toast.jsx'
 import { apiFetch, apiUrl } from '../../lib/api.js'
+import ImageCropModal from '../../components/ImageCropModal.jsx'
 
-const MAX_EDGE = 640
-const JPEG_QUALITY = 0.82
 const MAX_FILE_BYTES = 8 * 1024 * 1024
-
-function compressImage(file) {
-  return new Promise((resolve, reject) => {
-    const objectUrl = URL.createObjectURL(file)
-    const image = new Image()
-    image.onload = () => {
-      URL.revokeObjectURL(objectUrl)
-      const scale = Math.min(1, MAX_EDGE / Math.max(image.width, image.height))
-      const width = Math.max(1, Math.round(image.width * scale))
-      const height = Math.max(1, Math.round(image.height * scale))
-      const canvas = document.createElement('canvas')
-      canvas.width = width
-      canvas.height = height
-      canvas.getContext('2d').drawImage(image, 0, 0, width, height)
-      resolve(canvas.toDataURL('image/jpeg', JPEG_QUALITY))
-    }
-    image.onerror = () => { URL.revokeObjectURL(objectUrl); reject(new Error('err.invalidImage')) }
-    image.src = objectUrl
-  })
-}
 
 export default function ProfilePage() {
   const { user, updateUser } = useAuth()
@@ -37,6 +16,7 @@ export default function ProfilePage() {
   const [fullName, setFullName] = useState(user.fullName)
   const [photoDraft, setPhotoDraft] = useState(null)
   const [photoRemoved, setPhotoRemoved] = useState(false)
+  const [cropSrc, setCropSrc] = useState(null)
   const [saving, setSaving] = useState(false)
   const [passwords, setPasswords] = useState({ current: '', next: '', confirm: '' })
   const [changing, setChanging] = useState(false)
@@ -44,15 +24,16 @@ export default function ProfilePage() {
   const previewPhoto = photoDraft || (photoRemoved ? null : apiUrl(user.photoUrl))
   const hasPhoto = Boolean(user.photoUrl) && !photoRemoved
 
-  const pickPhoto = async event => {
+  const pickPhoto = event => {
     const file = event.target.files?.[0]
     event.target.value = ''
     if (!file) return
     if (file.size > MAX_FILE_BYTES) { toast.error(t('profile.imageTooBig')); return }
-    try { setPhotoDraft(await compressImage(file)); setPhotoRemoved(false) }
-    catch (imageError) { toast.error(imageError) }
+    setCropSrc(current => { if (current) URL.revokeObjectURL(current); return URL.createObjectURL(file) })
   }
 
+  const closeCrop = () => setCropSrc(current => { if (current) URL.revokeObjectURL(current); return null })
+  const applyCrop = dataUrl => { setPhotoDraft(dataUrl); setPhotoRemoved(false); closeCrop() }
   const clearPhoto = () => { setPhotoDraft(null); setPhotoRemoved(true) }
 
   const save = async event => {
@@ -76,7 +57,7 @@ export default function ProfilePage() {
     } catch (requestError) { toast.error(requestError) } finally { setChanging(false) }
   }
 
-  return <div className="page-stack">
+  return <><div className="page-stack">
     <section className="welcome-row">
       <div>
         <p className="eyebrow">{t('profile.accountSettings')}</p>
@@ -85,6 +66,7 @@ export default function ProfilePage() {
       </div>
     </section>
 
+    <div className="profile-grid">
     <div className="form-card card">
       <div className="profile-heading">
         <div className="large-avatar">{previewPhoto ? <img src={previewPhoto} alt="" /> : (user.fullName?.slice(0, 1) || '?')}</div>
@@ -125,5 +107,7 @@ export default function ProfilePage() {
       </form>
       <p className="photo-hint">{t('profile.passwordHint')}</p>
     </div>
+    </div>
   </div>
-}
+  {cropSrc && <ImageCropModal src={cropSrc} onCancel={closeCrop} onConfirm={applyCrop} />}
+  </>}

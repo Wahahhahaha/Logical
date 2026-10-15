@@ -14,6 +14,7 @@ import StudentProgressPage from './pages/student/StudentProgressPage.jsx'
 import StudentManagementPage from './pages/teacher/StudentManagementPage.jsx'
 import TeacherDashboard from './pages/teacher/TeacherDashboard.jsx'
 import TeacherProgressPage from './pages/teacher/TeacherProgressPage.jsx'
+import TeacherStudentDetailPage from './pages/teacher/TeacherStudentDetailPage.jsx'
 import './App.css'
 
 export default function App() {
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="/student/progress" element={<StudentProgressPage />} />
         <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
         <Route path="/teacher/students" element={<StudentManagementPage />} />
+        <Route path="/teacher/students/:id" element={<TeacherStudentDetailPage />} />
         <Route path="/teacher/progress" element={<TeacherProgressPage />} />
         <Route path="*" element={<Placeholder title="Page not found" description="The requested workspace page does not exist." />} />
       </Route>

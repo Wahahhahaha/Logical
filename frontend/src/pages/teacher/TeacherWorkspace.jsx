@@ -1,9 +1,11 @@
 import { useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useI18n } from '../../i18n.jsx'
 import Placeholder from '../common/Placeholder.jsx'
 
 export default function TeacherWorkspace() {
   const path = useLocation().pathname
-  const title = useMemo(() => ({ '/teacher/progress': 'Learning progress' }[path] || 'Teacher workspace'), [path])
-  return <Placeholder title={title} description="This workspace is ready for student data, monitoring, and analytics to be connected in the next phase." />
+  const { t } = useI18n()
+  const title = useMemo(() => ({ '/teacher/progress': t('workspace.teacherProgress') }[path] || t('workspace.teacher')), [path, t])
+  return <Placeholder title={title} description={t('placeholder.teacherDesc')} />
 }

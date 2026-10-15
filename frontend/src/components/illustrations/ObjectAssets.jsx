@@ -26,9 +26,10 @@ export function ObjectIcon({ kind, size = 22 }) {
 }
 
 export function ObjectRow({ count, kind, faded = false }) {
-  return <div className={`apple-row${faded ? ' faded' : ''}`}>{Array.from({ length: count }, (_, key) => <ObjectIcon key={key} kind={kind} />)}</div>
+  const columns = count >= 5 ? 5 : Math.max(1, count)
+  return <div className={`apple-row${faded ? ' faded' : ''}`} style={{ '--object-columns': columns }}>{Array.from({ length: count }, (_, key) => <ObjectIcon key={key} kind={kind} />)}</div>
 }
 
 export function ObjectPhrase({ a, op, b, answer, showAnswer, kind }) {
-  return <div className="fruit-phrase"><div className="fruit-group"><ObjectRow count={a} kind={kind} /></div><span className="fruit-operator">{op}</span><div className="fruit-group"><ObjectRow count={b} kind={kind} faded={op === '-'} /></div><span className="fruit-operator">=</span><div className="fruit-group">{showAnswer ? <ObjectRow count={answer} kind={kind} /> : <span className="fruit-blank">?</span>}</div></div>
+  return <div className="fruit-phrase"><div className="fruit-group fruit-group-a"><ObjectRow count={a} kind={kind} /></div><span className="fruit-operator fruit-operator-main">{op}</span><div className="fruit-group fruit-group-b"><ObjectRow count={b} kind={kind} faded={op === '-'} /></div><span className="fruit-operator fruit-operator-equals">=</span><div className="fruit-group fruit-group-answer">{showAnswer ? <ObjectRow count={answer} kind={kind} /> : <span className="fruit-blank">?</span>}</div></div>
 }

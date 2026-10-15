@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Check, Flame, Pencil, Sparkles, X, Zap } from 'lucide-react'
+import { Check, Pencil, Sparkles, X, Zap } from 'lucide-react'
 import { useI18n } from '../../i18n.jsx'
 import { apiFetch } from '../../lib/api.js'
 import { EggIllustration } from '../../components/illustrations/PetIllustration.jsx'
@@ -34,7 +34,7 @@ export default function StudentPetPage() {
   const percent = progress.expInLevel / progress.expToNextLevel * 100
   const petArt = progress.pet === 'egg' ? <EggIllustration /> : progress.pet === 'cat' ? <InteractiveCat label={displayName} /> : progress.pet === 'fox' ? <InteractiveFox label={displayName} /> : <InteractivePet type={progress.pet} label={displayName} />
   return <div className="page-stack">
-    <section className="welcome-row"><div><p className="eyebrow">{t('pet.companion')}</p><h1>{displayName}</h1><p className="page-subtitle">{t('pet.keepLearning')}</p></div><div className="streak-pill"><Flame size={17} fill="currentColor" /><strong>{progress.streak} {t('common.days')} <small>{t('pet.checkinStreak')}</small></strong></div></section>
+    <section className="welcome-row"><div><p className="eyebrow">{t('pet.companion')}</p><h1>{displayName}</h1><p className="page-subtitle">{t('pet.keepLearning')}</p></div></section>
     <section className="pet-progress-layout">
       <div className="pet-profile-column"><div className="card pet-profile-card"><div className="pet-art-stage">{petArt}</div></div><div className="pet-profile-caption"><h2>{displayName}</h2><p>{t('pet.learningCompanion')}</p>{!editing ? <button className="pet-rename-button" onClick={startEdit}><Pencil size={14} /> {t('common.rename')}</button> : <div className="pet-rename-form"><input className="text-input" type="text" value={draftName} maxLength={40} autoFocus onChange={event => setDraftName(event.target.value)} onKeyDown={event => { if (event.key === 'Enter') saveName(); if (event.key === 'Escape') cancelEdit() }} /><div className="pet-rename-actions"><button className="primary-button small" onClick={saveName}><Check size={14} /> {t('common.save')}</button><button className="ghost-button small" onClick={cancelEdit}><X size={14} /> {t('common.cancel')}</button></div>{saveError && <div className="form-error">{translateError(saveError)}</div>}</div>}</div></div>
       <div className="card pet-stats-card"><div className="section-title-row"><div><label>{t('pet.growth')}</label><h2>{t('dash.level', { n: progress.level })}</h2></div><div className="level-badge"><Zap size={13} /> {progress.exp} XP</div></div><div className="xp-progress"><div className="xp-progress-label"><span>{progress.expInLevel} / {progress.expToNextLevel} XP</span><b>{t('dash.level', { n: progress.level + 1 })}</b></div><div className="progress-track"><i style={{ width: `${percent}%` }} /></div><small>{t('pet.xpUntil', { n: progress.expToNextLevel - progress.expInLevel })}</small></div><div className="pet-rule"><Sparkles size={17} /><span>{t('pet.rule')}</span></div></div>

@@ -216,7 +216,7 @@ function FoxCharacterIllustration({ className = '', emotion = 'idle', effect = '
     ? ['          EEE    EEE']
     : emotion === 'sleepy'
       ? ['          EEE    EEE', '           E       E']
-      : emotion === 'thinking' || emotion === 'curious'
+      : emotion === 'thinking' || emotion === 'curious' || emotion === 'confused'
         ? ['            EE      EE']
         : ['           EE      EE']
   const mouths = emotion === 'happy' || emotion === 'celebrating' || emotion === 'excited'
