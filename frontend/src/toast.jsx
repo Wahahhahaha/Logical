@@ -1,10 +1,12 @@
 import { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react'
 import { CheckCircle2, XCircle } from 'lucide-react'
+import { useI18n } from './i18n.jsx'
 
 const ToastContext = createContext(null)
 const TOAST_DURATION = 3000
 
 export function ToastProvider({ children }) {
+  const { translateError } = useI18n()
   const [toasts, setToasts] = useState([])
   const counter = useRef(0)
 
@@ -19,10 +21,10 @@ export function ToastProvider({ children }) {
   }, [dismiss])
 
   const value = useMemo(() => ({
-    success: (message) => push(message, 'success'),
-    error: (message) => push(message, 'error'),
+    success: (message) => push(translateError(message), 'success'),
+    error: (message) => push(translateError(message), 'error'),
     dismiss,
-  }), [push, dismiss])
+  }), [push, dismiss, translateError])
 
   return <ToastContext.Provider value={value}>
     {children}

@@ -1,20 +1,22 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { useI18n } from '../../i18n.jsx'
 import { PetIllustration } from './PetIllustration.jsx'
 
 const reactions = {
-  happy: { emotion: 'happy', effect: 'sparkle', message: 'Fox ikut senang!' },
-  love: { emotion: 'excited', effect: 'love', message: 'Fox senang sekali!' },
-  confused: { emotion: 'curious', effect: 'sweat', message: 'Kita coba pelan-pelan, yuk!' },
-  thinking: { emotion: 'thinking', effect: 'thought', message: 'Hmm, coba lihat petunjuknya!' },
-  celebrating: { emotion: 'celebrating', effect: 'confetti', message: 'Kerja bagus! Fox ikut merayakan!' },
-  sleepy: { emotion: 'sleepy', effect: 'z', message: '' },
-  curious: { emotion: 'curious', effect: 'sparkle', message: 'Ada yang menarik!' },
-  frustrated: { emotion: 'sad', effect: 'anger', message: 'Wah, Fox jadi sedikit bingung!' },
+  happy: { emotion: 'happy', effect: 'sparkle', messageKey: 'pet.react.happy' },
+  love: { emotion: 'excited', effect: 'love', messageKey: 'pet.react.love' },
+  confused: { emotion: 'curious', effect: 'sweat', messageKey: 'pet.react.gentle' },
+  thinking: { emotion: 'thinking', effect: 'thought', messageKey: 'pet.react.thinking' },
+  celebrating: { emotion: 'celebrating', effect: 'confetti', messageKey: 'pet.react.celebrating' },
+  sleepy: { emotion: 'sleepy', effect: 'z', messageKey: '' },
+  curious: { emotion: 'curious', effect: 'sparkle', messageKey: 'pet.react.curious' },
+  frustrated: { emotion: 'sad', effect: 'anger', messageKey: 'pet.react.frustrated' },
 }
 
 const priorityFor = name => name === 'celebrating' ? 5 : name === 'thinking' ? 4 : name === 'happy' || name === 'confused' ? 3 : 2
 
 export default function InteractiveFox({ className = '', label = 'Fox', reaction, onReact }) {
+  const { t } = useI18n()
   const [current, setCurrent] = useState({ emotion: 'idle', effect: '', id: 0 })
   const [blink, setBlink] = useState(false)
   const [idleMotion, setIdleMotion] = useState('')
@@ -34,13 +36,14 @@ export default function InteractiveFox({ className = '', label = 'Fox', reaction
     activePriority.current = priority
     window.clearTimeout(timeoutRef.current)
     const mood = reactions[name] || reactions.happy
-    setCurrent({ ...mood, message: message ?? mood.message, id: Date.now() })
-    if (message || mood.message) onReactRef.current?.(message ?? mood.message)
+    const text = message ?? (mood.messageKey ? t(mood.messageKey, { pet: label }) : '')
+    setCurrent({ emotion: mood.emotion, effect: mood.effect, message: text, id: Date.now() })
+    if (text) onReactRef.current?.(text)
     timeoutRef.current = window.setTimeout(() => {
       setCurrent({ emotion: 'idle', effect: '', id: Date.now() })
       activePriority.current = 0
     }, duration)
-  }, [])
+  }, [t, label])
 
   useEffect(() => {
     if (!reaction) return
@@ -97,14 +100,14 @@ export default function InteractiveFox({ className = '', label = 'Fox', reaction
     const bounds = event.currentTarget.getBoundingClientRect()
     const x = (event.clientX - bounds.left) / bounds.width
     const y = (event.clientY - bounds.top) / bounds.height
-    if (count >= 5) play('frustrated', 'Wah, Fox jadi sedikit bingung!', 1200, 2)
-    else if (count >= 3) play('love', 'Fox senang sekali!', 1600, 2)
-    else if (x > 0.74 && y > 0.42) play('curious', 'Ekor Fox geli!', 1300, 2)
-    else if (y < 0.48) play(count === 2 ? 'love' : 'happy', count === 2 ? 'Fox senang sekali!' : 'Fox ikut senang!', 1400, 2)
+    if (count >= 5) play('frustrated', undefined, 1200, 2)
+    else if (count >= 3) play('love', undefined, 1600, 2)
+    else if (x > 0.74 && y > 0.42) play('curious', t('pet.react.tail', { pet: label }), 1300, 2)
+    else if (y < 0.48) play(count === 2 ? 'love' : 'happy', undefined, 1400, 2)
     else play(count === 2 ? 'love' : 'happy', undefined, 1300, 2)
   }
 
-  return <button className={`interactive-fox ${className} ${idleMotion} mood-${current.emotion}`} type="button" aria-label={`Fox, teman belajarmu. Klik untuk berinteraksi dengan ${label}.`} onClick={interact}>
+  return <button className={`interactive-fox ${className} ${idleMotion} mood-${current.emotion}`} type="button" aria-label={t('pet.aria', { pet: label })} onClick={interact}>
     <PetIllustration type="fox" emotion={blink && current.emotion === 'idle' ? 'blink' : current.emotion} effect={current.effect} />
   </button>
 }

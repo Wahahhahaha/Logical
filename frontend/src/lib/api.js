@@ -18,9 +18,9 @@ export async function apiFetch(path, options = {}) {
       },
     })
   } catch {
-    throw new Error('Backend API tidak dapat dihubungi. Pastikan server dan MySQL sedang berjalan.')
+    throw new Error('err.network')
   }
   const body = await response.json().catch(() => ({}))
-  if (!response.ok) throw new Error(body.message || 'Request failed')
+  if (!response.ok) throw new Error(body.message || 'err.requestFailed')
   return body
 }

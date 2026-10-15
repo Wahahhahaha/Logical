@@ -1,40 +1,126 @@
 .auth-page {
-  background: linear-gradient(180deg, #8bd9f3 0 58%, #c9eac9 58% 100%);
+  background: linear-gradient(180deg, #8bd9f3 0 55%, #afd59b 55% 100%);
 }
 
-.auth-page::before {
-  content: '';
+.auth-page::before,
+.auth-page::after { display: none; }
+
+.auth-landscape {
   position: absolute;
-  inset: auto 0 0 0;
-  height: 42%;
-  background:
-    radial-gradient(circle at 10% 80%, #7fb96b 0 30px, transparent 32px),
-    radial-gradient(circle at 25% 75%, #8fc877 0 24px, transparent 26px),
-    radial-gradient(circle at 40% 82%, #7fb96b 0 28px, transparent 30px),
-    radial-gradient(circle at 60% 78%, #95cf80 0 22px, transparent 24px),
-    radial-gradient(circle at 75% 84%, #7fb96b 0 26px, transparent 28px),
-    radial-gradient(circle at 90% 79%, #8fc877 0 24px, transparent 26px),
-    linear-gradient(180deg, #b6d8a8 0 60%, #9ecf90 60% 100%);
-  pointer-events: none;
+  inset: auto 0 0;
   z-index: 0;
+  display: block;
+  width: 100%;
+  height: 45%;
+  overflow: hidden;
+  pointer-events: none;
 }
 
-.auth-page::after {
+.auth-landscape path { stroke: none; }
+.landscape-back { fill: #91bd87; }
+.landscape-middle { fill: #afd59b; }
+.landscape-front { fill: #c4e5a9; }
+
+.auth-nature {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 0;
+  height: 35%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.grass,
+.flower {
+  position: absolute;
+  bottom: 0;
+  transform-origin: 50% 100%;
+}
+
+.grass {
+  width: 3px;
+  height: var(--grass-height, 28px);
+  border-radius: 3px 3px 0 0;
+  background: #5f9664;
+  animation: grassSway var(--sway-duration, 5.8s) ease-in-out infinite;
+  animation-delay: var(--sway-delay, 0s);
+}
+
+.grass::before,
+.grass::after {
   content: '';
   position: absolute;
-  inset: auto 0 0 0;
-  height: 46%;
-  background:
-    radial-gradient(circle at 8% 95%, #d8b76e 0 6px, transparent 8px),
-    radial-gradient(circle at 15% 88%, #f2d89c 0 4px, transparent 6px),
-    radial-gradient(circle at 22% 96%, #d8b76e 0 5px, transparent 7px),
-    radial-gradient(circle at 35% 90%, #f2d89c 0 4px, transparent 6px),
-    radial-gradient(circle at 48% 94%, #d8b76e 0 6px, transparent 8px),
-    radial-gradient(circle at 58% 89%, #f2d89c 0 4px, transparent 6px),
-    radial-gradient(circle at 70% 95%, #d8b76e 0 5px, transparent 7px),
-    radial-gradient(circle at 82% 91%, #f2d89c 0 4px, transparent 6px),
-    radial-gradient(circle at 92% 96%, #d8b76e 0 6px, transparent 8px);
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.9;
+  bottom: 0;
+  width: 3px;
+  height: 75%;
+  border-radius: 3px 3px 0 0;
+  background: inherit;
+}
+
+.grass::before { left: -6px; transform: rotate(-18deg); transform-origin: 50% 100%; }
+.grass::after { right: -6px; height: 62%; transform: rotate(20deg); transform-origin: 50% 100%; }
+
+.grass-1 { left: 5%; --grass-height: 34px; --sway-duration: 6.2s; }
+.grass-2 { left: 17%; --grass-height: 22px; --sway-duration: 5.1s; --sway-delay: -1.5s; background: #70a86c; }
+.grass-3 { left: 30%; --grass-height: 42px; --sway-duration: 7.1s; --sway-delay: -3.4s; }
+.grass-4 { left: 44%; --grass-height: 26px; --sway-duration: 5.6s; --sway-delay: -2.1s; background: #699f68; }
+.grass-5 { left: 58%; --grass-height: 38px; --sway-duration: 6.7s; --sway-delay: -4.2s; }
+.grass-6 { left: 70%; --grass-height: 24px; --sway-duration: 5.4s; --sway-delay: -1.1s; background: #70a86c; }
+.grass-7 { left: 83%; --grass-height: 35px; --sway-duration: 6.4s; --sway-delay: -2.8s; }
+.grass-8 { left: 94%; --grass-height: 28px; --sway-duration: 7.4s; --sway-delay: -5s; background: #699f68; }
+
+.flower {
+  width: 11px;
+  height: 11px;
+  margin-bottom: clamp(24px, 7vh, 54px);
+  border-radius: 50%;
+  background: var(--flower-center, #e4b94d);
+  box-shadow: -5px 0 var(--flower-petal, #fff8dc), 5px 0 var(--flower-petal, #fff8dc), 0 -5px var(--flower-petal, #fff8dc), 0 5px var(--flower-petal, #fff8dc);
+  transform: scale(.82);
+  animation: flowerSway var(--flower-duration, 6.8s) ease-in-out infinite;
+  animation-delay: var(--flower-delay, 0s);
+}
+
+.flower::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 4px;
+  width: 2px;
+  height: 29px;
+  background: #669b67;
+  transform-origin: 50% 0;
+}
+
+.flower-yellow { --flower-petal: #fff2a8; --flower-center: #e4a848; }
+.flower-pink { --flower-petal: #f3b2b9; --flower-center: #d88591; }
+.flower-white { --flower-petal: #fff9e8; --flower-center: #e6b54e; }
+.flower-1 { left: 11%; margin-bottom: 26px; --flower-scale: 1; --flower-duration: 7.2s; --flower-delay: -2.2s; }
+.flower-2 { left: 26%; margin-bottom: 34px; --flower-scale: .78; --flower-duration: 6.1s; --flower-delay: -4.4s; }
+.flower-3 { left: 39%; margin-bottom: 54px; --flower-scale: .92; --flower-duration: 7.8s; --flower-delay: -1.2s; }
+.flower-4 { left: 64%; margin-bottom: 38px; --flower-scale: .82; --flower-duration: 6.5s; --flower-delay: -3.5s; }
+.flower-5 { left: 78%; margin-bottom: 52px; --flower-scale: 1; --flower-duration: 7.5s; --flower-delay: -5.5s; }
+.flower-6 { left: 90%; margin-bottom: 32px; --flower-scale: .78; --flower-duration: 6.3s; --flower-delay: -2.8s; }
+
+@keyframes grassSway {
+  0%, 100% { transform: rotate(-2deg); }
+  35% { transform: rotate(3deg); }
+  55% { transform: rotate(-5deg); }
+  72% { transform: rotate(2deg); }
+}
+
+@keyframes flowerSway {
+  0%, 100% { transform: rotate(-2deg) scale(var(--flower-scale, .82)); }
+  38% { transform: rotate(4deg) scale(calc(var(--flower-scale, .82) + .04)); }
+  56% { transform: rotate(-6deg) scale(var(--flower-scale, .82)); }
+  74% { transform: rotate(2deg) scale(calc(var(--flower-scale, .82) + .02)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grass, .flower { animation: none; }
+}
+
+@media (max-width: 600px) {
+  .auth-nature { height: 31%; }
+  .grass-3, .grass-6 { display: none; }
 }

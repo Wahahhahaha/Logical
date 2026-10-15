@@ -1,15 +1,21 @@
 const SLOTS = [
-  [5, 'Good morning'],
-  [12, 'Good afternoon'],
-  [18, 'Good evening'],
-  [21, 'Good night'],
+  [5, 'greeting.morning'],
+  [12, 'greeting.afternoon'],
+  [18, 'greeting.evening'],
+  [21, 'greeting.night'],
 ]
 
-export function greetingFor(date = new Date()) {
+export function greetingKey(date = new Date()) {
   const hour = date.getHours()
-  let message = SLOTS[SLOTS.length - 1][1]
-  for (const [start, text] of SLOTS) if (hour >= start) message = text
-  return message
+  let key = SLOTS[SLOTS.length - 1][1]
+  for (const [start, slotKey] of SLOTS) if (hour >= start) key = slotKey
+  return key
+}
+
+export function greetingFor(date = new Date()) {
+  const FALLBACK = ['Good morning', 'Good afternoon', 'Good evening', 'Good night']
+  const index = ['greeting.morning', 'greeting.afternoon', 'greeting.evening', 'greeting.night'].indexOf(greetingKey(date))
+  return FALLBACK[index] || FALLBACK[0]
 }
 
 export function formatToday(locale = 'en-US', date = new Date()) {

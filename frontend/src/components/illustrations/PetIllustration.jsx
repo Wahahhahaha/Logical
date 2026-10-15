@@ -11,10 +11,12 @@ export function PetEggIllustration({ type = 'cat', className = '' }) {
   return <svg className={`illustration-svg ${className}`} viewBox="0 0 120 140" role="img" aria-label={`${type} pet egg`}><path d="M60 12C32 12 17 51 17 79c0 30 18 49 43 49s43-19 43-49C103 51 88 12 60 12Z" fill="#fff4d8" stroke={colors[1]} strokeWidth="4"/><path d="M35 76c11-8 17 8 26 0s15-8 24 0" fill="none" stroke={colors[0]} strokeWidth="7" strokeLinecap="round"/><g className="pet-eyes"><circle cx="47" cy="54" r="4" fill={colors[1]}/></g><g className="pet-eyes"><circle cx="73" cy="54" r="4" fill={colors[1]}/></g><path d="M48 97c8-5 16-5 24 0" fill="none" stroke={colors[0]} strokeWidth="4" strokeLinecap="round"/></svg>
 }
 
-const face = '#fff6e8'
-
 function CatCharacterIllustration({ className = '', emotion = 'idle', effect = '' }) {
-  return <img className={`illustration-svg pet-cat emotion-${emotion} ${className}`} src="/cat-pixel.png" alt="Cat pixel art character" draggable="false" data-effect={effect} />
+  const expression = ['blink', 'happy', 'thinking', 'sad'].includes(emotion) ? `/cat-pixel-${emotion}.png` : '/cat-pixel-body.png'
+  return <span className={`illustration-svg pet-cat emotion-${emotion} ${className}`} role="img" aria-label="Cat pixel art character" data-effect={effect}>
+    <img className="cat-body-layer" src={expression} alt="" draggable="false" />
+    <img className="cat-tail-layer" src="/cat-pixel-tail.png" alt="" draggable="false" />
+  </span>
   /* Legacy vector pixel construction removed from the active renderer. */
   /*
   const tail = ['                          DD', '                         DGGD', '                         DGGGD', '                          DGGGD', '                           DGGD', '                            DD']
@@ -50,12 +52,26 @@ function CatCharacterIllustration({ className = '', emotion = 'idle', effect = '
   </svg> */
 }
 
-function DogCharacterIllustration({ className = '' }) {
-  return <svg className={`illustration-svg ${className}`} viewBox="0 0 240 240" role="img" aria-label="Dog pet character">
+function DogCharacterIllustration({ className = '', emotion = 'idle' }) {
+  const expressive = ['happy', 'celebrating', 'excited', 'confused', 'thinking'].includes(emotion)
+  return <span className={`illustration-svg pet-dog pixel-pet-wrapper emotion-${emotion} ${className}`} role="img" aria-label="Dog pixel art character">
+    <img className="pixel-pet-image" src="/dog-pixel.png" alt="" draggable="false" />
+    {expressive && <svg className="pixel-pet-expression" viewBox="0 0 64 64" aria-hidden="true" shapeRendering="crispEdges">
+      {(emotion === 'confused' || emotion === 'thinking') && <>
+        <path d="M19 25h6M40 24h5" stroke="#493530" strokeWidth="2" />
+        <path d="M27 38h3m4 0h3m-7 0 2-2m2 2-2-2" stroke="#493530" strokeWidth="1.5" />
+      </>}
+      {(emotion === 'happy' || emotion === 'celebrating' || emotion === 'excited') && <>
+        <path d="M20 29h4m17 0h4" stroke="#fff1dc" strokeWidth="2" />
+        <path d="M27 36c2 3 7 3 10 0" stroke="#493530" strokeWidth="2" />
+      </>}
+    </svg>}
+  </span>
+  /*
     <path d="M158 176c27-4 35-20 46-15 8 4 5 13-7 20-12 7-25 8-40 4Z" fill="#a87654" stroke="#8c654e" strokeWidth="2"/><path d="M79 143c-10 18-10 43-1 58 7 10 21 7 31-4l11-13 12 13c10 11 24 14 31 4 9-15 8-40-2-58Z" fill="#d6ad78" stroke="#b9845f" strokeWidth="2.2"/><path d="M96 159c-4 12-3 25 2 35m46-35c4 12 3 25-2 35" fill="none" stroke="#f5dfc0" strokeWidth="2.2" strokeLinecap="round"/><path d="M83 184c8 2 15 0 21-6l10 11v12H87c-5-5-7-11-4-17Zm73 0c-8 2-15 0-21-6l-10 11v12h27c5-5 7-11 4-17Z" fill="#815842"/>
     <path d="M75 67C57 52 42 60 45 83c2 21 16 38 34 34l9-29Zm91 0c18-15 33-7 30 16-2 21-16 38-34 34l-9-29Z" fill="#ad7855" stroke="#8c654e" strokeWidth="2.2"/><path d="M56 82c6-10 13-14 21-11m107 11c-6-10-13-14-21-11" fill="none" stroke="#c18d67" strokeWidth="3" strokeLinecap="round"/>
     <path d="M66 101c0-36 22-60 54-60s54 24 54 60c0 37-22 56-54 56s-54-19-54-56Z" fill="#d6ad78" stroke="#b9845f" strokeWidth="2.2"/><path d="M77 118c6 22 21 33 43 33s37-11 43-33c-10-15-23-21-43-21s-33 6-43 21Z" fill={face}/><g className="pet-eyes"><ellipse cx="103" cy="97" rx="12" ry="15" fill="#fff"/><ellipse cx="107" cy="98" rx="5" ry="9" fill="#554940"/><circle cx="109" cy="93" r="3" fill="#fff"/></g><g className="pet-eyes"><ellipse cx="137" cy="97" rx="12" ry="15" fill="#fff"/><ellipse cx="141" cy="98" rx="5" ry="9" fill="#554940"/><circle cx="143" cy="93" r="3" fill="#fff"/></g><ellipse cx="120" cy="121" rx="8" ry="6" fill="#5d493f"/><path d="M120 126v5m0 0c-4 5-9 5-12 1m12-1c4 5 9 5 12 1" fill="none" stroke="#8e6857" strokeWidth="2" strokeLinecap="round"/><path d="M74 79c8-17 23-28 40-31" fill="none" stroke="#f8dfb7" strokeWidth="3" strokeLinecap="round"/><path d="M165 65c-8 5-14 12-17 22" fill="none" stroke="#d9a978" strokeWidth="4" strokeLinecap="round"/>
-  </svg>
+  </svg> */
 }
 
 function PixelLayer({ rows, palette, offsetY = 0, offsetX = 0, centered = false }) {
@@ -236,9 +252,10 @@ function FoxCharacterIllustration({ className = '', emotion = 'idle', effect = '
 }
 
 function BirdCharacterIllustration({ className = '' }) {
-  return <svg className={`illustration-svg ${className}`} viewBox="0 0 32 32" role="img" aria-label="Bird pixel art character" shapeRendering="crispEdges" style={{ imageRendering: 'pixelated' }}>
+  return <img className={`illustration-svg pet-bird ${className}`} src="/bird-pixel.png" alt="Bird pixel art character" draggable="false" />
+  /*
     <g className="bird-body"><path d="M8 11h14v12H8zM11 8h9v3h-9z" fill="#69b9da"/><path d="M10 18h12v7H10z" fill="#fff0cf"/><path d="M6 14h5v7H6z" fill="#4e9fc4"/><path d="M22 13h5v4h-5z" fill="#f6a943"/><path d="M12 25h2v3h-2zm8 0h2v3h-2z" fill="#e78537"/><path d="M11 12h2v2h-2zm8 0h2v2h-2z" fill="#24354a"/><path d="M10 8h3v3h-3z" fill="#9de0ea"/></g>
-  </svg>
+  </svg> */
 }
 
 // Small shared pixel canvas for the non-Cat onboarding pets. Cat uses the
@@ -288,7 +305,7 @@ function PixelPetIllustration({ type, className = '' }) {
 }
 
 function PetCharacter({ type, className, emotion, effect }) {
-  if (type === 'dog') return <DogCharacterIllustration className={className} />
+  if (type === 'dog') return <DogCharacterIllustration className={className} emotion={emotion} />
   if (type === 'fox') return <FoxCharacterIllustration className={className} emotion={emotion} effect={effect} />
   if (type === 'bird') return <BirdCharacterIllustration className={className} />
   return <CatCharacterIllustration className={className} />
@@ -303,6 +320,8 @@ export function PetIllustration({ type = 'cat', className = '', emotion, effect 
 }
 
 export function OnboardingPixelPet({ type = 'cat', className = '' }) {
+  if (type === 'dog') return <DogCharacterIllustration className={className} />
   if (type === 'cat') return <CatCharacterIllustration className={className} />
+  if (type === 'bird') return <BirdCharacterIllustration className={className} />
   return type === 'fox' ? <FoxCharacterIllustration className={className} /> : <PixelPetIllustration type={type} className={className} />
 }
