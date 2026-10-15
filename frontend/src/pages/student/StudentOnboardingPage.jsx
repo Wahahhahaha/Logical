@@ -78,7 +78,7 @@ export default function StudentOnboardingPage() {
                className="text-input"
                type="text"
                value={petName}
-               maxLength={40}
+               maxLength={20}
                placeholder={selectedPet ? t('onb.exampleName', { name: selectedName }) : t('onb.exampleName', { name: 'Milo' })}
                onChange={event => { setPetName(event.target.value); if (error) setError('') }}
                disabled={loading || selectionLocked}

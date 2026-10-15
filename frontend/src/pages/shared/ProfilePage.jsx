@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { Camera, KeyRound, Trash2 } from 'lucide-react'
+import { Camera, Eye, EyeOff, KeyRound, Trash2 } from 'lucide-react'
 import { useAuth } from '../../auth.jsx'
 import { useI18n } from '../../i18n.jsx'
 import { useToast } from '../../toast.jsx'
@@ -7,6 +7,16 @@ import { apiFetch, apiUrl } from '../../lib/api.js'
 import ImageCropModal from '../../components/ImageCropModal.jsx'
 
 const MAX_FILE_BYTES = 8 * 1024 * 1024
+
+function PasswordInput({ label, autoComplete, minLength, value, onChange, visible, onToggle }) {
+  const { t } = useI18n()
+  return <label>{label}
+    <span className="password-field">
+      <input type={visible ? 'text' : 'password'} autoComplete={autoComplete} minLength={minLength} value={value} onChange={onChange} required />
+      <button type="button" className="password-toggle" onClick={onToggle} aria-label={visible ? t('profile.hidePassword') : t('profile.showPassword')} aria-pressed={visible}>{visible ? <EyeOff size={16} /> : <Eye size={16} />}</button>
+    </span>
+  </label>
+}
 
 export default function ProfilePage() {
   const { user, updateUser } = useAuth()
@@ -19,7 +29,10 @@ export default function ProfilePage() {
   const [cropSrc, setCropSrc] = useState(null)
   const [saving, setSaving] = useState(false)
   const [passwords, setPasswords] = useState({ current: '', next: '', confirm: '' })
+  const [visible, setVisible] = useState({ current: false, next: false, confirm: false })
   const [changing, setChanging] = useState(false)
+
+  const toggleVisible = field => setVisible(state => ({ ...state, [field]: !state[field] }))
 
   const previewPhoto = photoDraft || (photoRemoved ? null : apiUrl(user.photoUrl))
   const hasPhoto = Boolean(user.photoUrl) && !photoRemoved
@@ -84,10 +97,9 @@ export default function ProfilePage() {
       </div>
       {user.role === 'student' && <div className="info-strip"><div><span>{t('profile.grade')}</span><b>{user.profile?.grade || '-'}</b></div><div><span>{t('profile.class')}</span><b>{user.profile?.className || '-'}</b></div></div>}
       <form className="profile-form" onSubmit={save}>
-        <label>{t('profile.fullName')}<input value={fullName} onChange={event => setFullName(event.target.value)} required /></label>
+        <label>{t('profile.fullName')}<input value={fullName} maxLength={30} onChange={event => setFullName(event.target.value)} required /></label>
         <button className="primary-button" type="submit" disabled={saving}>{saving ? t('common.saving') : t('profile.save')}</button>
       </form>
-      <p className="photo-hint">{t('profile.photoHint')}</p>
     </div>
 
     <div className="form-card card">
@@ -96,10 +108,10 @@ export default function ProfilePage() {
         <h2>{t('profile.changePassword')}</h2>
       </div>
       <form className="profile-form" onSubmit={changePassword}>
-        <label>{t('profile.currentPassword')}<input type="password" autoComplete="current-password" value={passwords.current} onChange={event => setPasswords({ ...passwords, current: event.target.value })} required /></label>
+        <PasswordInput label={t('profile.currentPassword')} autoComplete="current-password" value={passwords.current} onChange={event => setPasswords({ ...passwords, current: event.target.value })} visible={visible.current} onToggle={() => toggleVisible('current')} />
         <div className="form-two">
-          <label>{t('profile.newPassword')}<input type="password" autoComplete="new-password" minLength={4} value={passwords.next} onChange={event => setPasswords({ ...passwords, next: event.target.value })} required /></label>
-          <label>{t('profile.confirmPassword')}<input type="password" autoComplete="new-password" minLength={4} value={passwords.confirm} onChange={event => setPasswords({ ...passwords, confirm: event.target.value })} required /></label>
+          <PasswordInput label={t('profile.newPassword')} autoComplete="new-password" minLength={4} value={passwords.next} onChange={event => setPasswords({ ...passwords, next: event.target.value })} visible={visible.next} onToggle={() => toggleVisible('next')} />
+          <PasswordInput label={t('profile.confirmPassword')} autoComplete="new-password" minLength={4} value={passwords.confirm} onChange={event => setPasswords({ ...passwords, confirm: event.target.value })} visible={visible.confirm} onToggle={() => toggleVisible('confirm')} />
         </div>
         <div className="form-actions">
           <button className="primary-button" type="submit" disabled={changing}><KeyRound size={14} /> {changing ? t('profile.updating') : t('profile.updatePassword')}</button>

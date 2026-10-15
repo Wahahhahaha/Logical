@@ -1,10 +1,11 @@
-import { Clock, Home, LogIn, RotateCcw, SearchX, ServerCrash } from 'lucide-react'
+import { Clock, Home, LogIn, RotateCcw, SearchX, ServerCrash, ShieldX } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../auth.jsx'
 import { useI18n } from '../../i18n.jsx'
 import AuthScenery from '../../components/auth/AuthScenery.jsx'
 
 const VARIANTS = {
+  '403': { Icon: ShieldX, tone: 'peach' },
   '404': { Icon: SearchX, tone: 'sky' },
   '500': { Icon: ServerCrash, tone: 'peach' },
   '419': { Icon: Clock, tone: 'yellow' },

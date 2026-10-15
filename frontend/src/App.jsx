@@ -28,21 +28,28 @@ export default function App() {
       <Route path="/404" element={<ErrorPage code="404" />} />
       <Route path="/500" element={<ErrorPage code="500" />} />
       <Route path="/419" element={<ErrorPage code="419" />} />
+      <Route path="/403" element={<ErrorPage code="403" />} />
       <Route element={<RequireAuth />}>
         <Route path="/dashboard" element={<DashboardEntry />} />
         <Route path="/onboarding" element={<StudentOnboardingGate />} />
-        <Route path="/student/learn/:lessonKey" element={<StudentLessonPage />} />
+        <Route element={<RequireRole role="student" />}>
+          <Route path="/student/learn/:lessonKey" element={<StudentLessonPage />} />
+        </Route>
         <Route element={<AppShell />}>
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/student/dashboard" element={<StudentDashboard />} />
-          <Route path="/student/learn" element={<StudentLearningPage />} />
-          <Route path="/student/quests" element={<StudentQuestsPage />} />
-          <Route path="/student/pet" element={<StudentPetPage />} />
-          <Route path="/student/progress" element={<StudentProgressPage />} />
-          <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
-          <Route path="/teacher/students" element={<StudentManagementPage />} />
-          <Route path="/teacher/students/:id" element={<TeacherStudentDetailPage />} />
-          <Route path="/teacher/progress" element={<TeacherProgressPage />} />
+          <Route element={<RequireRole role="student" />}>
+            <Route path="/student/dashboard" element={<StudentDashboard />} />
+            <Route path="/student/learn" element={<StudentLearningPage />} />
+            <Route path="/student/quests" element={<StudentQuestsPage />} />
+            <Route path="/student/pet" element={<StudentPetPage />} />
+            <Route path="/student/progress" element={<StudentProgressPage />} />
+          </Route>
+          <Route element={<RequireRole role="teacher" />}>
+            <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
+            <Route path="/teacher/students" element={<StudentManagementPage />} />
+            <Route path="/teacher/students/:id" element={<TeacherStudentDetailPage />} />
+            <Route path="/teacher/progress" element={<TeacherProgressPage />} />
+          </Route>
         </Route>
       </Route>
       <Route path="*" element={<ErrorPage code="404" />} />
@@ -62,7 +69,13 @@ function homeRoute(user) {
 
 function RequireAuth() {
   const { user } = useAuth()
-  return user ? <Outlet /> : <Navigate to="/login" replace />
+  return user ? <Outlet /> : <ErrorPage code="403" />
+}
+
+function RequireRole({ role }) {
+  const { user } = useAuth()
+  if (!user || user.role !== role) return <ErrorPage code="403" />
+  return <Outlet />
 }
 
 function RoleDashboard() {

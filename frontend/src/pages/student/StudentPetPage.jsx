@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Check, Pencil, Sparkles, X, Zap } from 'lucide-react'
+import { Check, Pencil, X, Zap } from 'lucide-react'
 import { useI18n } from '../../i18n.jsx'
 import { apiFetch } from '../../lib/api.js'
-import { EggIllustration } from '../../components/illustrations/PetIllustration.jsx'
 import InteractiveCat from '../../components/illustrations/InteractiveCat.jsx'
 import InteractiveFox from '../../components/illustrations/InteractiveFox.jsx'
 import InteractivePet from '../../components/illustrations/InteractivePet.jsx'
@@ -22,7 +21,8 @@ export default function StudentPetPage() {
   }, [])
   if (error) return <div className="form-error">{translateError(error)}</div>
   if (!progress) return <PetPageSkeleton />
-  const defaultName = progress.pet === 'egg' ? t('pet.type.egg') : t(`pet.type.${progress.pet}`)
+  const petType = progress.pet && progress.pet !== 'egg' ? progress.pet : 'cat'
+  const defaultName = t(`pet.type.${petType}`)
   const displayName = progress.petName || defaultName || t('common.companion')
   const startEdit = () => { setDraftName(displayName); setSaveError(''); setEditing(true) }
   const cancelEdit = () => { setEditing(false); setSaveError('') }
@@ -33,12 +33,12 @@ export default function StudentPetPage() {
     try { const result = await apiFetch('/api/student/pet/name', { method: 'PUT', body: JSON.stringify({ petName }) }); setProgress({ ...progress, petName: result.user.profile?.petName || petName }); setEditing(false) } catch (requestError) { setSaveError(requestError.message) }
   }
   const percent = progress.expInLevel / progress.expToNextLevel * 100
-  const petArt = progress.pet === 'egg' ? <EggIllustration /> : progress.pet === 'cat' ? <InteractiveCat label={displayName} /> : progress.pet === 'fox' ? <InteractiveFox label={displayName} /> : <InteractivePet type={progress.pet} label={displayName} />
+  const petArt = petType === 'cat' ? <InteractiveCat label={displayName} /> : petType === 'fox' ? <InteractiveFox label={displayName} /> : <InteractivePet type={petType} label={displayName} />
   return <div className="page-stack">
     <section className="welcome-row"><div><p className="eyebrow">{t('pet.companion')}</p><h1>{displayName}</h1><p className="page-subtitle">{t('pet.keepLearning')}</p></div></section>
     <section className="pet-progress-layout">
-      <div className="pet-profile-column"><div className="card pet-profile-card"><div className="pet-art-stage">{petArt}</div></div><div className="pet-profile-caption"><h2>{displayName}</h2><p>{t('pet.learningCompanion')}</p>{!editing ? <button className="pet-rename-button" onClick={startEdit}><Pencil size={14} /> {t('common.rename')}</button> : <div className="pet-rename-form"><input className="text-input" type="text" value={draftName} maxLength={40} autoFocus onChange={event => setDraftName(event.target.value)} onKeyDown={event => { if (event.key === 'Enter') saveName(); if (event.key === 'Escape') cancelEdit() }} /><div className="pet-rename-actions"><button className="primary-button small" onClick={saveName}><Check size={14} /> {t('common.save')}</button><button className="ghost-button small" onClick={cancelEdit}><X size={14} /> {t('common.cancel')}</button></div>{saveError && <div className="form-error">{translateError(saveError)}</div>}</div>}</div></div>
-      <div className="card pet-stats-card"><div className="section-title-row"><div><label>{t('pet.growth')}</label><h2>{t('dash.level', { n: progress.level })}</h2></div><div className="level-badge"><Zap size={13} /> {progress.exp} XP</div></div><div className="xp-progress"><div className="xp-progress-label"><span>{progress.expInLevel} / {progress.expToNextLevel} XP</span><b>{t('dash.level', { n: progress.level + 1 })}</b></div><div className="progress-track"><i style={{ width: `${percent}%` }} /></div><small>{t('pet.xpUntil', { n: progress.expToNextLevel - progress.expInLevel })}</small></div><div className="pet-rule"><Sparkles size={17} /><span>{t('pet.rule')}</span></div></div>
+      <div className="card pet-profile-card"><div className="pet-art-stage">{petArt}</div><div className="pet-profile-caption">{editing ? <div className="pet-name-row pet-name-editing"><input className="text-input pet-name-input" type="text" value={draftName} maxLength={15} autoFocus aria-label={t('common.rename')} onChange={event => setDraftName(event.target.value)} onKeyDown={event => { if (event.key === 'Enter') saveName(); if (event.key === 'Escape') cancelEdit() }} /><button className="icon-button pet-name-confirm" onClick={saveName} aria-label={t('common.save')}><Check size={16} /></button><button className="icon-button pet-name-cancel" onClick={cancelEdit} aria-label={t('common.cancel')}><X size={16} /></button></div> : <div className="pet-name-row"><h2>{displayName}</h2><button className="icon-button pet-rename-icon" onClick={startEdit} aria-label={t('common.rename')} title={t('common.rename')}><Pencil size={14} /></button></div>}<p>{t('pet.learningCompanion')}</p>{editing && saveError && <div className="form-error">{translateError(saveError)}</div>}</div></div>
+      <div className="card pet-stats-card"><div className="section-title-row"><div><label>{t('pet.growth')}</label><h2>{t('dash.level', { n: progress.level })}</h2></div><div className="level-badge"><Zap size={13} /> {progress.exp} XP</div></div><div className="xp-progress"><div className="xp-progress-label"><span>{progress.expInLevel} / {progress.expToNextLevel} XP</span><b>{t('dash.level', { n: progress.level + 1 })}</b></div><div className="progress-track"><i style={{ width: `${percent}%` }} /></div><small>{t('pet.xpUntil', { n: progress.expToNextLevel - progress.expInLevel })}</small></div></div>
     </section>
   </div>
 }

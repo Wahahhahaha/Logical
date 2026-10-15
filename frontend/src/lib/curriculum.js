@@ -4042,6 +4042,7 @@ export const curriculum = {
 }
 
 export const fallbackGrade = { grade: '-', title: 'Segera hadir', subtitle: 'Materi untuk grade ini sedang disiapkan.', stages: [] }
+const fallbackGradeEn = { grade: '-', title: 'Coming soon', subtitle: 'Materials for this grade are being prepared.', stages: [] }
 
 function pickText(base, overlay) { return overlay ?? base }
 
@@ -4101,7 +4102,14 @@ export function localizePlan(plan, language) {
   }
 }
 
-export function planFor(grade, language) { return localizePlan(curriculum[grade] || fallbackGrade, language) }
+export function planFor(grade, language) {
+  const base = curriculum[grade]
+  if (!base) {
+    const fallback = String(language).slice(0, 2) === 'en' ? fallbackGradeEn : fallbackGrade
+    return grade ? { ...fallback, grade } : fallback
+  }
+  return localizePlan(base, language)
+}
 
 export function allLessons(grade, language) {
   const plan = planFor(grade, language)

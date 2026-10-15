@@ -132,7 +132,6 @@ export default function ImageCropModal({ src, onCancel, onConfirm }) {
               {CORNERS.map(([corner, cx, cy]) => <span key={corner} className={`crop-handle ${corner}`} role="presentation" style={{ left: cx ? '100%' : '0%', top: cy ? '100%' : '0%' }} onPointerDown={startDrag('corner', corner)} />)}
             </div>}
           </div>}
-        <p className="photo-hint">{t('profile.cropHint')}</p>
         <div className="form-actions">
           <button className="primary-button" type="button" onClick={handleConfirm} disabled={!meta || error}>{t('profile.cropApply')}</button>
           <button className="secondary-button" type="button" onClick={onCancel}>{t('common.cancel')}</button>

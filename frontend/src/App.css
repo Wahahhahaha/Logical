@@ -134,7 +134,7 @@ body{background:#f7fbff}
 .sidebar-collapsed .nav-item i{display:none}
 
 /* Interactive companion hatching */
-.hatch-onboarding{display:grid;place-items:center;min-height:100vh;padding:28px 16px}.hatch-card{width:min(900px,100%);padding:34px 38px;text-align:center}.hatch-card h1{margin:8px 0 10px}.hatch-progress{display:flex;justify-content:center;gap:8px;margin-bottom:23px}.hatch-progress span{width:30px;height:5px;background:#e2edf0;border-radius:1px}.hatch-progress span.active{background:#f1b43c}.egg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:28px 0 18px;text-align:left}.egg-card{display:flex;flex-direction:column;align-items:center;min-width:0;padding:17px 11px 14px;color:#2a4560;background:#fffef5;border:2px solid #dbe8e7;border-radius:7px;box-shadow:4px 4px 0 #d5e5e4;transition:transform .14s ease,border-color .14s ease,box-shadow .14s ease;animation:egg-idle 4.2s steps(2,end) infinite}.egg-card:nth-child(2){animation-delay:-1.2s}.egg-card:nth-child(3){animation-delay:-2.4s}.egg-card:nth-child(4){animation-delay:-3.1s}.egg-card:hover,.egg-card:focus-visible{border-color:var(--egg-accent);box-shadow:5px 5px 0 color-mix(in srgb,var(--egg-accent),white 55%);transform:translateY(-4px)}.egg-card:focus-visible{outline:3px solid #86d0e4;outline-offset:3px}.egg-art{display:grid;place-items:center;width:100%;height:132px}.egg-svg{width:106px;height:124px;image-rendering:pixelated}.egg-card strong{margin-top:5px;font-family:ui-monospace,monospace;font-size:12px}.egg-card small{min-height:30px;margin-top:6px;color:#7e91a0;font-size:10px;line-height:1.35;text-align:center}.egg-hint{display:flex;align-items:center;gap:4px;margin-top:12px;color:var(--egg-accent);font-family:ui-monospace,monospace;font-size:9px;font-weight:900}.hatch-tip{display:flex;justify-content:center;align-items:center;gap:7px;margin:12px 0 0;color:#8b9ca4;font-size:11px}.hatching-view{min-height:500px;display:flex;flex-direction:column;align-items:center;justify-content:center}.hatching-art,.reveal-stage{position:relative;display:grid;place-items:center;width:230px;height:245px}.egg-shell,.hatching-pet{position:absolute;inset:0;display:grid;place-items:center}.egg-shell{z-index:2}.egg-shell .egg-svg{width:175px;height:205px}.hatching-pet{opacity:0;transform:translateY(26px);z-index:1}.hatching-pet .pet-reveal{width:190px;height:190px}.hatch-stage-1 .egg-shell{animation:egg-wobble .16s steps(2,end) 4}.hatch-stage-2 .egg-shell{animation:egg-wobble .13s steps(2,end) 5}.hatch-stage-2 .crack,.hatch-stage-3 .crack{opacity:1}.hatch-stage-3 .egg-shell{animation:egg-open .4s steps(3,end) forwards}.hatch-stage-3 .hatching-pet{opacity:1;animation:pet-pop .45s steps(3,end) forwards}.crack{position:absolute;width:5px;height:35px;background:#51352f;opacity:0;z-index:3;transform:rotate(20deg);transition:opacity .1s}.crack-one{top:86px;left:79px}.crack-two{top:112px;right:75px;transform:rotate(-25deg)}.pixel-spark{position:absolute;color:#ffd35a;font-size:22px;opacity:0}.hatch-stage-1 .pixel-spark,.hatch-stage-2 .pixel-spark,.hatch-stage-3 .pixel-spark{opacity:1;animation:sparkle-pop .7s steps(3,end) infinite}.spark-one{top:40px;left:20px}.spark-two{top:80px;right:17px;animation-delay:.25s!important}.shell-bit{position:absolute;width:10px;height:10px;background:#f1b43c;opacity:0}.hatch-stage-3 .bit-one{opacity:1;animation:bit-fall .5s steps(3,end) forwards}.hatch-stage-3 .bit-two{opacity:1;animation:bit-fall .55s steps(3,end) .08s forwards}.bit-one{left:42px;bottom:65px}.bit-two{right:44px;bottom:72px}.hatching-view h1{max-width:550px;font-size:20px}.hatching-dots{display:flex;gap:6px;margin-top:12px}.hatching-dots i{width:6px;height:6px;background:#f1b43c;animation:dot-blink .6s steps(2,end) infinite}.hatching-dots i:nth-child(2){animation-delay:.15s}.hatching-dots i:nth-child(3){animation-delay:.3s}.reveal-stage{height:240px;margin:-12px auto 2px}.reveal-glow{position:absolute;width:150px;height:110px;background:#ffe38d;opacity:.65;box-shadow:0 0 35px 15px #ffe38d}.pet-reveal{position:relative;z-index:1;width:210px;height:210px;animation:reveal-bounce 2.8s steps(3,end) infinite}.reveal-pet-art{width:100%;height:100%;image-rendering:pixelated}.hatch-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:20px}.hatch-actions button{display:inline-flex;align-items:center;gap:7px}.hatch-card .care-note{margin-top:20px}.field-label small{font-weight:400;color:#99a7ae}.pet-bird .reveal-pet-art{width:150px;height:150px;margin:28px}.pet-bird{display:grid;place-items:center}
+.hatch-onboarding{display:grid;place-items:center;min-height:100vh;padding:28px 16px}.hatch-card{width:min(900px,100%);padding:34px 38px;text-align:center}.hatch-card h1{margin:8px 0 10px}.hatch-progress{display:flex;justify-content:center;gap:8px;margin-bottom:23px}.hatch-progress span{width:30px;height:5px;background:#e2edf0;border-radius:1px}.hatch-progress span.active{background:#f1b43c}.egg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:28px 0 18px;text-align:left}.egg-card{display:flex;flex-direction:column;align-items:center;min-width:0;padding:17px 11px 14px;color:#2a4560;background:#fffef5;border:2px solid #dbe8e7;border-radius:7px;box-shadow:4px 4px 0 #d5e5e4;transition:transform .14s ease,border-color .14s ease,box-shadow .14s ease;animation:egg-idle 4.2s steps(2,end) infinite}.egg-card:nth-child(2){animation-delay:-1.2s}.egg-card:nth-child(3){animation-delay:-2.4s}.egg-card:nth-child(4){animation-delay:-3.1s}.egg-card:hover,.egg-card:focus-visible{border-color:var(--egg-accent);box-shadow:5px 5px 0 color-mix(in srgb,var(--egg-accent),white 55%);transform:translateY(-4px)}.egg-card:focus-visible{outline:3px solid #86d0e4;outline-offset:3px}.egg-art{display:grid;place-items:center;width:100%;height:132px}.egg-svg{width:106px;height:124px;image-rendering:pixelated}.egg-card strong{margin-top:5px;font-family:ui-monospace,monospace;font-size:12px}.egg-card small{min-height:30px;margin-top:6px;color:#7e91a0;font-size:10px;line-height:1.35;text-align:center}.egg-hint{display:flex;align-items:center;gap:4px;margin-top:12px;color:var(--egg-accent);font-family:ui-monospace,monospace;font-size:9px;font-weight:900}.hatch-tip{display:flex;justify-content:center;align-items:center;gap:7px;margin:12px 0 0;color:#8b9ca4;font-size:11px}.hatching-view{min-height:500px;display:flex;flex-direction:column;align-items:center;justify-content:center}.hatching-art,.reveal-stage{position:relative;display:grid;place-items:center;width:230px;height:245px}.egg-shell,.hatching-pet{position:absolute;inset:0;display:grid;place-items:center}.egg-shell{z-index:2}.egg-shell .egg-svg{width:175px;height:205px}.hatching-pet{opacity:0;transform:translateY(26px);z-index:1}.hatching-pet .pet-reveal{width:190px;height:190px}.hatch-stage-1 .egg-shell{animation:egg-wobble .16s steps(2,end) 4}.hatch-stage-2 .egg-shell{animation:egg-wobble .13s steps(2,end) 5}.hatch-stage-2 .crack,.hatch-stage-3 .crack,.hatch-stage-4 .crack,.hatch-stage-5 .crack{opacity:1}.hatch-stage-3 .egg-shell{animation:egg-open .4s steps(3,end) forwards}.hatch-stage-3 .hatching-pet{opacity:1;animation:pet-pop .45s steps(3,end) forwards}.crack{position:absolute;width:5px;height:35px;background:#51352f;opacity:0;z-index:3;transform:rotate(20deg);transition:opacity .1s}.crack-one{top:86px;left:79px}.crack-two{top:112px;right:75px;transform:rotate(-25deg)}.pixel-spark{position:absolute;color:#ffd35a;font-size:22px;opacity:0}.hatch-stage-1 .pixel-spark,.hatch-stage-2 .pixel-spark,.hatch-stage-3 .pixel-spark{opacity:1;animation:sparkle-pop .7s steps(3,end) infinite}.spark-one{top:40px;left:20px}.spark-two{top:80px;right:17px;animation-delay:.25s!important}.shell-bit{position:absolute;width:10px;height:10px;background:#f1b43c;opacity:0}.hatch-stage-3 .bit-one{opacity:1;animation:bit-fall .5s steps(3,end) forwards}.hatch-stage-3 .bit-two{opacity:1;animation:bit-fall .55s steps(3,end) .08s forwards}.bit-one{left:42px;bottom:65px}.bit-two{right:44px;bottom:72px}.hatching-view h1{max-width:550px;font-size:20px}.hatching-dots{display:flex;gap:6px;margin-top:12px}.hatching-dots i{width:6px;height:6px;background:#f1b43c;animation:dot-blink .6s steps(2,end) infinite}.hatching-dots i:nth-child(2){animation-delay:.15s}.hatching-dots i:nth-child(3){animation-delay:.3s}.reveal-stage{height:240px;margin:-12px auto 2px}.reveal-glow{position:absolute;width:150px;height:110px;background:#ffe38d;opacity:.65;box-shadow:0 0 35px 15px #ffe38d}.pet-reveal{position:relative;z-index:1;width:210px;height:210px;animation:reveal-bounce 2.8s steps(3,end) infinite}.reveal-pet-art{width:100%;height:100%;image-rendering:pixelated}.hatch-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:20px}.hatch-actions button{display:inline-flex;align-items:center;gap:7px}.hatch-card .care-note{margin-top:20px}.field-label small{font-weight:400;color:#99a7ae}.pet-bird .reveal-pet-art{width:150px;height:150px;margin:28px}.pet-bird{display:grid;place-items:center}
 @keyframes egg-idle{0%,88%,100%{transform:translateY(0)}91%{transform:translateY(-2px) rotate(-1deg)}94%{transform:translateY(0) rotate(1deg)}}@keyframes egg-wobble{0%,100%{transform:translateX(0) rotate(0)}25%{transform:translateX(-5px) rotate(-3deg)}75%{transform:translateX(5px) rotate(3deg)}}@keyframes egg-open{to{transform:translateY(30px) scale(.86);opacity:.1}}@keyframes pet-pop{to{transform:translateY(-5px);opacity:1}}@keyframes sparkle-pop{0%,100%{transform:scale(.8);opacity:.35}50%{transform:scale(1.2);opacity:1}}@keyframes bit-fall{to{transform:translateY(34px) rotate(90deg);opacity:0}}@keyframes dot-blink{0%,100%{opacity:.3}50%{opacity:1}}@keyframes reveal-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 @media(max-width:700px){.hatch-card{padding:25px 16px}.egg-grid{grid-template-columns:repeat(2,1fr);gap:10px;margin-top:22px}.egg-card{padding:10px 8px}.egg-art{height:112px}.egg-svg{width:86px;height:105px}.egg-card small{font-size:9px}.hatching-view{min-height:450px}.hatch-card h1{font-size:23px}.hatch-actions{flex-direction:column}.hatch-actions button{justify-content:center;width:100%}}
 @media(prefers-reduced-motion:reduce){.egg-card,.hatching-art *,.pet-reveal,.hatching-dots i{animation:none!important;transition:none!important}.hatch-stage-3 .hatching-pet{opacity:1;transform:none}.hatch-stage-3 .egg-shell{opacity:.15;transform:none}}
@@ -242,16 +242,16 @@ body{background:#f7fbff}
 @keyframes pet-emerge-smooth{0%{opacity:0;transform:translateY(38px) scale(.86)}35%{opacity:.72;transform:translateY(21px) scale(.91)}72%{opacity:1;transform:translateY(-3px) scale(1.01)}100%{opacity:1;transform:translateY(-5px) scale(1)}}
 
 /* Pixel egg layers: the lower shell stays anchored while the lid lifts away. */
-.hatching-art .egg-shell,.hatching-art .egg-shell-bottom{position:absolute;inset:0;display:grid;place-items:center;width:100%;height:100%}.hatching-art .egg-shell{z-index:4}.hatching-art .egg-shell-bottom{z-index:3}.egg-shell-top,.egg-shell-bottom{display:grid;place-items:center;width:100%;height:100%}.egg-shell-top .pixel-egg,.egg-shell-bottom .pixel-egg{width:175px;height:205px}.hatching-art .hatching-pet{z-index:2;clip-path:inset(0 0 44% 0);will-change:transform,opacity}.hatching-art .pet-reveal{animation:none}.hatch-stage-0 .egg-shell-top,.hatch-stage-0 .egg-shell-bottom{transform:none}.hatch-stage-1 .egg-shell-top,.hatch-stage-2 .egg-shell-top{transform-origin:50% 80%}.hatch-stage-2 .hatching-pet{opacity:.35;transform:translateY(22px) scale(.92)}.hatch-stage-3 .egg-shell{animation:none;transform:none}.hatch-stage-3 .egg-shell-top{animation:egg-lid-lift .72s cubic-bezier(.22,.8,.25,1) forwards}.hatch-stage-3 .hatching-pet{opacity:1;animation:pet-head-reveal .76s cubic-bezier(.22,.8,.25,1) forwards}.hatch-stage-4 .egg-shell{transform:none}.hatch-stage-4 .egg-shell-top{transform:translateY(-42px) translateX(13px) rotate(9deg);transform-origin:50% 85%}.hatch-stage-4 .hatching-pet{opacity:1;clip-path:none;animation:pet-full-emerge .92s cubic-bezier(.22,.8,.25,1) forwards}.hatch-stage-4 .crack{opacity:0}.hatch-stage-4 .egg-shell-bottom{transform:translateY(4px)}
+.hatching-art .egg-shell,.hatching-art .egg-shell-bottom{position:absolute;inset:0;display:grid;place-items:center;width:100%;height:100%}.hatching-art .egg-shell{z-index:4}.hatching-art .egg-shell-bottom{z-index:3}.egg-shell-top,.egg-shell-bottom{display:grid;place-items:center;width:100%;height:100%}.egg-shell-top{position:relative}.egg-shell-top .pixel-egg,.egg-shell-bottom .pixel-egg{width:175px;height:205px}.hatching-art .hatching-pet{z-index:2;clip-path:inset(0 0 44% 0);will-change:transform,opacity}.hatching-art .pet-reveal{animation:none}.hatch-stage-0 .egg-shell-top,.hatch-stage-0 .egg-shell-bottom{transform:none}.hatch-stage-1 .egg-shell-top,.hatch-stage-2 .egg-shell-top{transform-origin:50% 80%}.hatch-stage-2 .hatching-pet{opacity:.35;transform:translateY(22px) scale(.92)}.hatch-stage-3 .egg-shell{animation:none;transform:none}.hatch-stage-3 .egg-shell-top{animation:egg-lid-lift .72s cubic-bezier(.22,.8,.25,1) forwards}.hatch-stage-3 .hatching-pet{opacity:1;animation:pet-head-reveal .76s cubic-bezier(.22,.8,.25,1) forwards}.hatch-stage-4 .egg-shell{transform:none}.hatch-stage-4 .egg-shell-top{transform:translateY(-42px) translateX(13px) rotate(9deg);transform-origin:50% 85%}.hatch-stage-4 .hatching-pet{opacity:1;clip-path:none;animation:pet-full-emerge .92s cubic-bezier(.22,.8,.25,1) forwards}.hatch-stage-4 .egg-shell-bottom{transform:translateY(4px)}
 @keyframes egg-lid-lift{0%{transform:translateY(0) rotate(0)}65%{transform:translateY(-12px) translateX(3px) rotate(3deg)}100%{transform:translateY(-38px) translateX(11px) rotate(8deg)}}@keyframes pet-head-reveal{0%{opacity:.25;transform:translateY(28px) scale(.9)}100%{opacity:1;transform:translateY(8px) scale(.96)}}@keyframes pet-full-emerge{0%{transform:translateY(24px) scale(.94)}70%{transform:translateY(-5px) scale(1.01)}100%{transform:translateY(0) scale(1)}}
-@media(prefers-reduced-motion:reduce){.hatching-art .egg-shell-top{animation:none!important;transform:translateY(-24px) translateX(5px) rotate(4deg)}.hatching-art .hatching-pet{animation:none!important;opacity:1;clip-path:none;transform:none}.hatching-art .egg-shell-bottom{transform:none}.hatching-art .crack{opacity:0}}
+@media(prefers-reduced-motion:reduce){.hatching-art .egg-shell-top{animation:none!important;transform:translateY(-24px) translateX(5px) rotate(4deg)}.hatching-art .hatching-pet{animation:none!important;opacity:1;clip-path:none;transform:none}.hatching-art .egg-shell-bottom{transform:none}.hatching-art .crack{opacity:0}.preview-slot .hatch-stage-6 .hatching-pet{transform:scale(1.5)!important}}
 
 /* Final hatch polish: stepped cracks stay pixel-shaped, and the pet grows out of the shell. */
-.hatching-art .crack{width:4px;height:4px;border:0;background:#51352f;transform:none;clip-path:none;transition:opacity .22s ease}.hatching-art .crack-one{top:92px;left:88px;box-shadow:4px 4px 0 #51352f,4px 8px 0 #51352f,8px 12px 0 #51352f,4px 16px 0 #51352f}.hatching-art .crack-two{top:100px;right:82px;box-shadow:-4px 4px 0 #51352f,-4px 8px 0 #51352f,-8px 12px 0 #51352f,-4px 16px 0 #51352f}.hatch-stage-2 .hatching-pet{opacity:.2;transform:translateY(26px) scale(.72);transform-origin:50% 88%}.hatch-stage-3 .hatching-pet{transform-origin:50% 88%}.hatch-stage-4 .hatching-pet{transform-origin:50% 88%}.hatching-art .reveal-pet-art{image-rendering:pixelated}.hatching-name-field{width:min(270px,100%);margin:8px auto 0;text-align:left}.hatching-name-field .field-label{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:6px}.hatching-name-field .text-input{width:100%;box-sizing:border-box}.hatch-stage-3 .hatching-pet{animation-name:pet-head-reveal}.hatch-stage-4 .hatching-pet{animation-name:pet-full-emerge}@keyframes pet-head-reveal{0%{opacity:.2;transform:translateY(30px) scale(.72)}55%{opacity:.8;transform:translateY(14px) scale(.78)}100%{opacity:1;transform:translateY(8px) scale(.82)}}@keyframes pet-full-emerge{0%{transform:translateY(28px) scale(.78)}55%{transform:translateY(7px) scale(.9)}82%{transform:translateY(-4px) scale(.98)}100%{transform:translateY(0) scale(1)}}
+.hatching-art .crack{width:4px;height:4px;border:0;background:#51352f;transform:none;clip-path:none;transition:opacity .22s ease}.hatching-art .crack-one{top:92px;left:88px;box-shadow:4px 4px 0 #51352f,4px 8px 0 #51352f,8px 12px 0 #51352f,4px 16px 0 #51352f}.hatching-art .crack-two{top:100px;right:82px;box-shadow:-4px 4px 0 #51352f,-4px 8px 0 #51352f,-8px 12px 0 #51352f,-4px 16px 0 #51352f}.hatch-stage-2 .hatching-pet{opacity:.2;transform:translateY(26px) scale(.72);transform-origin:50% 88%}.hatch-stage-3 .hatching-pet{transform-origin:50% 88%}.hatch-stage-4 .hatching-pet{transform-origin:50% 88%}.hatching-art .reveal-pet-art{image-rendering:pixelated}.hatching-name-field{width:min(270px,100%);margin:8px auto 0;text-align:left}.hatching-name-field .field-label{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:6px}.hatching-name-field .text-input{width:100%;box-sizing:border-box}.hatch-stage-3 .hatching-pet{animation-name:pet-head-reveal}.hatch-stage-4 .hatching-pet{animation-name:pet-full-emerge}@keyframes pet-head-reveal{0%{opacity:.2;transform:translateY(30px) scale(.72)}55%{opacity:.8;transform:translateY(6px) scale(.78)}100%{opacity:1;transform:translateY(0) scale(.82)}}@keyframes pet-full-emerge{0%{transform:translateY(28px) scale(.78)}55%{transform:translateY(7px) scale(.9)}82%{transform:translateY(-4px) scale(.98)}100%{transform:translateY(0) scale(1)}}
 @media(max-width:700px){.hatching-name-field{width:min(250px,100%)}.hatching-art .crack-one{left:78px}.hatching-art .crack-two{right:72px}}
 
 /* Final sequence: open shell first, then a contained glow, then the pet pop-out. */
-.hatching-art .egg-glow{position:absolute;z-index:1;width:22px;height:18px;opacity:0;background:#ffe58b;box-shadow:0 0 0 4px #ffe58b,0 0 18px 5px #ffe58b;transform:translateY(18px);image-rendering:pixelated}.hatch-stage-1 .hatching-pet,.hatch-stage-2 .hatching-pet,.hatch-stage-3 .hatching-pet,.hatch-stage-4 .hatching-pet{opacity:0;transform:translateY(30px) scale(.68);clip-path:inset(0 0 48% 0)}.hatch-stage-3 .egg-shell-top{animation:egg-lid-lift .72s cubic-bezier(.22,.8,.25,1) forwards}.hatch-stage-4 .egg-shell-top,.hatch-stage-5 .egg-shell-top{transform:translateY(-38px) translateX(11px) rotate(8deg);transform-origin:50% 85%}.hatch-stage-4 .egg-glow{animation:egg-glow-rise .82s ease-in-out forwards}.hatch-stage-5 .egg-glow{opacity:.22;transform:translateY(10px) scale(.8);transition:opacity .25s ease}.hatch-stage-5 .hatching-pet{z-index:5;opacity:1;clip-path:inset(0 0 48% 0);animation:pet-pop-out 1.05s cubic-bezier(.22,.8,.25,1) forwards}.hatch-stage-5 .egg-shell-bottom{transform:translateY(4px)}.hatch-stage-5 .crack{opacity:0}@keyframes egg-glow-rise{0%{opacity:0;transform:translateY(24px) scale(.55)}55%{opacity:.72;transform:translateY(13px) scale(1)}100%{opacity:.9;transform:translateY(9px) scale(.82)}}@keyframes pet-pop-out{0%{opacity:0;transform:translateY(28px) scale(.68);clip-path:inset(0 0 48% 0)}34%{opacity:1;transform:translateY(13px) scale(.76);clip-path:inset(0 0 44% 0)}68%{opacity:1;transform:translateY(-4px) scale(.92);clip-path:inset(0 0 16% 0)}86%{transform:translateY(-1px) scale(1.01);clip-path:inset(0 0 0 0)}100%{opacity:1;transform:translateY(0) scale(1);clip-path:inset(0 0 0 0)}}
+.hatching-art .egg-glow{position:absolute;z-index:1;width:22px;height:18px;opacity:0;background:#ffe58b;box-shadow:0 0 0 4px #ffe58b,0 0 18px 5px #ffe58b;transform:translateY(18px);image-rendering:pixelated}.hatch-stage-1 .hatching-pet,.hatch-stage-2 .hatching-pet,.hatch-stage-3 .hatching-pet,.hatch-stage-4 .hatching-pet{opacity:0;transform:translateY(30px) scale(.68);clip-path:inset(0 0 48% 0)}.hatch-stage-3 .egg-shell-top{animation:egg-lid-lift .72s cubic-bezier(.22,.8,.25,1) forwards}.hatch-stage-4 .egg-shell-top,.hatch-stage-5 .egg-shell-top{transform:translateY(-38px) translateX(11px) rotate(8deg);transform-origin:50% 85%}.hatch-stage-4 .egg-glow{animation:egg-glow-rise .82s ease-in-out forwards}.hatch-stage-5 .egg-glow{opacity:.22;transform:translateY(10px) scale(.8);transition:opacity .25s ease}.hatch-stage-5 .hatching-pet{z-index:5;opacity:1;clip-path:inset(0 0 48% 0);animation:pet-pop-out 1.05s cubic-bezier(.22,.8,.25,1) forwards}.hatch-stage-5 .egg-shell-bottom{transform:translateY(4px)}@keyframes egg-glow-rise{0%{opacity:0;transform:translateY(24px) scale(.55)}55%{opacity:.72;transform:translateY(13px) scale(1)}100%{opacity:.9;transform:translateY(9px) scale(.82)}}@keyframes pet-pop-out{0%{opacity:0;transform:translateY(28px) scale(.68);clip-path:inset(0 0 48% 0)}34%{opacity:1;transform:translateY(13px) scale(.76);clip-path:inset(0 0 44% 0)}68%{opacity:1;transform:translateY(-4px) scale(.92);clip-path:inset(0 0 16% 0)}86%{transform:translateY(-1px) scale(1.01);clip-path:inset(0 0 0 0)}100%{opacity:1;transform:translateY(0) scale(1);clip-path:inset(0 0 0 0)}}
 @media(prefers-reduced-motion:reduce){.hatching-art .egg-glow{opacity:.65;transform:translateY(10px)}.hatch-stage-5 .hatching-pet{opacity:1;transform:none;clip-path:none;animation:none}.hatch-stage-3 .egg-shell-top,.hatch-stage-4 .egg-shell-top,.hatch-stage-5 .egg-shell-top{animation:none;transform:translateY(-24px) translateX(5px) rotate(4deg)}}
 
 /* Hatching visibility contract: the pet is mounted for asset readiness, but cannot
@@ -404,32 +404,41 @@ body{background:#f7fbff}
 body:has(.onboarding-page),body:has(.error-page){background:linear-gradient(180deg,#8bd9f3 0 55%,#afd59b 55% 100%)}
 
 /* Final onboarding sequence: reveal the head first, fade the shell, then
-   scale the same mounted sprite to its idle size. */
-.hatch-stage-4 .hatching-pet {
-  z-index: 5;
-  opacity: 1 !important;
-  visibility: visible !important;
-  transform: translateY(0) scale(.68) !important;
-  transform-origin: 50% 100% !important;
-  clip-path: inset(0 0 48% 0) !important;
-  animation: hatch-head-reveal .55s ease-out forwards !important;
-}
+   scale the same mounted sprite to its idle size. Each sprite carries a
+   transparent top margin, so the scale origin is pinned to the top of the
+   visible art (--pet-origin). That keeps the head at the exact same height
+   before and after hatching. The lower shell paints above the pet, so it is
+   the occluder that hides the body until it fades — no hard clip needed. */
+.hatching-pet { --pet-origin: 51.25px; }
+.hatching-pet-cat { --pet-origin: 51.25px; }
+.hatching-pet-dog { --pet-origin: 60.2px; }
+.hatching-pet-bird { --pet-origin: 57.2px; }
+.hatching-pet-fox { --pet-origin: 33.4px; }
+.hatch-stage-4 .hatching-pet,
 .hatch-stage-5 .hatching-pet {
-  z-index: 5;
+  z-index: 2 !important;
   opacity: 1 !important;
   visibility: visible !important;
   transform: translateY(0) scale(.68) !important;
-  transform-origin: 50% 100% !important;
-  clip-path: inset(0 0 48% 0) !important;
+  transform-origin: 50% var(--pet-origin) !important;
+  clip-path: none !important;
   animation: none !important;
 }
+.hatch-stage-4 .hatching-pet {
+  animation: hatch-head-reveal .55s ease-out forwards !important;
+}
 .hatch-stage-6 .hatching-pet {
-  z-index: 5;
+  z-index: 5 !important;
   opacity: 1 !important;
   visibility: visible !important;
-  transform-origin: 50% 50% !important;
-  clip-path: inset(0) !important;
+  transform-origin: 50% var(--pet-origin) !important;
+  clip-path: none !important;
   animation: hatch-pet-emerge 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+/* Keep the lifted lid behind the pet so it never covers the head. */
+.hatch-stage-4 .egg-shell,
+.hatch-stage-5 .egg-shell {
+  z-index: 1 !important;
 }
 .hatch-stage-5 .egg-shell,
 .hatch-stage-5 .egg-shell-bottom {
@@ -441,14 +450,13 @@ body:has(.onboarding-page),body:has(.error-page){background:linear-gradient(180d
   animation: none !important;
 }
 @keyframes hatch-head-reveal {
-  0% { opacity: 0; transform: translateY(0) scale(.68); clip-path: inset(0 0 48% 0); }
-  100% { opacity: 1; transform: translateY(0) scale(.68); clip-path: inset(0 0 48% 0); }
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 @keyframes hatch-pet-emerge {
-  0% { opacity: 0; transform: translateY(0) scale(0.15); }
-  30% { opacity: 0.5; transform: translateY(0) scale(0.5); }
-  70% { opacity: 0.95; transform: translateY(0) scale(1.05); }
-  100% { opacity: 1; transform: translateY(0) scale(1.3); }
+  0% { opacity: 1; transform: translateY(0) scale(.68); }
+  60% { opacity: 1; transform: translateY(0) scale(1.6); }
+  100% { opacity: 1; transform: translateY(0) scale(1.5); }
 }
 @keyframes hatch-shell-fast-fade {
   0% { opacity: 1; }
@@ -521,4 +529,442 @@ body:has(.onboarding-page),body:has(.error-page){background:linear-gradient(180d
 @media(max-width:700px){
   .preview-slot-active .inline-preview { grid-template-columns: 1fr; }
   .preview-slot-active .hatch-actions { margin-top: 10px; }
+}
+
+/* Password visibility toggle used on the profile page. */
+.password-field {
+  position: relative;
+  display: block;
+}
+.password-field input {
+  width: 100%;
+  padding-right: 46px;
+}
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 7px;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  color: #7f8da4;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.password-toggle:hover {
+  color: #3157c6;
+  background: #eef2ff;
+}
+.password-toggle:focus-visible {
+  outline: 2px solid #7590e8;
+  outline-offset: 1px;
+}
+
+/* Crop modal action row spacing. */
+.crop-modal-card .form-actions {
+  margin-top: 18px;
+}
+
+/* Reset password confirmation modal action spacing. */
+.modal-card-confirm .form-actions {
+  margin-top: 18px;
+}
+
+/* Larger filter area on the teacher student list. */
+.student-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding: 16px;
+  border: 1px solid #e7ecf5;
+  border-radius: 14px;
+  background: #fbfcfe;
+}
+.student-filters .search-input {
+  flex: 1 1 280px;
+  min-width: 240px;
+}
+.student-filters .search-input,
+.student-filters .filter-select {
+  min-height: 46px;
+  padding: 0 16px;
+  color: #34435b;
+  background: #fff;
+  border: 1px solid #dfe5ef;
+  border-radius: 10px;
+  font-size: 13px;
+  outline: none;
+}
+.student-filters .search-input:focus,
+.student-filters .filter-select:focus {
+  border-color: #7590e8;
+  box-shadow: 0 0 0 3px #edf1ff;
+}
+.student-filters .filter-select {
+  flex: 0 0 auto;
+  min-width: 170px;
+  cursor: pointer;
+}
+
+/* Keep the close (X) button pinned to the modal's top-right corner. */
+.student-modal {
+  position: relative;
+}
+.student-modal > .section-title-row > .icon-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1;
+}
+.student-modal > .section-title-row > div {
+  padding-right: 44px;
+}
+
+/* Danger styled confirm button (delete student). */
+.modal-card-confirm .primary-button.danger-button {
+  color: #fff;
+  background: #e0666d;
+  border-color: #c14b52;
+  box-shadow: 3px 3px 0 #d3a0a3;
+}
+.modal-card-confirm .primary-button.danger-button:hover {
+  background: #d0575e;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 #d3a0a3;
+}
+
+/* Teacher stat cards: 2x2 on small screens. */
+@media(max-width:700px){
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .stat-card {
+    padding: 13px;
+    column-gap: 10px;
+  }
+  .stat-icon {
+    width: 32px;
+    height: 32px;
+  }
+  .stat-card > b {
+    font-size: 20px;
+  }
+}
+
+/* Compact quest summary card (top-right of the quests page). */
+.quest-summary-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 15px;
+  align-self: flex-end;
+}
+.quest-summary-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  color: #4d7289;
+  background: #f3fbfd;
+  border: 2px solid #d1e1e6;
+  border-radius: 5px;
+  font-family: ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.quest-summary-count {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+}
+.quest-summary-count b {
+  color: #2e77b7;
+  font-family: ui-monospace, monospace;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1;
+}
+.quest-summary-count span {
+  color: #9aa5b6;
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+  font-weight: 900;
+}
+@media(max-width:700px){
+  .quest-summary-card {
+    align-self: flex-start;
+    width: auto;
+  }
+}
+
+/* Inline check/cross shown inside a practice answer input. */
+.practice-input-wrap {
+  position: relative;
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
+.practice-input-wrap .practice-input {
+  width: 100%;
+  padding-right: 48px;
+}
+.practice-input-icon {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  color: #fff;
+  border-radius: 99px;
+  font-size: 14px;
+  font-weight: 900;
+  pointer-events: none;
+}
+.practice-input-icon.correct {
+  background: #35c16b;
+}
+.practice-input-icon.wrong {
+  background: #e0666d;
+}
+
+/* Pet page: name with inline edit + equal-height cards. */
+.pet-progress-layout {
+  align-items: stretch;
+}
+.pet-profile-card {
+  align-content: start;
+}
+.pet-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-width: 0;
+  margin-top: 4px;
+}
+.pet-name-row h2 {
+  margin: 0;
+}
+.pet-rename-icon {
+  width: 30px;
+  height: 30px;
+  color: #8065c9;
+  background: #eee5ff;
+  border: 2px solid #d2c3f1;
+  border-radius: 6px;
+  box-shadow: 2px 2px 0 #d8e7ec;
+  cursor: pointer;
+  transition: background .15s ease, transform .15s ease;
+}
+.pet-rename-icon:hover {
+  color: #5f43b0;
+  background: #e6dbff;
+  transform: translate(-1px, -1px);
+}
+.pet-name-input {
+  width: auto;
+  max-width: 220px;
+  min-height: 38px;
+  text-align: center;
+}
+.pet-name-confirm,
+.pet-name-cancel {
+  width: 34px;
+  height: 34px;
+  border: 2px solid;
+  border-radius: 6px;
+  box-shadow: 2px 2px 0 #d8e7ec;
+  cursor: pointer;
+}
+.pet-name-confirm {
+  color: #268d5b;
+  background: #dcf7e8;
+  border-color: #9edec0;
+}
+.pet-name-confirm:hover {
+  background: #c9f0da;
+}
+.pet-name-cancel {
+  color: #c78222;
+  background: #fff1c9;
+  border-color: #ecd39a;
+}
+.pet-name-cancel:hover {
+  background: #ffe9b0;
+}
+.pet-profile-caption .form-error {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 10px;
+}
+
+/* Demo credentials button + accounts modal on the login page. */
+.demo-login {
+  position: relative;
+}
+.demo-login .demo-info-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  min-height: 0;
+  padding: 0;
+  color: #2e6c9b;
+  background: #fff;
+  border: 2px solid #b9dce7;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.demo-login .demo-info-button:hover {
+  color: #1f5170;
+  background: #e7f8ff;
+}
+.demo-accounts-modal {
+  width: min(520px, 100%);
+}
+.demo-account-list {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.demo-account-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: #f7fbfe;
+  border: 2px solid #dcebf1;
+  border-radius: 8px;
+}
+.demo-account-info {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.demo-account-info b {
+  color: #244261;
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+}
+.demo-account-info span {
+  color: #7f9bac;
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+}
+.demo-account-role {
+  margin-left: auto;
+  padding: 4px 9px;
+  border: 2px solid;
+  border-radius: 5px;
+  font-family: ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.demo-account-role.student {
+  color: #2e77b7;
+  background: #e8f4ff;
+  border-color: #bcdff5;
+}
+.demo-account-role.teacher {
+  color: #8065c9;
+  background: #eee5ff;
+  border-color: #d2c3f1;
+}
+.demo-account-row .secondary-button {
+  min-height: 34px;
+  padding: 0 12px;
+  font-size: 10px;
+}
+@media(max-width:520px){
+  .demo-account-row {
+    flex-wrap: wrap;
+  }
+  .demo-account-row .secondary-button {
+    width: 100%;
+  }
+}
+
+/* Keep the navbar actions pinned to the right after the breadcrumb removal. */
+.topbar-actions {
+  margin-left: auto;
+}
+
+/* The demo info trigger sits directly inside the demo card (no card look). */
+.demo-login .demo-info-button {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  min-height: 0;
+  padding: 0;
+  color: #6d94a5;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: pointer;
+}
+.demo-login .demo-info-button:hover {
+  color: #2e6c9b;
+  background: transparent;
+}
+
+/* Soft fade between the app shell and the login page. */
+@keyframes authFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes authFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+.auth-page {
+  animation: authFadeIn .35s ease both;
+}
+.app-shell.is-logging-out {
+  animation: authFadeOut .24s ease forwards;
+  pointer-events: none;
+}
+
+/* Demo accounts modal: title only, close button pinned to the corner. */
+.demo-accounts-modal {
+  position: relative;
+}
+.demo-accounts-modal > .section-title-row > .demo-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1;
+}
+@media(prefers-reduced-motion:reduce){
+  .auth-page,
+  .app-shell.is-logging-out {
+    animation: none !important;
+  }
 }
