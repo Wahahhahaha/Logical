@@ -38,6 +38,11 @@ async function columnExists(tableName, columnName) {
   return Number(result.rows[0]?.present) > 0;
 }
 
+async function foreignKeyExists(tableName, constraintName) {
+  const result = await query("SELECT COUNT(*) AS present FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = $1 AND constraint_name = $2 AND constraint_type = 'FOREIGN KEY'", [tableName, constraintName]);
+  return Number(result.rows[0]?.present) > 0;
+}
+
 async function ensureProfilePhotoColumn() {
   try {
     if (!(await tableExists('users'))) return 'missing-table';
@@ -104,4 +109,28 @@ async function ensurePracticeAttempts() {
   }
 }
 
-module.exports = { ensureProfilePhotoColumn, ensureQuestActivityType, ensurePetNameColumn, ensureStudentActivities, ensurePracticeAttempts };
+async function ensureInitialLevelRemoved() {
+  try {
+    if (!(await tableExists('users'))) return 'missing-table';
+    if (await columnExists('users', 'level_id')) {
+      if (await foreignKeyExists('users', 'fk_users_level')) await query('ALTER TABLE users DROP FOREIGN KEY fk_users_level');
+      await query('ALTER TABLE users DROP COLUMN level_id');
+      console.log('Schema: dropped obsolete column users.level_id');
+    }
+    if ((await tableExists('student_profiles')) && (await columnExists('student_profiles', 'initial_level_id'))) {
+      if (await foreignKeyExists('student_profiles', 'fk_student_level')) await query('ALTER TABLE student_profiles DROP FOREIGN KEY fk_student_level');
+      await query('ALTER TABLE student_profiles DROP COLUMN initial_level_id');
+      console.log('Schema: dropped obsolete column student_profiles.initial_level_id');
+    }
+    if (await tableExists('levels')) {
+      await query('DROP TABLE levels');
+      console.log('Schema: dropped obsolete table levels');
+    }
+    return 'ok';
+  } catch (error) {
+    console.warn('Schema check for initial learning level removal skipped:', error.message);
+    return 'error';
+  }
+}
+
+module.exports = { ensureProfilePhotoColumn, ensureQuestActivityType, ensurePetNameColumn, ensureStudentActivities, ensurePracticeAttempts, ensureInitialLevelRemoved };

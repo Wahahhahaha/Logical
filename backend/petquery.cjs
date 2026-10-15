@@ -18,7 +18,7 @@ function streakFromDates(dates) {
 (async () => {
   const c = await mysql.createConnection({ host: 'localhost', port: 3306, database: process.env.DATABASE_NAME, user: process.env.DATABASE_USER, password: process.env.DATABASE_PASSWORD, connectTimeout: 8000 });
   try {
-    const userQuery = `SELECT u.*, l.name AS level_name, sp.nis, sp.grade, sp.class_id, c.name AS class_name, sp.current_exp, sp.current_streak, sp.pet_type, sp.pet_name, sp.onboarding_completed FROM users u LEFT JOIN levels l ON l.id = u.level_id LEFT JOIN student_profiles sp ON sp.user_id = u.id LEFT JOIN classes c ON c.id = sp.class_id`;
+    const userQuery = `SELECT u.*, sp.nis, sp.grade, sp.class_id, c.name AS class_name, sp.current_exp, sp.current_streak, sp.pet_type, sp.pet_name, sp.onboarding_completed FROM users u LEFT JOIN student_profiles sp ON sp.user_id = u.id LEFT JOIN classes c ON c.id = sp.class_id`;
     const [users] = await c.query(normalizePlaceholders(`${userQuery} WHERE u.id = $1 AND u.is_active = TRUE`), ['41dc5a7a-d86b-46c0-a591-89acc79613a6']);
     console.log('user rows:', users.length);
     if (users.length) {

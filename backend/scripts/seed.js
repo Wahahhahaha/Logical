@@ -18,16 +18,21 @@ async function seed() {
   await query("INSERT INTO users (id, full_name, username, password_hash, role) VALUES ($1, 'Demo Teacher', 'teacher.demo', $2, 'teacher') ON DUPLICATE KEY UPDATE full_name = VALUES(full_name), password_hash = VALUES(password_hash)", [teacherId, teacherPassword]);
   const teacher = await query('SELECT id FROM users WHERE username = $1', ['teacher.demo']);
   const actualTeacherId = teacher.rows[0].id;
-  const levels = (await query('SELECT id, name FROM levels')).rows.reduce((map, level) => ({ ...map, [level.name]: level.id }), {});
-  const students = [['Student A', 'STU-001', 'student123', '7', 'Class A', levels.Intermediate], ['Student B', 'STU-002', 'student123', '7', 'Class A', levels.Intermediate], ['Student C', 'STU-003', 'student123', '7', 'Class A', levels.Basic]];
-  for (const [fullName, nis, password, grade, className, levelId] of students) {
+  const students = [
+    ['Student A', 'STU-001', 'student123', '7', 'Class A'],
+    ['Student B', 'STU-002', 'student123', '7', 'Class A'],
+    ['Student C', 'STU-003', 'student123', '7', 'Class A'],
+    ['Student D', 'STU-004', 'student123', '7', 'Class A'],
+    ['Student E', 'STU-005', 'student123', '7', 'Class A'],
+  ];
+  for (const [fullName, nis, password, grade, className] of students) {
     const hash = await bcrypt.hash(password, 12); const userId = randomUUID();
-    await query("INSERT INTO users (id, full_name, username, password_hash, role, level_id) VALUES ($1, $2, $3, $4, 'student', $5) ON DUPLICATE KEY UPDATE full_name = VALUES(full_name), password_hash = VALUES(password_hash), level_id = VALUES(level_id)", [userId, fullName, nis, hash, levelId]);
+    await query("INSERT INTO users (id, full_name, username, password_hash, role) VALUES ($1, $2, $3, $4, 'student') ON DUPLICATE KEY UPDATE full_name = VALUES(full_name), password_hash = VALUES(password_hash)", [userId, fullName, nis, hash]);
     const user = await query('SELECT id FROM users WHERE username = $1', [nis]); const actualUserId = user.rows[0].id;
     const classId = await findOrCreateClass(className, grade, actualTeacherId);
-    await query("INSERT INTO student_profiles (user_id, nis, teacher_id, class_id, grade, initial_level_id) VALUES ($1, $2, $3, $4, $5, $6) ON DUPLICATE KEY UPDATE teacher_id = VALUES(teacher_id), class_id = VALUES(class_id), grade = VALUES(grade), initial_level_id = VALUES(initial_level_id)", [actualUserId, nis, actualTeacherId, classId, grade, levelId]);
+    await query("INSERT INTO student_profiles (user_id, nis, teacher_id, class_id, grade) VALUES ($1, $2, $3, $4, $5) ON DUPLICATE KEY UPDATE teacher_id = VALUES(teacher_id), class_id = VALUES(class_id), grade = VALUES(grade)", [actualUserId, nis, actualTeacherId, classId, grade]);
   }
-  console.log('Seed complete. Teacher: teacher.demo / teacher123. Student IDs: STU-001, STU-002, STU-003 / student123.');
+  console.log('Seed complete. Teacher: teacher.demo / teacher123. Student IDs: STU-001..STU-005 / student123.');
 }
 
 seed().catch((error) => { console.error('Seed failed:', error.message); process.exitCode = 1; }).finally(() => closePool());

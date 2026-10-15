@@ -2,7 +2,7 @@
 
 ## Database setup
 
-1. Create a MySQL 8 database named `mathpath`.
+1. Create a MySQL 8 database named `logical`.
 2. Copy `.env.example` to `.env`.
 3. Set the MySQL connection values and a long random `JWT_SECRET`.
 4. Run the schema migration and development seed:
@@ -12,10 +12,16 @@ npm run migrate
 npm run seed
 ```
 
+To drop and recreate the database from scratch (schema + seed) in one step:
+
+```powershell
+npm run reset
+```
+
 The seed creates these development accounts:
 
 - Teacher: `teacher.demo` / `teacher123`
-- Students: `STU-001`, `STU-002`, `STU-003` / `student123`
+- Students: `STU-001`, `STU-002`, `STU-003`, `STU-004`, `STU-005` / `student123`
 
 ## Run the API
 
@@ -23,7 +29,7 @@ The seed creates these development accounts:
 npm run dev
 ```
 
-The API owns authentication, authorization, profile updates, student CRUD, level lookup, and database-backed session data. Student delete is implemented as deactivation so academic history is not removed.
+The API owns authentication, authorization, profile updates, student CRUD, and database-backed session data. Student delete is implemented as deactivation so academic history is not removed.
 
 ## Profile photos
 
