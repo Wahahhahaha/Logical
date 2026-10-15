@@ -4,6 +4,7 @@ import { apiFetch } from '../../lib/api.js'
 import { useI18n } from '../../i18n.jsx'
 import { useToast } from '../../toast.jsx'
 import { deriveTeacherStats, formatLastActive, studentProgress } from '../../lib/teacherAnalytics.js'
+import { ListSkeleton, StatsSkeleton } from '../../components/Skeleton.jsx'
 
 const initialsOf = (name) => name.split(' ').filter(Boolean).map((word) => word[0]).join('').slice(0, 2).toUpperCase()
 
@@ -18,6 +19,7 @@ export default function TeacherProgressPage() {
   const totalLessons = students.reduce((sum, student) => sum + studentProgress(student).done, 0)
   const classCompletion = (className) => { const members = students.filter((student) => (student.className || t('teacher.noClass')) === className); return members.length ? Math.round(members.reduce((sum, student) => sum + studentProgress(student).percent, 0) / members.length) : 0 }
   const stats = [[t('teacher.classes'), String(classes.length), t('teacher.nStudents', { n: students.length }), Users, 'blue'], [t('teacher.lessonsCompleted'), String(totalLessons), t('teacher.acrossAll'), BookOpen, 'green'], [t('teacher.avgCompletion'), `${averageCompletion}%`, t('teacher.ofActiveCurriculum'), BarChart3, 'purple'], [t('teacher.activeToday'), String(activeToday), t('teacher.studentsTotal', { n: students.length }), Zap, 'amber']]
+  if (!data) return <div className="page-stack"><StatsSkeleton /><ListSkeleton count={5} className="card" /></div>
   return <div className="page-stack"><section className="welcome-row"><div><p className="eyebrow">{t('teacher.workspace')}</p><h1>{t('teacher.learningProgress')}</h1><p className="page-subtitle">{t('teacher.trackHow')}</p></div></section>
     <section className="stats-grid">{stats.map(([label, value, detail, Icon, tone]) => <div className="stat-card card" key={label}><div className={`stat-icon ${tone}`}><Icon size={18} /></div><span>{label}</span><b>{value}</b><small>{detail}</small></div>)}</section>
     <section className="section-block"><div className="section-title-row"><div><label>{t('teacher.classProgress')}</label><h2>{t('teacher.completionByClass')}</h2></div></div><div className="class-grid">{data === null ? <p className="muted-text">{t('teacher.loadingClasses')}</p> : classes.length === 0 ? <div className="empty-state">{t('teacher.noClasses')}</div> : classes.map((cls) => { const percent = classCompletion(cls.name); return <div className="class-card card" key={cls.name}><div className="class-head"><div className="round-icon blue"><Users size={17} /></div><div><h3>{cls.name}</h3><span>{t('teacher.gradeShort', { n: cls.grade || '-' })} · {t('teacher.nStudents', { n: cls.studentCount })}</span></div></div><div className="class-stats"><div><b>{cls.lessonsCompleted}</b><span>{t('teacher.lessons')}</span></div><div><b>{cls.averageExp}</b><span>{t('teacher.avgXpLabel')}</span></div><div><b>{cls.activeToday}</b><span>{t('teacher.active')}</span></div></div><div className="progress-track"><i style={{ width: `${percent}%` }} /></div><p className="muted-text">{t('teacher.avgCompletionPct', { n: percent })}</p></div> })}</div></section>

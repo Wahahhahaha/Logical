@@ -1,12 +1,9 @@
 @keyframes cloudFloat {
   0% {
-    transform: translateX(-100vw) translateY(0);
-  }
-  50% {
-    transform: translateX(50vw) translateY(-12px);
+    transform: translateX(-130vw);
   }
   100% {
-    transform: translateX(100vw) translateY(0);
+    transform: translateX(130vw);
   }
 }
 
@@ -28,7 +25,7 @@
   border-radius: 50px;
   box-shadow: 24px 20px 40px -20px rgba(80, 140, 200, 0.4);
   opacity: 0.95;
-  animation: cloudFloat 28s linear infinite;
+  animation: cloudFloat 32s linear infinite;
   will-change: transform;
 }
 
@@ -56,24 +53,24 @@
 
 .cloud.cloud-1 {
   top: 120px;
-  animation-duration: 28s;
-  animation-delay: -8s;
+  animation-duration: 34s;
+  animation-delay: -10s;
   opacity: 0.9;
   transform: scale(0.9);
 }
 
 .cloud.cloud-2 {
   top: 60px;
-  animation-duration: 28s;
-  animation-delay: -16s;
+  animation-duration: 26s;
+  animation-delay: -18s;
   opacity: 0.85;
   transform: scale(0.8);
 }
 
 .cloud.cloud-3 {
   top: 180px;
-  animation-duration: 28s;
-  animation-delay: -0s;
+  animation-duration: 40s;
+  animation-delay: -5s;
   opacity: 0.88;
   transform: scale(0.95);
 }

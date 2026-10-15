@@ -1,8 +1,9 @@
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import { useAuth } from './auth.jsx'
 import AppShell from './components/layout/AppShell.jsx'
+import { AppErrorWatcher } from './components/system/ErrorHandling.jsx'
 import LoginPage from './pages/auth/LoginPage.jsx'
-import Placeholder from './pages/common/Placeholder.jsx'
+import ErrorPage from './pages/common/ErrorPage.jsx'
 import ProfilePage from './pages/shared/ProfilePage.jsx'
 import StudentDashboard from './pages/student/StudentDashboard.jsx'
 import StudentLearningPage from './pages/student/StudentLearningPage.jsx'
@@ -19,28 +20,44 @@ import './App.css'
 
 export default function App() {
   const { user } = useAuth()
-  return <Routes>
-    <Route path="/login" element={user ? <Navigate to="/dashboard" replace /> : <LoginPage />} />
-    <Route path="/" element={<Navigate to={user ? '/dashboard' : '/login'} replace />} />
-    <Route element={<RequireAuth />}>
-      <Route path="/dashboard" element={<DashboardEntry />} />
-      <Route path="/onboarding" element={<StudentOnboardingGate />} />
-      <Route path="/student/learn/:lessonKey" element={<StudentLessonPage />} />
-      <Route element={<AppShell />}>
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/student/dashboard" element={<StudentDashboard />} />
-        <Route path="/student/learn" element={<StudentLearningPage />} />
-        <Route path="/student/quests" element={<StudentQuestsPage />} />
-        <Route path="/student/pet" element={<StudentPetPage />} />
-        <Route path="/student/progress" element={<StudentProgressPage />} />
-        <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
-        <Route path="/teacher/students" element={<StudentManagementPage />} />
-        <Route path="/teacher/students/:id" element={<TeacherStudentDetailPage />} />
-        <Route path="/teacher/progress" element={<TeacherProgressPage />} />
-        <Route path="*" element={<Placeholder title="Page not found" description="The requested workspace page does not exist." />} />
+  return <>
+    <AppErrorWatcher />
+    <Routes>
+      <Route path="/login" element={<LoginEntry />} />
+      <Route path="/" element={<Navigate to={user ? '/dashboard' : '/login'} replace />} />
+      <Route path="/404" element={<ErrorPage code="404" />} />
+      <Route path="/500" element={<ErrorPage code="500" />} />
+      <Route path="/419" element={<ErrorPage code="419" />} />
+      <Route element={<RequireAuth />}>
+        <Route path="/dashboard" element={<DashboardEntry />} />
+        <Route path="/onboarding" element={<StudentOnboardingGate />} />
+        <Route path="/student/learn/:lessonKey" element={<StudentLessonPage />} />
+        <Route element={<AppShell />}>
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/student/dashboard" element={<StudentDashboard />} />
+          <Route path="/student/learn" element={<StudentLearningPage />} />
+          <Route path="/student/quests" element={<StudentQuestsPage />} />
+          <Route path="/student/pet" element={<StudentPetPage />} />
+          <Route path="/student/progress" element={<StudentProgressPage />} />
+          <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
+          <Route path="/teacher/students" element={<StudentManagementPage />} />
+          <Route path="/teacher/students/:id" element={<TeacherStudentDetailPage />} />
+          <Route path="/teacher/progress" element={<TeacherProgressPage />} />
+        </Route>
       </Route>
-    </Route>
-  </Routes>
+      <Route path="*" element={<ErrorPage code="404" />} />
+    </Routes>
+  </>
+}
+
+function LoginEntry() {
+  const { user } = useAuth()
+  if (!user) return <LoginPage />
+  return <Navigate to={homeRoute(user)} replace />
+}
+
+function homeRoute(user) {
+  return user?.role === 'student' && !user.profile?.onboardingCompleted ? '/onboarding' : '/dashboard'
 }
 
 function RequireAuth() {

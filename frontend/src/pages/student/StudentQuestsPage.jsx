@@ -4,6 +4,7 @@ import { apiFetch } from '../../lib/api.js'
 import { useI18n } from '../../i18n.jsx'
 import { dailyQuests } from '../../lib/quests.js'
 import { formatToday } from '../../lib/greeting.js'
+import { ListSkeleton } from '../../components/Skeleton.jsx'
 
 export default function StudentQuestsPage() {
   const { t, language, translateError } = useI18n()
@@ -12,7 +13,7 @@ export default function StudentQuestsPage() {
   useEffect(() => { let active = true; apiFetch('/api/student/activities').then(result => { if (active) setProgress(result) }).catch(requestError => { if (active) setError(requestError.message) }); return () => { active = false } }, [])
   const quests = dailyQuests(new Date())
   if (error) return <div className="form-error">{translateError(error)}</div>
-  if (!progress) return <div className="card loading-card">{t('quest.loading')}</div>
+  if (!progress) return <ListSkeleton count={3} className="card" />
   const doneCount = quests.filter(quest => quest.measure(progress) >= quest.target).length
     const questTitle = quest => language === 'en-US' ? (quest.titleEn || quest.title) : quest.title
   const questDesc = quest => language === 'en-US' ? (quest.descriptionEn || quest.description) : quest.description

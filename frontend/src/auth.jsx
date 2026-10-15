@@ -33,6 +33,7 @@ export function AuthProvider({ children }) {
       try { if (localStorage.getItem('mathpath_token')) await apiFetch('/api/auth/logout', { method: 'POST' }) } catch { /* local logout still clears the session */ }
       localStorage.removeItem('mathpath_token'); localStorage.removeItem('mathpath_user'); setUser(null)
     },
+    clearSession() { localStorage.removeItem('mathpath_token'); localStorage.removeItem('mathpath_user'); setUser(null) },
     updateUser(nextUser) { if (!nextUser) return; localStorage.setItem('mathpath_user', JSON.stringify(nextUser)); setUser(nextUser) },
   }), [loading, user])
 

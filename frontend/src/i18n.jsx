@@ -31,8 +31,11 @@ export function I18nProvider({ children }) {
     localStorage.setItem(LANG_KEY, next)
     setStored(next)
     if (user) {
-      const result = await apiFetch('/api/profile', { method: 'PUT', body: JSON.stringify({ language: next }) })
-      if (result.user) updateUser(result.user)
+      updateUser({ ...user, language: next })
+      try {
+        const result = await apiFetch('/api/profile', { method: 'PUT', body: JSON.stringify({ language: next }) })
+        if (result.user) updateUser(result.user)
+      } catch { /* keep the immediate local choice */ }
     }
   }, [user, updateUser])
 

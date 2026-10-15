@@ -6,6 +6,7 @@ import { EggIllustration } from '../../components/illustrations/PetIllustration.
 import InteractiveCat from '../../components/illustrations/InteractiveCat.jsx'
 import InteractiveFox from '../../components/illustrations/InteractiveFox.jsx'
 import InteractivePet from '../../components/illustrations/InteractivePet.jsx'
+import { PetPageSkeleton } from '../../components/Skeleton.jsx'
 
 export default function StudentPetPage() {
   const { t, translateError } = useI18n()
@@ -20,7 +21,7 @@ export default function StudentPetPage() {
     return () => { active = false }
   }, [])
   if (error) return <div className="form-error">{translateError(error)}</div>
-  if (!progress) return <div className="card loading-card">{t('pet.loading')}</div>
+  if (!progress) return <PetPageSkeleton />
   const defaultName = progress.pet === 'egg' ? t('pet.type.egg') : t(`pet.type.${progress.pet}`)
   const displayName = progress.petName || defaultName || t('common.companion')
   const startEdit = () => { setDraftName(displayName); setSaveError(''); setEditing(true) }

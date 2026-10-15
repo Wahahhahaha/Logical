@@ -10,6 +10,7 @@ import { apiFetch } from '../../lib/api.js'
 import { formatToday, greetingKey } from '../../lib/greeting.js'
 import { allLessons } from '../../lib/curriculum.js'
 import { dailyQuests } from '../../lib/quests.js'
+import { ListSkeleton, Skeleton, StatsSkeleton, SkeletonRegion, SkeletonText } from '../../components/Skeleton.jsx'
 
 const EXP_PER_LEVEL = 100
 
@@ -20,6 +21,7 @@ export default function StudentDashboard() {
   const { t, language } = useI18n()
   const [activities, setActivities] = useState(null)
   useEffect(() => { let active = true; apiFetch('/api/student/activities').then(result => { if (active) setActivities(result) }).catch(() => {}); return () => { active = false } }, [])
+  if (!activities) return <div className="page-stack"><section className="welcome-row"><div><SkeletonText className="skeleton-short" /><SkeletonText className="skeleton-heading" /><SkeletonText className="skeleton-medium" /></div></section><SkeletonRegion className="student-grid" label="Memuat dashboard"><div className="hero-card card skeleton-card"><SkeletonText className="skeleton-heading" /><SkeletonText /><SkeletonText className="skeleton-medium" /><Skeleton className="skeleton-button" /></div><div className="progress-card card skeleton-card"><SkeletonText className="skeleton-heading" /><Skeleton className="skeleton-progress" /><SkeletonText className="skeleton-medium" /></div></SkeletonRegion><StatsSkeleton count={2} /><ListSkeleton count={3} className="card" /></div>
     const exp = user.profile?.currentExp || 0
   const level = Math.floor(exp / EXP_PER_LEVEL)
   const expInLevel = exp % EXP_PER_LEVEL

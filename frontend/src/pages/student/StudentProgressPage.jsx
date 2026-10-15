@@ -8,6 +8,7 @@ import { useToast } from '../../toast.jsx'
 import { formatToday } from '../../lib/greeting.js'
 import { planFor } from '../../lib/curriculum.js'
 import { dailyQuests } from '../../lib/quests.js'
+import { ListSkeleton, StatsSkeleton } from '../../components/Skeleton.jsx'
 
 const EXP_PER_LEVEL = 100
 
@@ -17,6 +18,7 @@ export default function StudentProgressPage() {
   const toast = useToast()
   const [activities, setActivities] = useState(null)
   useEffect(() => { let active = true; apiFetch('/api/student/activities').then((result) => { if (active) setActivities(result) }).catch((error) => { if (active) toast.error(error) }); return () => { active = false } }, [toast])
+  if (!activities) return <div className="page-stack"><StatsSkeleton /><ListSkeleton count={5} className="card" /></div>
   const exp = user.profile?.currentExp || 0
     const grade = user.profile?.grade
   const level = Math.floor(exp / EXP_PER_LEVEL)

@@ -2,8 +2,39 @@ export function WelcomeIllustration() {
   return <svg className="illustration-svg" viewBox="0 0 140 100" role="img" aria-label="Welcome illustration"><path d="M22 65c16-24 33-31 49-23 10 5 15 15 17 25" fill="none" stroke="#6e85e5" strokeWidth="6" strokeLinecap="round"/><path d="M82 32c8-9 22-8 28 1" fill="none" stroke="#9eaff4" strokeWidth="5" strokeLinecap="round"/><circle cx="34" cy="31" r="5" fill="#f4b865"/><circle cx="114" cy="57" r="4" fill="#a982e8"/><path d="M53 75c10 8 25 9 35 0" fill="none" stroke="#f0a45b" strokeWidth="5" strokeLinecap="round"/></svg>
 }
 
-export function EggIllustration({ className = '' }) {
-  return <svg className={`illustration-svg ${className}`} viewBox="0 0 120 140" role="img" aria-label="Pet egg"><path d="M60 12C32 12 17 51 17 79c0 30 18 49 43 49s43-19 43-49C103 51 88 12 60 12Z" fill="#fff4d8" stroke="#dba85d" strokeWidth="4"/><path d="M35 76c11-8 17 8 26 0s15-8 24 0" fill="none" stroke="#efb96d" strokeWidth="5" strokeLinecap="round"/><path d="M48 39c4-7 13-7 17-1M60 89c5 4 10 4 15 0" fill="none" stroke="#f4c985" strokeWidth="4" strokeLinecap="round"/></svg>
+const eggAccents = { cat: '#e89a54', dog: '#bb8156', fox: '#e56b3d', bird: '#65afd0' }
+
+function PixelEggSvg({ type = 'cat', className = '', parts = 'whole', decorative = false }) {
+  const accent = eggAccents[type] || eggAccents.cat
+  const outline = '#9c624c'
+  const shell = '#fff0c9'
+  const shadow = '#f2c887'
+  const highlight = '#fff9e9'
+  const top = <g className="egg-top-piece">
+    <path d="M13 2h6v2h4v3h3v8h2v3H4v-3h2V7h3V4h4z" fill={outline} />
+    <path d="M13 4h5v2h4v3h2v7H8v-7h2V6h3z" fill={shell} />
+    <path d="M12 6h3v2h-3zM10 9h2v5h-2z" fill={highlight} />
+    <path d="M8 16h16v2H8z" fill={accent} />
+  </g>
+  const bottom = <g className="egg-bottom-piece">
+    <path d="M5 16h22v8h-2v5h-3v4H10v-4H7v-5H5z" fill={outline} />
+    <path d="M7 18h18v6h-2v4h-3v3H12v-3H9v-4H7z" fill={shell} />
+    <path d="M9 19h16v3H9z" fill={accent} />
+    <path d="M11 24h3v3h-3zM20 27h3v2h-3z" fill={shadow} />
+  </g>
+  return <svg className={`illustration-svg pixel-egg ${className}`} viewBox="0 0 32 36" role={decorative ? undefined : 'img'} aria-label={decorative ? undefined : 'Pet egg'} aria-hidden={decorative ? 'true' : undefined} shapeRendering="crispEdges" style={{ imageRendering: 'pixelated' }}>{parts === 'bottom' ? bottom : parts === 'top' ? top : <>{bottom}{top}</>}</svg>
+}
+
+export function EggIllustration({ className = '', type = 'cat' }) {
+  return <PixelEggSvg className={className} type={type} />
+}
+
+export function EggShellTop({ className = '', type = 'cat' }) {
+  return <PixelEggSvg className={className} type={type} parts="top" decorative />
+}
+
+export function EggShellBottom({ className = '', type = 'cat' }) {
+  return <PixelEggSvg className={className} type={type} parts="bottom" decorative />
 }
 
 export function PetEggIllustration({ type = 'cat', className = '' }) {

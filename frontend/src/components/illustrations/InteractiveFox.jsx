@@ -25,11 +25,11 @@ export default function InteractiveFox({ className = '', label = 'Fox', reaction
   const blinkRef = useRef(null)
   const idleRef = useRef(null)
   const sleepyRef = useRef(null)
-  const lastActivity = useRef(Date.now())
+  const lastActivity = useRef(0)
   const activePriority = useRef(0)
   const reducedMotion = useRef(false)
   const onReactRef = useRef(onReact)
-  onReactRef.current = onReact
+  useEffect(() => { onReactRef.current = onReact }, [onReact])
 
   const play = useCallback((name, message, duration = 1500, priority = priorityFor(name)) => {
     if (priority < activePriority.current) return
@@ -51,6 +51,7 @@ export default function InteractiveFox({ className = '', label = 'Fox', reaction
   }, [reaction, play])
 
   useEffect(() => {
+    lastActivity.current = Date.now()
     const media = window.matchMedia('(prefers-reduced-motion: reduce)')
     reducedMotion.current = media.matches
     const update = () => { reducedMotion.current = media.matches }

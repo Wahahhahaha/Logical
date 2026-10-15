@@ -331,7 +331,6 @@ const dict = {
   'teacher.editAria': ['Edit {name}', 'Edit {name}'],
   'teacher.resetAria': ['Reset kata sandi {name}', 'Reset password {name}'],
   'teacher.deleteAria': ['Hapus {name}', 'Delete {name}'],
-  'teacher.pleaseSelectLevel': ['Pilih level belajar awal.', 'Please select an initial learning level.'],
   'teacher.studentUpdated': ['Akun murid diperbarui', 'Student account updated'],
   'teacher.studentCreated': ['Akun murid dibuat', 'Student account created'],
   'teacher.resetTo12345': ['Kata sandi direset ke 12345', 'Password reset to 12345'],
@@ -346,8 +345,6 @@ const dict = {
   'teacher.selectGrade': ['Pilih tingkat', 'Select grade'],
   'teacher.classLabel': ['Kelas', 'Class'],
   'teacher.classPlaceholder': ['contoh: Kelas A', 'e.g. Class A'],
-  'teacher.initialLevel': ['Level belajar awal', 'Initial learning level'],
-  'teacher.selectLevel': ['Pilih level', 'Select level'],
   'teacher.saveChanges': ['Simpan perubahan', 'Save changes'],
   'teacher.initialPasswordNote': ['Akun murid akan dibuat dengan kata sandi awal 12345.', 'Student accounts are created with the initial password 12345.'],
   'teacher.passwordReset': ['Reset kata sandi', 'Password reset'],
@@ -447,6 +444,17 @@ const dict = {
   'err.generic': ['Terjadi kesalahan. Coba lagi.', 'Something went wrong. Please try again.'],
   'err.requestFailed': ['Permintaan gagal', 'Request failed'],
   'err.passwordChanged': ['Kata sandi berhasil diubah', 'Password changed successfully'],
+
+  'error.404.title': ['Halaman tidak ditemukan', 'Page not found'],
+  'error.404.desc': ['Halaman yang kamu cari tidak ada atau sudah dipindahkan.', 'The page you are looking for does not exist or has been moved.'],
+  'error.500.title': ['Terjadi kesalahan server', 'Something went wrong'],
+  'error.500.desc': ['Kami sedang mengalami gangguan di sisi server. Coba muat ulang halaman ini.', 'We ran into a problem on our side. Please try reloading this page.'],
+  'error.419.title': ['Sesi kamu berakhir', 'Your session has expired'],
+  'error.419.desc': ['Sesi kamu sudah berakhir karena tidak ada aktivitas. Silakan masuk kembali.', 'Your session has ended due to inactivity. Please sign in again.'],
+  'error.backHome': ['Kembali ke beranda', 'Back to home'],
+  'error.backLogin': ['Masuk kembali', 'Sign in again'],
+  'error.retry': ['Muat ulang', 'Reload page'],
+  'error.code': ['Kode kesalahan', 'Error code'],
 }
 
 export const messages = {

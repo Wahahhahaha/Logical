@@ -7,6 +7,7 @@ import { useToast } from '../../toast.jsx'
 import Avatar from '../../components/Avatar.jsx'
 import { allLessons, planFor } from '../../lib/curriculum.js'
 import { formatLastActive } from '../../lib/teacherAnalytics.js'
+import { StatsSkeleton, ListSkeleton } from '../../components/Skeleton.jsx'
 
 export default function TeacherStudentDetailPage() {
   const { t, language } = useI18n()
@@ -56,7 +57,7 @@ export default function TeacherStudentDetailPage() {
   }, [data, grade, language, student])
 
   if (error && !data) return <div className="page-stack"><Link className="text-link detail-back" to="/teacher/students"><ArrowLeft size={14} /> {t('teacher.backToStudents')}</Link><div className="form-error">{t('teacher.studentNotFound')}</div></div>
-  if (!data || !analysis) return <div className="page-stack"><div className="card loading-card">{t('teacher.loadingStudent')}</div></div>
+  if (!data || !analysis) return <div className="page-stack"><StatsSkeleton /><ListSkeleton count={4} className="card" /></div>
 
   const activityMax = Math.max(1, ...(data.activityByDay || []).map((day) => day.count))
   const dayLabel = (date) => new Date(`${date}T00:00:00Z`).toLocaleDateString(language, { weekday: 'short' })

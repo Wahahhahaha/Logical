@@ -139,9 +139,9 @@ body{background:#f7fbff}
 @media(max-width:700px){.hatch-card{padding:25px 16px}.egg-grid{grid-template-columns:repeat(2,1fr);gap:10px;margin-top:22px}.egg-card{padding:10px 8px}.egg-art{height:112px}.egg-svg{width:86px;height:105px}.egg-card small{font-size:9px}.hatching-view{min-height:450px}.hatch-card h1{font-size:23px}.hatch-actions{flex-direction:column}.hatch-actions button{justify-content:center;width:100%}}
 @media(prefers-reduced-motion:reduce){.egg-card,.hatching-art *,.pet-reveal,.hatching-dots i{animation:none!important;transition:none!important}.hatch-stage-3 .hatching-pet{opacity:1;transform:none}.hatch-stage-3 .egg-shell{opacity:.15;transform:none}}
 .egg-grid-previewing .egg-card{opacity:.58;filter:saturate(.7)}.egg-grid-previewing .egg-card.egg-card-selected{opacity:1;border-color:var(--egg-accent);box-shadow:4px 4px 0 color-mix(in srgb,var(--egg-accent),white 50%)}.egg-card[aria-disabled="true"]{cursor:default}.inline-hatch-panel{margin:18px auto 0;padding:8px 18px;border:2px dashed #d7e6e5;border-radius:7px;background:#fbfff8}.inline-hatch-panel .hatching-view{min-height:410px}.inline-preview{width:100%;padding:8px 0 0}.inline-preview h2{margin:5px 0 8px;color:#213b59;font-family:ui-monospace,monospace;font-size:20px}.inline-preview .reveal-stage{height:190px}.inline-preview .pet-reveal{width:170px;height:170px}.inline-preview .onboarding-copy{max-width:500px;margin-left:auto;margin-right:auto}
-.pet-selection-layout{display:grid;grid-template-columns:minmax(260px,1fr) minmax(280px,1.15fr);gap:22px;align-items:start;margin:24px 0 14px}.preview-slot{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-height:370px;padding:18px;border:2px dashed #b89572;border-radius:12px;background:#fff9ed;color:#9c826c;box-shadow:inset 0 0 0 4px #fffdf5}.preview-slot>.egg-svg{width:130px;height:150px;opacity:.72}.preview-slot>p{max-width:190px;margin:6px 0 0;font-family:ui-monospace,monospace;font-size:11px;line-height:1.45}.preview-slot-active{border-color:#e6b355;background:#fffdf4}.preview-slot .hatching-view{width:100%;min-height:330px}.preview-slot .hatching-art{transform:scale(.82)}.preview-slot .reveal-stage{height:210px}.preview-slot h2{margin:2px 0 5px;color:#213b59;font-family:ui-monospace,monospace;font-size:18px}.preview-slot .onboarding-copy{margin:0;font-size:11px}.pet-selection-layout>.egg-grid{grid-template-columns:repeat(2,minmax(0,1fr));margin:0}.pet-selection-layout .egg-art{height:105px}.pet-selection-layout .egg-card{animation-duration:5.2s}.pet-selection-layout .egg-card-selected{transform:translateY(-3px)}
+.pet-selection-layout{display:grid;grid-template-columns:minmax(260px,1fr) minmax(280px,1.15fr);gap:22px;align-items:start;margin:24px 0 14px}.preview-slot{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-height:400px;padding:18px;border:2px dashed #b89572;border-radius:12px;background:#fff9ed;color:#9c826c;box-shadow:inset 0 0 0 4px #fffdf5}.preview-slot>.egg-svg{width:130px;height:150px;opacity:.72}.preview-slot>p{max-width:190px;margin:6px 0 0;font-family:ui-monospace,monospace;font-size:11px;line-height:1.45}.preview-slot-active{border-color:#e6b355;background:#fffdf4}.preview-slot .hatching-view{width:100%;min-height:296px;height:296px}.preview-slot .hatching-art{transform:scale(.82)}.preview-slot .reveal-stage{height:210px}.preview-slot h2{margin:2px 0 5px;color:#213b59;font-family:ui-monospace,monospace;font-size:18px}.preview-slot .onboarding-copy{margin:0;font-size:11px}.pet-selection-layout>.egg-grid{grid-template-columns:repeat(2,minmax(0,1fr));margin:0}.pet-selection-layout .egg-art{height:105px}.pet-selection-layout .egg-card{animation-duration:5.2s}.pet-selection-layout .egg-card-selected{transform:translateY(-3px)}
 .pet-selection-layout.phase-select{display:block}.pet-selection-layout.phase-select>.egg-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.pet-selection-layout.phase-select .egg-art{height:132px}.pet-selection-layout.phase-select .egg-card{padding:17px 11px 14px}
-@media(max-width:700px){.pet-selection-layout{grid-template-columns:1fr;gap:14px}.preview-slot{min-height:300px}.preview-slot .hatching-view{min-height:285px}.pet-selection-layout>.egg-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pet-selection-layout .egg-card small{min-height:25px}.preview-slot .hatching-art{transform:scale(.68)}}
+@media(max-width:700px){.pet-selection-layout{grid-template-columns:1fr;gap:14px}.preview-slot{min-height:330px}.preview-slot .hatching-view{min-height:210px;height:210px}.pet-selection-layout>.egg-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pet-selection-layout .egg-card small{min-height:25px}.preview-slot .hatching-art{transform:scale(.68)}}
 @media(max-width:700px){.pet-selection-layout.phase-select>.egg-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pet-selection-layout.phase-select .egg-art{height:112px}.pet-selection-layout.phase-select .egg-card{padding:10px 8px}}
 .hatch-stage-2 .hatching-pet{opacity:.28;transform:translateY(18px) scale(.92)}
 .egg-card{justify-content:flex-start;cursor:pointer}
@@ -233,6 +233,68 @@ body{background:#f7fbff}
 @media(max-width:900px){.profile-grid{grid-template-columns:1fr}}
 @media(min-width:701px){.sidebar{position:sticky;top:0;align-self:flex-start;height:100vh;overflow-y:auto}}
 
+/* Final hatching pass: let the shared egg linger while the pet rises from behind it. */
+.hatch-stage-1 .egg-shell{animation:egg-wobble-soft .72s cubic-bezier(.22,.8,.25,1) 2}
+.hatch-stage-2 .egg-shell{animation:egg-wobble-soft .86s cubic-bezier(.22,.8,.25,1) 2}
+.hatch-stage-3 .egg-shell{animation:egg-open-smooth .9s cubic-bezier(.22,.8,.25,1) forwards}
+.hatch-stage-3 .hatching-pet{animation:pet-emerge-smooth 1.18s cubic-bezier(.22,.8,.25,1) .12s forwards}
+@keyframes egg-open-smooth{0%{transform:translateY(0) scale(1);opacity:1}58%{transform:translateY(6px) scale(.98);opacity:.8}100%{transform:translateY(15px) scale(.94);opacity:.38}}
+@keyframes pet-emerge-smooth{0%{opacity:0;transform:translateY(38px) scale(.86)}35%{opacity:.72;transform:translateY(21px) scale(.91)}72%{opacity:1;transform:translateY(-3px) scale(1.01)}100%{opacity:1;transform:translateY(-5px) scale(1)}}
+
+/* Pixel egg layers: the lower shell stays anchored while the lid lifts away. */
+.hatching-art .egg-shell,.hatching-art .egg-shell-bottom{position:absolute;inset:0;display:grid;place-items:center;width:100%;height:100%}.hatching-art .egg-shell{z-index:4}.hatching-art .egg-shell-bottom{z-index:3}.egg-shell-top,.egg-shell-bottom{display:grid;place-items:center;width:100%;height:100%}.egg-shell-top .pixel-egg,.egg-shell-bottom .pixel-egg{width:175px;height:205px}.hatching-art .hatching-pet{z-index:2;clip-path:inset(0 0 44% 0);will-change:transform,opacity}.hatching-art .pet-reveal{animation:none}.hatch-stage-0 .egg-shell-top,.hatch-stage-0 .egg-shell-bottom{transform:none}.hatch-stage-1 .egg-shell-top,.hatch-stage-2 .egg-shell-top{transform-origin:50% 80%}.hatch-stage-2 .hatching-pet{opacity:.35;transform:translateY(22px) scale(.92)}.hatch-stage-3 .egg-shell{animation:none;transform:none}.hatch-stage-3 .egg-shell-top{animation:egg-lid-lift .72s cubic-bezier(.22,.8,.25,1) forwards}.hatch-stage-3 .hatching-pet{opacity:1;animation:pet-head-reveal .76s cubic-bezier(.22,.8,.25,1) forwards}.hatch-stage-4 .egg-shell{transform:none}.hatch-stage-4 .egg-shell-top{transform:translateY(-42px) translateX(13px) rotate(9deg);transform-origin:50% 85%}.hatch-stage-4 .hatching-pet{opacity:1;clip-path:none;animation:pet-full-emerge .92s cubic-bezier(.22,.8,.25,1) forwards}.hatch-stage-4 .crack{opacity:0}.hatch-stage-4 .egg-shell-bottom{transform:translateY(4px)}
+@keyframes egg-lid-lift{0%{transform:translateY(0) rotate(0)}65%{transform:translateY(-12px) translateX(3px) rotate(3deg)}100%{transform:translateY(-38px) translateX(11px) rotate(8deg)}}@keyframes pet-head-reveal{0%{opacity:.25;transform:translateY(28px) scale(.9)}100%{opacity:1;transform:translateY(8px) scale(.96)}}@keyframes pet-full-emerge{0%{transform:translateY(24px) scale(.94)}70%{transform:translateY(-5px) scale(1.01)}100%{transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.hatching-art .egg-shell-top{animation:none!important;transform:translateY(-24px) translateX(5px) rotate(4deg)}.hatching-art .hatching-pet{animation:none!important;opacity:1;clip-path:none;transform:none}.hatching-art .egg-shell-bottom{transform:none}.hatching-art .crack{opacity:0}}
+
+/* Final hatch polish: stepped cracks stay pixel-shaped, and the pet grows out of the shell. */
+.hatching-art .crack{width:4px;height:4px;border:0;background:#51352f;transform:none;clip-path:none;transition:opacity .22s ease}.hatching-art .crack-one{top:92px;left:88px;box-shadow:4px 4px 0 #51352f,4px 8px 0 #51352f,8px 12px 0 #51352f,4px 16px 0 #51352f}.hatching-art .crack-two{top:100px;right:82px;box-shadow:-4px 4px 0 #51352f,-4px 8px 0 #51352f,-8px 12px 0 #51352f,-4px 16px 0 #51352f}.hatch-stage-2 .hatching-pet{opacity:.2;transform:translateY(26px) scale(.72);transform-origin:50% 88%}.hatch-stage-3 .hatching-pet{transform-origin:50% 88%}.hatch-stage-4 .hatching-pet{transform-origin:50% 88%}.hatching-art .reveal-pet-art{image-rendering:pixelated}.hatching-name-field{width:min(270px,100%);margin:8px auto 0;text-align:left}.hatching-name-field .field-label{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:6px}.hatching-name-field .text-input{width:100%;box-sizing:border-box}.hatch-stage-3 .hatching-pet{animation-name:pet-head-reveal}.hatch-stage-4 .hatching-pet{animation-name:pet-full-emerge}@keyframes pet-head-reveal{0%{opacity:.2;transform:translateY(30px) scale(.72)}55%{opacity:.8;transform:translateY(14px) scale(.78)}100%{opacity:1;transform:translateY(8px) scale(.82)}}@keyframes pet-full-emerge{0%{transform:translateY(28px) scale(.78)}55%{transform:translateY(7px) scale(.9)}82%{transform:translateY(-4px) scale(.98)}100%{transform:translateY(0) scale(1)}}
+@media(max-width:700px){.hatching-name-field{width:min(250px,100%)}.hatching-art .crack-one{left:78px}.hatching-art .crack-two{right:72px}}
+
+/* Final sequence: open shell first, then a contained glow, then the pet pop-out. */
+.hatching-art .egg-glow{position:absolute;z-index:1;width:22px;height:18px;opacity:0;background:#ffe58b;box-shadow:0 0 0 4px #ffe58b,0 0 18px 5px #ffe58b;transform:translateY(18px);image-rendering:pixelated}.hatch-stage-1 .hatching-pet,.hatch-stage-2 .hatching-pet,.hatch-stage-3 .hatching-pet,.hatch-stage-4 .hatching-pet{opacity:0;transform:translateY(30px) scale(.68);clip-path:inset(0 0 48% 0)}.hatch-stage-3 .egg-shell-top{animation:egg-lid-lift .72s cubic-bezier(.22,.8,.25,1) forwards}.hatch-stage-4 .egg-shell-top,.hatch-stage-5 .egg-shell-top{transform:translateY(-38px) translateX(11px) rotate(8deg);transform-origin:50% 85%}.hatch-stage-4 .egg-glow{animation:egg-glow-rise .82s ease-in-out forwards}.hatch-stage-5 .egg-glow{opacity:.22;transform:translateY(10px) scale(.8);transition:opacity .25s ease}.hatch-stage-5 .hatching-pet{z-index:5;opacity:1;clip-path:inset(0 0 48% 0);animation:pet-pop-out 1.05s cubic-bezier(.22,.8,.25,1) forwards}.hatch-stage-5 .egg-shell-bottom{transform:translateY(4px)}.hatch-stage-5 .crack{opacity:0}@keyframes egg-glow-rise{0%{opacity:0;transform:translateY(24px) scale(.55)}55%{opacity:.72;transform:translateY(13px) scale(1)}100%{opacity:.9;transform:translateY(9px) scale(.82)}}@keyframes pet-pop-out{0%{opacity:0;transform:translateY(28px) scale(.68);clip-path:inset(0 0 48% 0)}34%{opacity:1;transform:translateY(13px) scale(.76);clip-path:inset(0 0 44% 0)}68%{opacity:1;transform:translateY(-4px) scale(.92);clip-path:inset(0 0 16% 0)}86%{transform:translateY(-1px) scale(1.01);clip-path:inset(0 0 0 0)}100%{opacity:1;transform:translateY(0) scale(1);clip-path:inset(0 0 0 0)}}
+@media(prefers-reduced-motion:reduce){.hatching-art .egg-glow{opacity:.65;transform:translateY(10px)}.hatch-stage-5 .hatching-pet{opacity:1;transform:none;clip-path:none;animation:none}.hatch-stage-3 .egg-shell-top,.hatch-stage-4 .egg-shell-top,.hatch-stage-5 .egg-shell-top{animation:none;transform:translateY(-24px) translateX(5px) rotate(4deg)}}
+
+/* Hatching visibility contract: the pet is mounted for asset readiness, but cannot
+   paint until the glow has completed (stage 5). This also neutralizes legacy
+   stage-3/stage-4 animations that previously revealed it during shell opening. */
+.hatching-art .hatching-pet,
+.hatch-stage-0 .hatching-pet,
+.hatch-stage-1 .hatching-pet,
+.hatch-stage-2 .hatching-pet,
+.hatch-stage-3 .hatching-pet,
+.hatch-stage-4 .hatching-pet {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(30px) scale(.68) !important;
+  clip-path: inset(0 0 48% 0) !important;
+  animation: none !important;
+}
+.hatch-stage-5 .hatching-pet {
+  z-index: 5;
+  visibility: visible !important;
+  animation: hatch-pet-pop-out 1.05s cubic-bezier(.22,.8,.25,1) forwards !important;
+}
+@keyframes hatch-pet-pop-out {
+  0% { opacity: 0; transform: translateY(28px) scale(.68); clip-path: inset(0 0 48% 0); }
+  34% { opacity: 1; transform: translateY(13px) scale(.76); clip-path: inset(0 0 44% 0); }
+  68% { opacity: 1; transform: translateY(-4px) scale(.92); clip-path: inset(0 0 16% 0); }
+  86% { opacity: 1; transform: translateY(-1px) scale(1.01); clip-path: inset(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1); clip-path: inset(0); }
+}
+
+/* The completed view uses the same 190px pet box and the same zero-offset
+   transform as the final pop-out frame. Idle motion must not move the body
+   anchor, otherwise the phase change produces a second upward jump. */
+.preview-slot .reveal-stage {
+  height: 245px;
+}
+.preview-slot .reveal-stage .pet-reveal {
+  width: 190px;
+  height: 190px;
+  animation: none;
+  transform: translateY(0) scale(1);
+}
+
 /* Practice object groups: compact, countable grids with clear operation spacing. */
 .fruit-phrase{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(42px,.48fr);align-items:center;gap:14px;margin:22px 0;padding:18px clamp(12px,3vw,24px);width:100%;box-sizing:border-box;overflow:hidden}
 .fruit-group{display:flex;align-items:center;justify-content:center;min-width:0;max-width:none}
@@ -311,3 +373,152 @@ body{background:#f7fbff}
 .tour-actions{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .tour-actions .primary-button,.tour-actions .ghost-button{padding:8px 14px;font-size:12px}
 @media(max-width:700px){.language-grid{grid-template-columns:1fr}}
+
+/* Shared loading placeholders: calm, theme-matched, and layout-preserving. */
+.skeleton{display:block;min-height:12px;border-radius:7px;background:linear-gradient(105deg,#e7f0f1 20%,#f7fbfa 42%,#e7f0f1 64%);background-size:400% 100%;animation:skeleton-shimmer 1.8s ease-in-out infinite}.skeleton-text{width:78%;height:11px}.skeleton-short{width:42%}.skeleton-medium{width:62%}.skeleton-heading{width:58%;height:18px}.skeleton-icon{width:36px;height:36px;border-radius:12px}.skeleton-value{width:58%;height:25px;margin:9px 0 5px}.skeleton-button{width:132px;height:36px;margin-top:18px}.skeleton-avatar{width:34px;height:34px;border-radius:50%;flex:none}.skeleton-chip{width:58px;height:22px;border-radius:999px}.skeleton-card{overflow:hidden}.skeleton-region{min-width:0}.skeleton-row{display:flex;align-items:center;gap:12px;padding:13px 0}.skeleton-row-copy{display:grid;gap:8px;flex:1;min-width:0}.skeleton-list{padding:4px 20px}.skeleton-table{display:grid;gap:1px}.skeleton-table-row{display:grid;grid-template-columns:minmax(140px,1.6fr) repeat(2,minmax(80px,1fr)) 70px;align-items:center;gap:18px;padding:14px 0;border-bottom:1px solid #edf2f3}.skeleton-progress{width:100%;height:8px;border-radius:999px;margin:12px 0}.skeleton-pet-layout{align-items:start}.skeleton-pet-art{width:min(220px,70%);aspect-ratio:1;margin:24px auto;border-radius:42% 42% 38% 38%}.skeleton-pet-stats{padding:24px}.skeleton-stat-pair{display:flex;gap:12px;align-items:center;margin-top:22px}.skeleton-stat-pair>div{display:grid;gap:8px;flex:1}.skeleton-card .skeleton-icon{margin-bottom:8px}.skeleton-card .skeleton-text{margin-top:6px}@keyframes skeleton-shimmer{0%{background-position:100% 0}100%{background-position:-100% 0}}@media(prefers-reduced-motion:reduce){.skeleton{animation:none;background:#e7f0f1}}@media(max-width:700px){.skeleton-table-row{grid-template-columns:1fr 1fr;gap:10px}.skeleton-table-row .skeleton-row-copy{grid-column:1/-1}.skeleton-pet-layout{display:grid}.skeleton-pet-stats{padding:18px}.skeleton-list{padding:4px 14px}}
+
+/* Global error pages (404 / 500 / 419): full-screen, theme-matched, localized. */
+.error-page{position:relative;overflow:hidden;display:grid;place-items:center;min-height:100vh;padding:32px 20px;background:linear-gradient(180deg,#8bd9f3 0 55%,#afd59b 55% 100%)}
+.error-page:after{display:none}
+.error-card{position:relative;z-index:1;width:min(460px,calc(100% - 8px));padding:40px 34px;text-align:center;border:3px solid #315e82;border-radius:10px;box-shadow:7px 7px 0 #6ca8b4;background:#fffef6}
+.error-badge{display:grid;place-items:center;width:64px;height:64px;margin:0 auto 16px;border:2px solid #75bdd7;border-radius:14px;background:#dff6ff;color:#2877a6}
+.error-tone-peach .error-badge{background:#ffe9d9;border-color:#f0bd98;color:#cf6f31}
+.error-tone-yellow .error-badge{background:#fff7d9;border-color:#f2d77d;color:#d79b1c}
+.error-code{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:44px;font-weight:900;letter-spacing:-2px;color:#2c6ca5}
+.error-tone-peach .error-code{color:#cf6f31}
+.error-tone-yellow .error-code{color:#d79b1c}
+.error-card h1{margin:6px 0 0;font-family:ui-monospace,monospace;color:#213b59;font-size:22px;letter-spacing:-1px}
+.error-copy{margin:12px auto 0;max-width:340px;color:#66839a;font-size:13px;line-height:1.6}
+.error-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:26px}
+.error-actions .primary-button,.error-actions .ghost-button{display:inline-flex;align-items:center;gap:7px}
+.error-meta{margin:18px 0 0;color:#9bb0bd;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.06em}
+@media(max-width:700px){.error-card{padding:30px 20px}.error-code{font-size:38px}}
+
+/* Onboarding shares the login scenery; match sky/ground, keep background fixed to viewport with internal card scrolling and smooth slow expansion transitions. */
+.onboarding-page,.hatch-onboarding{height:100vh;min-height:100vh;overflow:hidden;display:grid;place-items:center}
+.onboarding-card,.hatch-card{max-height:calc(100vh - 48px);overflow-y:auto;transition:max-height .4s cubic-bezier(.16,1,.3,1),height .4s cubic-bezier(.16,1,.3,1),padding .4s ease}
+.onboarding-card .preview-slot,.onboarding-card .inline-preview,.onboarding-card .language-grid,.onboarding-card .egg-grid{animation:soft-page-in .35s cubic-bezier(.16,1,.3,1) both}
+.onboarding-page{background:linear-gradient(180deg,#8bd9f3 0 55%,#afd59b 55% 100%)}
+.onboarding-page:after{display:none}
+.onboarding-page .auth-landscape,.onboarding-page .auth-nature{min-height:0}
+body:has(.onboarding-page),body:has(.error-page){background:linear-gradient(180deg,#8bd9f3 0 55%,#afd59b 55% 100%)}
+
+/* Final onboarding sequence: reveal the head first, fade the shell, then
+   scale the same mounted sprite to its idle size. */
+.hatch-stage-4 .hatching-pet {
+  z-index: 5;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) scale(.68) !important;
+  transform-origin: 50% 100% !important;
+  clip-path: inset(0 0 48% 0) !important;
+  animation: hatch-head-reveal .55s ease-out forwards !important;
+}
+.hatch-stage-5 .hatching-pet {
+  z-index: 5;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) scale(.68) !important;
+  transform-origin: 50% 100% !important;
+  clip-path: inset(0 0 48% 0) !important;
+  animation: none !important;
+}
+.hatch-stage-6 .hatching-pet {
+  z-index: 5;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform-origin: 50% 50% !important;
+  clip-path: inset(0) !important;
+  animation: hatch-pet-emerge 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+.hatch-stage-5 .egg-shell,
+.hatch-stage-5 .egg-shell-bottom {
+  animation: hatch-shell-fast-fade .34s ease-out forwards !important;
+}
+.hatch-stage-6 .egg-shell,
+.hatch-stage-6 .egg-shell-bottom {
+  opacity: 0 !important;
+  animation: none !important;
+}
+@keyframes hatch-head-reveal {
+  0% { opacity: 0; transform: translateY(0) scale(.68); clip-path: inset(0 0 48% 0); }
+  100% { opacity: 1; transform: translateY(0) scale(.68); clip-path: inset(0 0 48% 0); }
+}
+@keyframes hatch-pet-emerge {
+  0% { opacity: 0; transform: translateY(0) scale(0.15); }
+  30% { opacity: 0.5; transform: translateY(0) scale(0.5); }
+  70% { opacity: 0.95; transform: translateY(0) scale(1.05); }
+  100% { opacity: 1; transform: translateY(0) scale(1.3); }
+}
+@keyframes hatch-shell-fast-fade {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Hatching and idle use the same stage box and parent scale. This prevents the
+   remount from changing the pet's effective position or visual size. */
+.preview-slot .reveal-stage {
+  width: 230px;
+  height: 245px;
+  margin: 0 auto;
+  transform: translateY(0) scale(.85);
+  transform-origin: 50% 50%;
+}
+
+/* Keep the name field aligned with the preview card instead of constraining
+   it to the pet artwork width. */
+.hatching-name-field {
+  width: calc(100% - 24px);
+  max-width: none;
+  padding: 12px 14px 14px;
+  box-sizing: border-box;
+  border: 2px solid #eadfc9;
+  border-radius: 10px;
+  background: #fffdf7;
+}
+.hatching-name-field .text-input {
+  width: 100%;
+  min-height: 44px;
+  background: #fff;
+  border-color: #d9e1e9;
+}
+
+/* Keep the completed hatching component mounted. Only its surrounding copy
+   changes, so the zoomed pet is never replaced by a second sprite. */
+.preview-slot-active .hatching-view {
+  min-height: 296px;
+  height: 296px;
+}
+.preview-slot-revealed .hatching-view > .eyebrow,
+.preview-slot-revealed .hatching-view > h1 {
+  display: none;
+}
+.preview-slot-active {
+  min-height: 400px;
+  padding: 14px 18px 18px;
+}
+.preview-slot-active .inline-preview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 12px;
+  padding: 0;
+}
+.preview-slot-active .hatching-name-field {
+  width: auto;
+  margin: 12px 0 0 !important;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.preview-slot-active .inline-preview > .eyebrow,
+.preview-slot-active .inline-preview > h2 {
+  grid-column: 1 / -1;
+}
+.preview-slot-active .hatch-actions {
+  margin: 0;
+}
+@media(max-width:700px){
+  .preview-slot-active .inline-preview { grid-template-columns: 1fr; }
+  .preview-slot-active .hatch-actions { margin-top: 10px; }
+}
